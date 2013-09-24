@@ -1,0 +1,268 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutFrame.cshtml";
+}
+<div class="bigbox">
+<h2>角色分配模块</h2>
+<table>
+<tr>
+<td>
+<div id="RoleTree" style="border: 1px #c7c7c7 dashed;height: 500px;width: 340px;padding:5px;"</div>
+@*@Html.RenderPartial("RoleTree");*@
+</td>
+<td>
+<div id="ModuleTree" style="border: 1px #c7c7c7 dashed;height: 500px;width: 340px; overflow:auto; padding:5px;"></div>
+ <div style="color: Orange; font-size: 14px" id="AlertMessage">
+@*@Html.RenderPartial("ModuleTree");*@
+</td>
+</tr>
+</table>
+<div  style=" margin-left:230px; " id="result" ></div>  
+<div style=" margin-top:5px;">
+<button class="t-button" value = "保 存" onclick = "displayChecked()">保 存</button>
+<button class="t-button" value = "返 回" @*onclick = "/Role/GetRole" *@ onclick = "javascript:window.history.go(-1)">返 回</button>
+</div>
+
+        <input type="hidden" value="" id="hidden" />
+        <input type="hidden" value="" id="hiddenleaf" />
+        <input type="hidden" value="" id="hiddenhaschild" />
+</div>
+
+@section Footer{
+
+    <script type="text/javascript">
+        var nowroleid;
+        $(document).ready(function () {
+            $("#PersonSequenceSubmit").attr('disabled', true);
+
+            $("#RoleTree").jstree({
+                json_data: {
+                    ajax: {
+                        url: '@Url.Action("GetRoleTreeDataAll", "Tree")',
+                        data: '{did:1}',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json charset=utf-8'
+                    }
+                },
+
+                "themes": { "theme": "default", "dots": true, "icons": true },
+                "plugins": ["themes", "json_data", "ui"]
+            });
+            $("#RoleTree").bind("select_node.jstree", function (event, data) {
+                if (data.rslt.obj.length == 1) {
+
+                    var value = data.rslt.obj.attr("id");   //获取节点的id值（id值由Controller赋值）
+                    nowroleid = value;
+                    var child = data.rslt.obj.attr("ifPerson");
+                    if (value != "#") {
+                        $.ajax({
+                            type: "Post",
+                            url: '@Url.Action("GetModuleIDByRoleID","Role")',
+                            cache: false,
+                            data: "roleid=" + value,
+                            datatype: "json",
+                            success: function (msg) {
+                                $("input#hidden:hidden").attr("value", value);
+                                $("#hiddenleaf").attr("value", child);
+                                var ad = $("#hiddenleaf").attr("value");
+                                if ($("#hiddenleaf").attr("value") == "N") {
+                                    AlertMessage.innerHTML = "";
+                                    $("#ModuleTree").show()
+                                    removeclass("ModuleTree");
+                                    settreecheck(msg, "ModuleTree");
+                                    checkchang2("ModuleTree");
+                                }
+                                else {
+                                    AlertMessage.innerHTML = "当前选择的是角色分类，请继续选择角色";
+                                    $("#ModuleTree").hide();
+                                }
+                            }
+                        })
+                    }
+                }
+            });
+
+            //            function settreecheck(jsondate, jstreeid) {          //很据数据在树中查找元素
+            //                var $idlist = new Array();
+            //                var j;
+            //                j = 0;
+
+            //                var $lilist = $("#" + jstreeid).find("li");
+            //                for (var i = 0; i < $lilist.length; i++) {
+            //                    var tempid = $($lilist.get(i)).attr("id")
+            //                    if (tempid != "") {
+            //                        for (j = 0; j < jsondate.length; j++) {
+            //                            if (jsondate[j] == tempid) {
+            //                                var a = $($($lilist.get(i)).children("a").get(0)).text();
+
+            //                                if ($($lilist.get(i)).hasClass("jstree-leaf")) $($lilist.get(i)).removeClass().addClass("jstree-checked").addClass("jstree-leaf");
+
+            //                                else $($lilist.get(i)).removeClass("jstree-unchecked").removeClass("jstree-undetermine").addClass("jstree-checked");
+
+            //                                $($($lilist.get(i)).parents("li")).removeClass("jstree-closed").addClass("jstree-open");
+
+            //                                var $b = $($($lilist.get(i)).children("a").get(0));
+            //                                //  $b.removeClass().addClass("jstree-search");
+
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //            }
+
+            function settreecheck(jsondate, jstreeid) {          //很据数据在树种查找元素
+                var $idlist = new Array();
+                var j;
+                j = 0;
+                
+                var $lilist = $("#" + jstreeid).find("li");
+
+                for (var i = 0; i < $lilist.length; i++) {
+                    var tempid = $($lilist.get(i)).attr("id")
+
+                    if (tempid != "") {
+                        for (j = 0; j < jsondate.length; j++) {
+                            if (jsondate[j] == tempid) {
+                                var a = $($($lilist.get(i)).children("a").get(0)).text();
+
+                                if ($($lilist.get(i)).hasClass("jstree-leaf")) 
+                                      $($lilist.get(i)).removeClass().addClass("jstree-checked").addClass("jstree-leaf");
+
+                                else 
+                                      $($lilist.get(i)).removeClass("jstree-unchecked").removeClass("jstree-undetermine").addClass("jstree-checked");
+
+                                $($($lilist.get(i)).parents("li")).removeClass("jstree-closed").addClass("jstree-open");
+
+                                var $b = $($($lilist.get(i)).children("a").get(0));
+                                    $b.removeClass().addClass("jstree-search");
+
+                            }
+                        }
+                    }
+                }
+            }
+            // ---------------------将树的状态还原---------------------- //
+            function removeclass(jstreeid) {
+                var $lilist = $("#" + jstreeid).find("li");
+                var length = $lilist.length;
+                for (var i = 0; i < length; i++) {
+                    if ($($lilist.get(i)).hasClass("jstree-leaf"))
+                        $($lilist.get(i)).removeClass().addClass("jstree-unchecked").addClass("jstree-leaf").addClass("jstree-open");
+                    else {
+                        var $li = $($lilist.get(i)).removeClass().addClass("jstree-unchecked jstree-closed");
+                        var $check = $($($lilist.get(i)).children("a").get(0)).removeClass();
+                    }
+                }
+            }
+
+            //修正模块树的勾选情况
+            function checkchang2(jstreeid) {
+
+                var $firstul = $("#" + jstreeid).children("ul");
+                var $li = $firstul.find("li");
+                // repeate($li);
+
+                for (var k = 0; k < $li.length; k++) {
+
+                    check($($li.get(k)));
+                }
+
+                for (var k = 0; k < $li.length; k++) {
+
+                    check($($li.get(k)));
+                }
+
+
+            }
+
+            function check(node) {
+                var $li = $(node)
+
+                var $childli = $li.children("ul").children("li");
+                if ($childli.length == 0) return;
+                else {
+                    var state;
+                    for (var j = 0; j < $childli.length; j++) {
+                        if (j == 0) {
+                            if ($($childli.get(j)).hasClass("jstree-undetermined"))
+                                $li.removeClass('jstree-checked').addClass("jstree-undetermined");
+                            else state = $($childli.get(j)).hasClass("jstree-checked");
+                        }
+                        else if (state != $($childli.get(j)).hasClass("jstree-checked")) {
+                            if ($li.hasClass("jstree-checked")) {
+
+                                $li.removeClass('jstree-checked').addClass("jstree-undetermined");
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            var SelectedRoles = new Array();
+            var systemid = 0;
+
+            //ar userid = "'@ViewBag.UserID'";
+            $("#ModuleTree").jstree({
+                "json_data": {
+                    "ajax": {
+                        "url": '@Url.Action("GetModuleNodeChildren","Tree")',
+                        "data": function (n) {
+                            if (n == -1)
+                                return '{SystemID:' + systemid + '}';
+                            else {
+                                var nid = n[0].id;
+                                return '{SystemID:' + nid + '}';
+                            }
+                        },
+                        "type": "POST",
+                        "dataType": "json",
+                        "contentType": "application/json charset=utf-8"
+                    }
+                },
+
+                "themes": { "theme": "classic", "dots": true, "icons": true },
+                "plugins": ["themes", "json_data", "ui", "checkbox"]
+            });
+
+        });
+
+        function displayChecked() {
+
+            var $checkedRecords = new Array();
+            var j;
+            j = 0;
+            ///  var nodes = $("#ModulesEditTree").jstree("get_checked", null, true);  //使用get_checked方法
+            var nodes = $("#ModuleTree").find(".jstree-checked,.jstree-undetermined");  //使用get_checked方法
+            // alert(nodes.length);
+            $.each(nodes, function (i, element) {
+                //   if ($(element).attr("ifPerson") == "Y") {
+                $checkedRecords[j] = $(element).attr("id");
+                j = j + 1;
+                // };
+            });
+
+            if ($checkedRecords.length < 1) {
+                alert('请选择');
+                return;
+                // alert(("input#hidden:hidden").attr("value"));
+            }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RoleAssignModule", "Role")',
+                data: { Roleid: nowroleid, ModuleTree_checkedNodes: $checkedRecords },
+                dataType: "text",
+                traditional: true,                                                                    //必须加上？？？？？？
+                success: function (msg) { alert(msg); },
+                error: function (data) { alert("操作失败"); }
+            });
+
+        }
+
+</script>
+
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+}

@@ -1,0 +1,100 @@
+﻿@using Telerik.Web.Mvc.UI;
+@{
+    ViewBag.Title = "UnitsCss";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+
+<h2>UnitsCss</h2>
+<div>
+@(
+    Html.Telerik().Grid<WiGetMS.Models.ShowUnitsCss>()
+            .Name("UnitsCssGrid")
+        .DataKeys(keys =>
+        {
+            keys.Add(p => p.id);
+        })
+                    .ToolBar(commands => commands.Template("<input type='button' value='添加记录' class='t-button' onclick=UnitsCssInsert()>"))
+            .DataBinding(dataBinding =>
+            {
+                dataBinding.Ajax()
+                    .Select("SelectUnitsCssAjaxEditing", "UnitsCss");
+            })
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.id).Width(20);
+            columns.Bound(p => p.name).Width(20);
+            //columns.Bound(p => p.unitsid).Width(35);
+            columns.Bound(p => p.unitname).Width(35);
+            columns.Bound(p => p.css).Width(20);
+            columns.Bound(p => p.edit)
+                .ClientTemplate("<input type='button' value='编 辑' class='t-button' onclick = UnitsCssEdit(<#=id#>)> <input type='button' value='删 除' class='t-button' onclick = UnitsCssDelete(<#=id#>)>")
+                .Width(80).Title("管 理");
+        })
+        .Editable(editing => editing.Mode(GridEditMode.PopUp))
+        .Selectable()
+        //.ClientEvents(events => events.OnRowSelect("onRowSelected"))
+        .Pageable()
+       .Scrollable(scrolling => scrolling.Height(220))
+		 .Filterable()
+		.Resizable(resizing => resizing.Columns(true))
+        .Reorderable(reorder => reorder.Columns(true))  
+        .Sortable()       
+)
+</div>
+<div id="somediv">
+     @{ Html.Telerik().Window()
+            .Name("UnitsCss-Window")
+            .Title("UnitsCss信息")
+            .Content(() => {})
+            .Width(400)
+            .Height(210)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+    </div>
+
+@section Footer{
+<script type="text/javascript" language="javascript">
+    function UnitsCssEdit(id) {
+        var window = $('#UnitsCss-Window').data('tWindow');
+        window.ajaxRequest("/UnitsCss/UnitsCssEditWindow?confid=" + id);
+        window.center().open()
+    }
+
+    function UnitsCssDelete(id) {
+        if (!confirm("你确定要删除该UnitsCss吗？"))
+            return;
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: '@Url.Action("_DeleteUnitsCssAjaxEditing", "UnitsCss")',
+            data: { id: id },
+            dataType: "html",
+            success: function (data) {
+               // alert(data);
+            }
+        });
+        window.location.href = window.location.href;
+    }
+
+
+    function UnitsCssInsert() {
+        var window = $('#UnitsCss-Window').data('tWindow');
+        window.ajaxRequest("/UnitsCss/UnitsCssInsertWindow");
+        window.center().open()
+    }
+
+
+    function OperateWindow1(ms) {
+        if(ms != "")
+            alert("操作成功!!!");
+        var grid = $('#UnitsCssGrid').data('tGrid'); //重新加载
+        grid.rebind();
+        autodisapear();
+
+    }
+
+</script>
+}

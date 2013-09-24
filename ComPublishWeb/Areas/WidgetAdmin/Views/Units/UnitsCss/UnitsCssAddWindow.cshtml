@@ -1,0 +1,46 @@
+﻿@model WiGetMS.Models.ShowUnitsCss
+
+@using (Ajax.BeginForm("Modify", "UnitsCss", new { }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "OperateWindowForCssAdd()" }))
+{
+  		<table>
+            <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.name)：
+              </td>
+			  <td class="PersMS-table-4cols-3">
+                  @Html.EditorFor(m => m.name)
+              </td>
+            </tr>
+           @* <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.unitname)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.DropDownList("Unitsid", ViewData["Unitsid"] as SelectList, "---请选择---",new {@style= "width:130px "})
+              </td>
+            </tr>*@
+
+            <tr>
+			  <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.css)：
+              </td>
+			  <td class="PersMS-table-4cols-3">
+                  @Html.EditorFor(m => m.css)         
+              </td>
+            </tr>
+  </table><br/>
+    <div style="margin:0 auto;width:170px">
+    <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				添加
+				</button>
+                <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="CloseUnitsCssAddWindow()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+	    </div>
+}
+
+

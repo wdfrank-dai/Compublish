@@ -1,0 +1,164 @@
+﻿@model WiGetMS.Models.ContentsModel
+
+<div id="block-create" class="block">
+    <div class="content">
+@*        <h2 class="title">
+            审 核</h2>*@
+        <div class="inner">
+@using (Ajax.BeginForm("ContentsForSave", "Contents",new { ID = Model.ID }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "EditorForContents" }))
+{
+    <div class="flash">
+         <p>@Html.ValidationSummary(true,string.Empty, new { @class = "message error" })</p>
+    </div>
+     <table>
+        <tr>
+           <td class="PersMS-table-4cols-1">
+          	 @Html.LabelFor(model => model.Title)
+		   </td>
+           <td class="PersMS-table-4cols-3">
+             @Html.TextBoxFor(model => model.Title, new { @class = "text_field" })
+           	 @Html.ValidationMessageFor(model => model.Title)
+           </td>
+            <td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.Creator)
+		   </td>
+           <td class="PersMS-table-4cols-3">
+             @Html.TextBoxFor(model => model.Creator, new { @class = "text_field" })
+             @Html.ValidationMessageFor(model => model.Creator)
+           </td>           
+           <td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.Tags)
+           </td>
+           <td class="PersMS-table-4cols-3">
+             @Html.TextBoxFor(model => model.Tags, new { @class = "text_field" })
+           	 @Html.ValidationMessageFor(model => model.Tags)
+           </td>
+        </tr>
+
+        <tr>
+
+           <td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.Sorlink)
+		   </td>
+           <td class="PersMS-table-4cols-3">
+             @Html.TextBoxFor(model => model.Sorlink, new { @class = "text_field" })
+           	 @Html.ValidationMessageFor(model => model.Sorlink) 
+           </td>
+   
+          <td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.Priority)
+           </td>
+		   <td class="PersMS-table-4cols-3">
+             @Html.TextBoxFor(model => model.Priority, new { @class = "text_field" })
+           	 @Html.ValidationMessageFor(model => model.Priority)
+           </td>
+            <td class="PersMS-table-4cols-1">      
+             @Html.LabelFor(model => model.Operator)
+		   </td>
+           <td class="PersMS-table-4cols-3">
+             @Html.TextBoxFor(model => model.Operator, new { @class = "text_field" })
+           	 @Html.ValidationMessageFor(model => model.Operator)
+           </td>
+          @* <td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.Createtime)
+		   </td>
+           <td class="PersMS-table-4cols-3">
+             @Html.TextBoxFor(model => model.Createtime, new { @class = "text_field" })
+             @Html.ValidationMessageFor(model => model.Createtime)
+           </td>*@
+        </tr>
+
+         <tr>
+           <td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.Hotspot)
+		   </td>
+           <td class="PersMS-table-4cols-1">
+             @Html.CheckBoxFor(model => model.Hotspot, new { @class = "text_field" })
+             @Html.ValidationMessageFor(model => model.Hotspot)
+           </td>
+           <td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.Stick)
+           </td>
+           <td class="PersMS-table-4cols-1">
+             @Html.CheckBoxFor(model => model.Stick, new { @class = "text_field" })
+             @Html.ValidationMessageFor(model => model.Stick)
+           </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+           <td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.Summary)
+		   </td>
+           <td class="PersMS-table-4cols-2">
+             @Html.TextAreaFor(model => model.Summary, new { @class = "text_field" ,@style = "width:439px;height:40px"})
+             @Html.ValidationMessageFor(model => model.Summary)
+           </td>
+        </tr>
+      </table>
+    
+     <table>
+        <tr>
+           <td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.Suggestion)
+		   </td>
+           <td class="PersMS-table-4cols-2">
+             @Html.TextAreaFor(model => model.Suggestion, new { @class = "text_field", @style = "width:439px;height:40px" })
+             @Html.ValidationMessageFor(model => model.Suggestion)
+           </td>
+        </tr>
+      </table>
+      
+    <textarea cols = "40" rows = "10" id ="PassedContent1" name = "PassedContent">@Model.T_content</textarea>
+
+		<div class="PersMS-table-4cols-1">
+		    <div class="right" style="margin:0 auto; width:400px;">
+			    <button class="button" type="submit" name = "passed" value = "3">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save"/>
+				通过审核
+				</button>
+                <button class="button" type="submit" name = "passed" value = "2">
+				<img src="@Url.Content("~/images/icons/application_edit1.png")" alt="Save" />
+				需要修改
+				</button>
+                <button class="button" type="submit" name = "passed" value = "1">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				未通过审核
+				</button>				
+			</div>
+              <button class="button" type="button" name = "close" value = "close"  onclick = "CloseWindow()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				 取 消
+				</button>
+          </div>		
+}
+
+        </div>
+    </div>
+</div> 
+<script type="text/javascript">
+
+    var instance1 = CKEDITOR.instances['PassedContent1'];
+    if (instance1) {
+        CKEDITOR.remove(instance1);
+    }
+    CKEDITOR.replace('PassedContent');
+
+//    if (!CKEDITOR.instances.Content) {
+//        var editor = CKEDITOR.replace('examine1');
+//    }
+//    else {
+//        addCkeditor("examine1");
+//    }
+//    function addCkeditor(id) {
+//        var editor2 = CKEDITOR.instances[id];
+//        if (editor2)
+//            editor2.destroy(true);
+//        editor = CKEDITOR.replace(id);
+//    }
+//    CKFinder.SetupCKEditor(editor, '/ckfinder/');
+//    var editor = CKEDITOR.replace('examine1', { customConfig: '/config.js' });
+//    CKFinder.setupCKEditor(editor, { basePath: '/CKfinder/', customConfig: '/config.js' });
+</script>
+
+

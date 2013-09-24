@@ -1,0 +1,81 @@
+@using Telerik.Web.Mvc.UI;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>综合信息发布系统</title>
+    @{ 
+        var nowstyle = "red";
+        if (ViewBag.NowPageStyle != null)
+        {
+            nowstyle = ViewBag.NowPageStyle;
+        }
+    }
+    @Assets.CSS("base_Frame.css")
+    @Assets.CSS("base.css")
+    @(Html.Telerik().StyleSheetRegistrar()
+                            .DefaultGroup(group => group
+                            .Add("telerik.common.css")
+                            .Add("telerik.Simple.min.css")
+                            .Compress(true))
+                     )
+    @Assets.Theme(@nowstyle)    
+    @Assets.Script("modernizr-1.7.min.js")
+    @RenderSection("Header",false)
+     <link href="../../Content/INettutes/inettuts.css" rel="stylesheet" type="text/css" />
+ <link href="../../Content/widget.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <div id="pic_name"></div>
+            <div id="S_name"></div>
+            @Html.Partial("_UserNavigation")
+            @Html.Partial("_MainNavigation")
+        </div>
+        <div id="wrapper" class="wat-cf"style ="height:650px; background:url(/images/fbbg.png) no-repeat;">
+            <div id="main" style="width:100%">
+                @RenderBody()                
+            </div>            
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+     
+    @Html.Telerik().ScriptRegistrar()
+    @Assets.Script("modernizr-1.7.min.js")
+    <script src="../../Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>
+    @RenderSection("Scripts",false)
+        <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>  
+    <script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.cookie.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.hotkeys.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/jquery.jstree.js")"></script>
+        
+    @RenderSection("Footer",false)
+
+<script type="text/javascript">
+    function PortalSet() {
+        var window = $('#PortalSetWindow').data('tWindow');
+        //window.ajaxRequest("/AttendMS/Attend/GetIDSelect/?id=" + id);
+        window.center().open();
+    }
+    $(document).ready(function () {
+        var str = location.href.toLowerCase();
+        $("#main-navigation ul li a").each(function () {
+            if (str.indexOf(this.href.toLowerCase()) > -1) {
+                $("li.active").removeClass("active");
+                $(this).parent().addClass("active");
+            }
+        });
+        $("#user-navigation ul li a").each(function () {
+            if (str.indexOf(this.href.toLowerCase()) > -1) {
+                $("li.active").removeClass("active");
+                $(this).parent().addClass("first");
+                $(this).parent().addClass("active");
+            }
+        });
+    })
+</script>
+</body>
+
+</html>

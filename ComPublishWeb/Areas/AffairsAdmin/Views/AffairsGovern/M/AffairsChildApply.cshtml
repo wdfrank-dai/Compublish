@@ -1,0 +1,160 @@
+﻿@model ComPublishWeb.Areas.AffairsAdmin.Models.AffairsModel
+
+@{
+    ViewBag.Title = "AffairsForApply";
+    Layout = "~/Views/Shared/M/_LayoutAffairs.cshtml";
+}
+@using Telerik.Web.Mvc.UI
+<div id="block-create" class="block">
+    <div class="content">
+        <h2 class="title">
+          子 事 务 申 请</h2>
+        <div class="inner">
+        </div>
+    </div>
+</div>
+@using (Ajax.BeginForm("AffairsChildForSave", "AffairsGovern", new { }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "InsertAffairs" }))
+{   
+    
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ParentName)
+        </div>
+           @Html.HiddenFor(model => model.ParentID)
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.ParentName, new { @readonly = true })
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Typename)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Typename", ViewData["Typename"] as SelectList, "--请选择--")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Principal)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Principal)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Collaborativer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Collaborativer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Starttime)
+        </div>
+        <div class="editor-field">
+            @{
+       Html.Telerik().DateTimePicker()
+                     .Name("starttime")
+                     .Value(@Model.Starttime)
+                     .HtmlAttributes(new { Style = "width:220px" })
+                     .ClientEvents(events => events.OnChange("StarttimeChange")
+                         .OnLoad("StarttimeLoad"))
+                     .Min(@Model.Starttime)
+                     .Max(@Model.Endtime)
+                     .Render();
+             }             
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Endtime)
+        </div>
+        <div class="editor-field">
+            @{
+       Html.Telerik().DateTimePicker()
+                     .Name("endtime")
+                     .Value(@Model.Endtime)
+                     .HtmlAttributes(new { Style = "width:220px" })
+                     .ClientEvents(events => events.OnChange("EndtimeChange")
+                         .OnLoad("EndtimeLoad"))
+                     .Min(DateTime.Now.AddMinutes(30))
+                     .Max(@Model.Endtime)
+                     .Render();
+             }
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gradename)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Gradename", ViewData["Gradename"] as SelectList, "--请选择--")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Petitionernum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Petitionernum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Securityname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Securityname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.T_content)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.T_content)
+        </div>
+
+        <p>
+            <input type="submit" value="保 存" onclick = "javascript:window.history.go(-1)" />           
+        </p>
+        <p>
+            <input type="button" value="返 回" onclick = "javascript:window.history.go(-1)" />            
+        </p>
+}
+
+@section Footer{  
+    <script type="text/javascript">
+        $("input#ParentID").attr("readonly", true);
+        var stime = $("#starttime").val();
+        var etime = $("#endtime").val();
+
+        function StarttimeChange(e) {
+            var utime = $('#starttime').data('tDateTimePicker');
+            var otime = $('#endtime').data('tDateTimePicker');
+            if (utime.value() > otime.value()) {
+                otime.value(utime.value());
+            }
+        }
+        function EndtimeChange(e) {
+            var utime = $('#starttime').data('tDateTimePicker');
+            var otime = $('#endtime').data('tDateTimePicker');
+            if (e.value < utime.value()) {
+                alert("事务结束时间不能小于当前时间或者小于事务开始时间");
+                otime.value(utime.value());
+            }
+        }
+        function StarttimeLoad() {
+            var picker = $(this).data("tDateTimePicker");
+            picker.timeView.format = "HH:mm";
+            picker.timeView.bind();
+        }
+        function EndtimeLoad() {
+            var picker = $(this).data("tDateTimePicker");
+            picker.timeView.format = "HH:mm";
+            picker.timeView.bind();
+        }
+
+   </script>
+   }

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WidgetDate.Models.InitPageAppInfoModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "首页";
+}
+<div class="block" id="block-text">
+    <div class="content">
+        @if (!Request.IsAuthenticated)
+        {
+            <div id="columns">
+                <ul id="column" class="column0">
+                    @foreach (var m in Model.Where(o => o.ShowType == 1 && o.FirstPageId != 0))
+                    {
+                        <li class="widget my-widget" id="intro">
+                            <div class="widget-head">
+                                <h3 class="h3title">@m.AppName</h3>
+                            </div>
+                            <div class="widget-content">
+                                @Html.GetPageContent(m.FirstPageId, null)
+                            </div>
+                        </li>
+
+                    }
+                </ul>
+                @{ var mList = Model.Where(o => o.ShowType == 0 && o.FirstPageId != 0).ToList(); }
+                <ul id="column1" class="column">
+                    @for (int i = 0; i < mList.Count(); i += 2)
+                    {
+                        <li class="widget my-widget" id="intro">
+                            <div class="widget-head">
+                                <h3 class="h3title">@mList[i].AppName</h3>
+                            </div>
+                            <div class="widget-content" style="">
+                                @Html.GetPageContent(mList[i].FirstPageId, null)
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <ul id="column1" class="column">
+                    @for (int i = 1; i < mList.Count(); i += 2)
+                    {
+                        <li class="widget my-widget" id="intro">
+                            <div class="widget-head">
+                                <h3 class="h3title">@mList[i].AppName</h3>
+                            </div>
+                            <div class="widget-content" style="">
+                                @Html.GetPageContent(mList[i].FirstPageId, null)
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+        else
+        {
+            @Html.Action("Channels");
+        }
+    </div>
+</div>

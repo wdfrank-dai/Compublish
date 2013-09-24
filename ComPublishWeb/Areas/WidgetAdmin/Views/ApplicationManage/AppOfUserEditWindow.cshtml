@@ -1,0 +1,149 @@
+﻿@model WiGetMS.Models.showApplication
+@{
+    ViewBag.Title = "AppOfUserEditWindow";
+}
+@{
+    var m = Model;
+    }
+
+@using (Ajax.BeginForm("SaveAppEdit", "ApplicationManage", new { id = Model.id }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "GetResult" }))
+{ 
+        @Html.ValidationSummary(true)
+   
+          <table>
+             <tr>
+			<td class="PersMS-table-4cols-1">
+			 @Html.LabelFor(model => model.Passed)：
+			</td>
+        	<td class="PersMS-table-4cols-2">
+			@m.Passed
+			</td>
+             </tr>
+             <tr>
+			   <td class="PersMS-table-4cols-1">
+		           @Html.LabelFor(model => model.Appname)：		
+			   </td>
+			   <td class="PersMS-table-4cols-J">
+                   @Html.EditorFor(model => model.Appname) 
+                   @Html.ValidationMessageFor(model => model.Appname)			
+			   </td>
+		     </tr>
+             
+		     <tr>
+			   <td class="PersMS-table-4cols-1">
+			       @Html.LabelFor(model => model.Priority)：
+            	   @*<%//: Html.LabelFor(model => model.ModuleName)%>*@
+			   </td>
+			   <td class="PersMS-table-4cols-J">
+				   @Html.EditorFor(model => model.Priority) 
+                   @Html.ValidationMessageFor(model => model.Priority)	
+			   </td>
+		     </tr>
+            
+		     <tr>
+			   <td class="PersMS-table-4cols-1">
+				   @Html.LabelFor(model => model.Publishto)：
+                   @* <%//: Html.LabelFor(model => model.ModuleHierarchy)%>*@
+			   </td>
+			   <td class="PersMS-table-4cols-2">
+				   @Html.DropDownList("Publishto", ViewData["Publishto"] as SelectList,  new { multiple = "multiple" })
+			   </td>
+		</tr>
+       
+
+		<tr>
+			<td class="PersMS-table-4cols-1">
+				 @Html.LabelFor(model => model.Logourl)：
+            		@*<%//: Html.LabelFor(model => model.ModulePriority)%>*@
+			</td>
+			<td class="PersMS-table-4cols-J">
+				@Html.EditorFor(model => model.Logourl) 
+                @Html.ValidationMessageFor(model => model.Logourl)	
+			</td>
+		</tr>
+
+		<tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.ShowType)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+					@Html.DropDownList("ShowType",null,new { @style = "width:183px " })
+					</td>
+               </tr>
+        
+		<tr>
+			<td class="PersMS-table-4cols-1">
+				 @Html.LabelFor(model => model.Tags)：
+            		@*<%//: Html.LabelFor(model => model.RouteName)%>*@
+			</td>
+			<td class="PersMS-table-4cols-J">
+				@Html.EditorFor(model => model.Tags) 
+                @Html.ValidationMessageFor(model => model.Tags)	
+			</td>
+		</tr>
+        
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			    @Html.LabelFor(model => model.Ispublish)：
+            		@*<%//: Html.LabelFor(model => model.IsMenu)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@Html.CheckBoxFor(model => model.Ispublish) 
+                @Html.ValidationMessageFor(model => model.Ispublish)	
+			</td>
+		</tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			    @Html.LabelFor(model => model.IfLoginShow)：
+            		
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@Html.CheckBoxFor(model => model.IfLoginShow) 
+                @Html.ValidationMessageFor(model => model.IfLoginShow)	
+			</td>
+		</tr>
+
+       
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			 @Html.LabelFor(model => model.Note)：
+            		@*<%//: Html.LabelFor(model => model.ModuleNotes)%>*@
+			</td>
+        	<td class="PersMS-table-4cols-2">
+			@Html.TextAreaFor(model => model.Note, new {@style= "width:210px ;height:100px"}) 
+            @Html.ValidationMessageFor(model => model.Note)	
+			</td>
+
+        </tr>
+      
+        </table><br/>
+		 <div style="margin:0 auto;width:170px">
+		        
+                <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				保存
+				</button>
+                 <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="Close()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+	       </div>
+
+}
+
+
+
+  <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+  <script src="@Url.Content("~/Scripts/plusIns/multiselect/jquery.multiselect.js")" type="text/javascript"></script>
+ 
+  <script type="text/javascript">
+     $("#Publishto").multiselect({
+         selectedList: 3,
+         //  header: "请选择发布平台"
+         show: ["bounce", 200],
+         hide: ["explode", 1000]
+     });
+  </script>
+ 

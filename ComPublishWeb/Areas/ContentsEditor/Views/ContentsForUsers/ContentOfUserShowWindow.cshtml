@@ -1,0 +1,90 @@
+﻿@model WiGetMS.Models.ContentsModel
+
+@{
+    ViewBag.Title = "ContentOfUserShowWindow";
+}
+
+<h2>审核状态:@Model.Passed</h2>
+
+ <table>
+        <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.ID)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                    @Model.ID
+                 </td>
+               </tr>
+               <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Title)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                    @Model.Title
+                 </td>
+               </tr>
+                <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Creator)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Model.Creator
+                 </td>
+               </tr>
+               <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Tags)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Model.Tags
+                 </td>
+               </tr>
+                <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Sorlink)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Model.Sorlink
+                 </td>
+               </tr>
+               <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Stick)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Model.StickS
+                 </td>
+               </tr>
+                <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Hotspot)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                    @Model.HotspotS
+                 </td>
+               </tr>
+                <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Summary)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Model.Summary
+                 </td>
+               </tr>    
+               </table>
+               <table>
+                <tr>
+                 <td class="PersMS-table-4cols-1" colspan="3" >
+                     @Html.LabelFor(model => model.T_content)：
+                 </td>
+			     <td class="PersMS-table-4cols-2" colspan="3">
+                    @Model.T_content
+                 </td>
+               </tr>
+               </table>
+        <div class="right" style="margin:0 auto; width:200px;">
+          <button class="button" type="submit" name = "edit" value = "关闭" onclick ="Close()">
+	     <img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+		  关 闭
+		 </button>
+         </div>

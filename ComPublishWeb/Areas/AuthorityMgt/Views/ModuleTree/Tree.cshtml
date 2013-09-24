@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "Tree";
+}
+
+<h2></h2>
+<table>
+    <tr>
+        <td>
+                <div id="ModuleTree" style=" text-align:left;height: 360px; width: 370px; overflow: auto;"></div>
+        </td>
+    </tr>
+    <tr>
+        <td class="PersMS-table-cels-center">
+            <input class="PersMS-button t-button" type="button" id="editModule" value="修改模块" onclick= "ChangeModule()" name="TreeButton" />
+            <input class="PersMS-button t-button" type="button" id="AddModule" value="添加模块" onclick= "InsertModule()" name="TreeButton" />
+            <input class="PersMS-button t-button" type="button" id="DeleteModule" value="删除模块" onclick= "RemoveModule()"   name="TreeButton" />
+        </td>
+     
+    </tr>  
+</table> 
+
+
+@section _Footer{
+ 
+<script type="text/javascript">
+
+//    $(document).ready(function () {
+
+//        var mess = '@ViewData["Delete"].ToString()';
+//        if (mess != "") {
+//            alert(mess);
+//        }
+//    });
+   
+
+
+//    var nowmoduleid = 0;
+//    $(document).ready(function () {
+//    var systemid = 267;
+//    //var userid = "'@ViewBag.UserID'";
+//    $("#ModuleTree").jstree({
+//        "json_data": {
+//            "ajax": {
+//                "url": '@Url.Content("/ModuleTree/GetModuleNodeChildren")',
+//                "data": function (n) {
+//                    if (n == -1)
+//                        return '{SystemID:' + systemid + '}';
+//                    else {
+//                        var nid = n[0].id;
+//                        return '{SystemID:' + nid + '}';
+//                    }
+//                },
+//                "type": "POST",
+//                "dataType": "json",
+//                "contentType": "application/json charset=utf-8"
+//            }
+//        },
+
+//        "themes": { "theme": "classic", "dots": true, "icons": true },
+//        "plugins": ["themes", "json_data", "ui"]
+//    });
+
+//    $("#ModuleTree").bind("select_node.jstree", function (event, data) {
+//    if (data.rslt.obj.length == 1) {
+
+//        var value = data.rslt.obj.attr("id");   //获取节点的id值（id值由Controller赋值）
+//        nowmoduleid = value;
+//        var child = data.rslt.obj.attr("hid");
+//        if (value != "#") {
+//            $.ajax({
+//                type: "POST",
+//                url: '@Url.Action("DisplayModule","ModuleTree")',
+//                data: { moduleid: value },
+//                dataType: "html",
+//                success: function (request) {
+//                    $("#table_module").html(request); 
+//                },
+//                traditional: true
+//            });
+//        }
+//    } 
+//});
+//});
+
+//function quicksearch() {
+//    var str = $("#Seach").attr("value");
+//    $("#ModuleTree").jstree("search", str);
+//}
+//function ChangeModule() {
+//         var value = nowmoduleid;
+//         if (value == 0) {
+//                alert('请首先要选择修改的模块');
+//                          return;
+//            }
+////            var child = data.rslt.obj.attr("hid");
+//            if (value != "#") {
+//                $.ajax({
+//                    type: "POST",
+//                    url: '@Url.Action("EditModule","ModuleTree")',
+//                    data: { moduleid: value },
+//                    dataType: "html",
+//                    success: function (request) {
+//                        $("#table_module").html(request);
+//                    },
+//                    traditional: true
+//                });
+//            }
+
+//        }
+
+
+//        function InsertModule() {
+//            var value = nowmoduleid;
+//            if (value == 0) {
+//                alert('请首先要选择修改的模块');
+//                return;
+//            }
+//            //            var child = data.rslt.obj.attr("hid");
+//            if (value != "#") {
+//                $.ajax({
+//                    type: "POST",
+//                    url: '@Url.Action("AddModule","ModuleTree")',
+//                    data: { id: value },
+//                    dataType: "html",
+//                    success: function (msg) {
+//                        $("#table_module").html(msg);$("input#ModuleParentID").attr("readonly", true); 
+//                    },
+//                    traditional: true
+//                });
+//            }
+
+//        }
+
+
+//        function RemoveModule() {
+//            var value = nowmoduleid;
+//            if (value == 0) {
+//                alert('请首先要选择修改的模块');
+//                return;
+//            }
+//            if (!confirm("你确定要删除该用户吗？"))
+//                return;
+//            if (value != "#") {
+//                $.ajax({
+//                    type: "POST",
+//                    url: '@Url.Action("DeleteModule","ModuleTree")',
+//                    data: { id: value },
+//                    dataType: "html",
+//                    success: function (msg) {
+//                        $("#tree_module").html(msg);
+//                    },
+//                    traditional: true
+//                });
+//            }
+
+//        }
+
+
+
+//    function RemoveModule() {
+//        var value = nowmoduleid;
+//        if (value == 0) {
+//            alert('请首先要选择修改的模块');
+//            return;
+//        }
+//        if (!confirm("你确定要删除该用户吗？"))
+//            return;
+//        if (value != "#") {
+//            window.location.href = '@Url.Action("DeleteModule", "ModuleTree")' + "/" + value;
+//            $('#RoleTree').jstree('refresh', -1);
+//        }
+
+//    }
+
+</script>
+ 
+}
+
+

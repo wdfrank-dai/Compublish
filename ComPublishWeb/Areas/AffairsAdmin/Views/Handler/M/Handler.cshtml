@@ -1,0 +1,76 @@
+﻿@model ComPublishWeb.Areas.AffairsAdmin.Models.AffairsDataModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    @Html.HiddenFor(model => model.AffairsID)
+    <video id="myVideo" autoplay="autoplay"></video>
+    <br />
+    <input type="button" value="拍照" />
+    <br />
+    拍照结果：
+    <div id="result">
+    </div>
+    <script type="text/javascript">
+        var affairsid = $("#AffairsID").val();
+        $(document).ready(init);
+        var video_element = document.getElementById('myVideo'); 
+        function init() {
+
+            //Google Chrome要用webkitGetUserMedia函式
+            navigator.webkitGetUserMedia({ video: true }, success);   //显示影像
+
+
+            //定义button点选后要做什么
+            $("input[type='button']").click(function () {
+                shoot(); //执行拍照
+            });
+        }
+        function success(stream) {
+            video_element.src =stream;
+            $("#myVideo").attr("src", window.webkitURL.createObjectURL(stream));
+        }
+        //执行拍照
+        function shoot() {
+
+            var video = $("#myVideo")[0];
+            var canvas = capture(video);
+
+
+            $("#result").empty();
+            $("#result").append(canvas); //呈现图像(拍照结果)
+            var imgData = canvas.toDataURL("image/jpg");
+            var base64String = imgData.substr(22); //取得base64字符串
+
+            //上传，储存图片
+            $.ajax({
+                url: '@Url.Action("ApplyForApp", "Handler", new { Area = "AffairsAdmin" })',
+                type: "post",
+                data: { data: base64String, affairsid: affairsid },
+                async: true,
+                success: function (htmlVal) {
+                    alert("另存图片成功！");
+                }, error: function (e) {
+                    alert(e.responseText); //alert错误讯息
+                    alert("程序出错！");
+                }
+
+            });
+        }
+
+        //从video元素抓取图像到canvas
+        function capture(video) {
+
+            var canvas = document.createElement('canvas'); //建立canvas js DOM元素
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0);
+            return canvas;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+﻿@using Telerik.Web.Mvc.UI;
+@{
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+<div class="bigbox">
+<h2>第三方应用审核</h2>
+<div>
+@(Html.Telerik().Grid<WiGetMS.Models.showApplication>()
+          .Name("AppExamineGrid")
+          .DataKeys(keys =>
+           {
+               keys.Add(c => c.id);
+           })
+
+          .DataBinding(dataBinding =>
+              {
+                  dataBinding.Ajax()
+                   .Select("GetAllAppOfExamine", "ApplicationManage");
+              })
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.id).Hidden(true);
+              columns.Bound(c => c.Appname).Width(130);
+              columns.Bound(c => c.Note).Title("应用备注").Width(160);
+              columns.Bound(c => c.Logourl).Width(260);
+              columns.Bound(c => c.Lastmodifytime).Width(140);
+              columns.Bound(c => c.Publishto).Width(145);
+              columns.Bound(c => c.Ispublishstring).Width(90);
+			  columns.Bound(c => c.ShowTypes).Width(90);
+			  columns.Bound(c => c.IfLoginShows).Width(90);
+              columns.Bound(c => c.Tags).Width(180);
+              columns.Bound(c => c.Passed).Width(125);
+          })
+          @*.DetailView(detailView => detailView.Template(e =>
+              {
+                  Html.Telerik().TabStrip()
+                   .Name("TabStrip_" + e.id)
+                   .SelectedIndex(0)
+                   .Items(items =>
+                   {
+                       items.Add().Text("Contact Information").Content(
+                              @<div class="employee-details">
+                                    <img src='@Url.Content(""+e.Logourl+"")'
+                                        alt='@e.Appname' />
+                                    <ul>
+                                        <li>
+                                            <label>第三方应用名称:</label>@e.Appname 
+                                        </li>
+                                        <li>
+                                            <label>应用备注:</label>@e.Note 
+                                        </li>
+                                        <li>
+                                            <label>最新修改时间:</label>@e.Lastmodifytime 
+                                        </li>
+                                        <li>
+                                            <label>Addr发布平台ess:</label>@e.Publishto 
+                                        </li>
+                                        <li>
+                                            <label>是否发布:</label>@e.Ispublishstring 
+                                        </li>
+                                         <li>
+                                            <label>标签:</label>@e.Tags 
+                                        </li>
+                                         <li>
+                                            <label>审核状态:</label>@e.Passed 
+                                        </li>
+                                    </ul>
+                                </div>);
+                   })
+                   .Render();
+              }))
+              .RowAction(row =>
+               {
+                 if (row.Index == 0)
+                   {
+                      row.DetailRow.Expanded = true;
+                    }
+               })*@
+         .Pageable(paging => paging.PageSize(10))
+         .Scrollable(scrolling => scrolling.Height(260))
+         .Resizable(resizing => resizing.Columns(true))
+         .Sortable()
+         .Selectable()
+         .Filterable()
+         .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+          )
+</div>
+<div id="Window">
+@{Html.Telerik().Window()
+            .Name("AppExamine-Window")
+            .Title("App信息详细")
+            .Content(() => {})
+            .Width(450)
+            .Height(300)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+</div>
+</div>
+ @section Footer{
+  <script type="text/javascript">
+      var nowmoduleid; 
+      function onRowSelected(e) {
+          var Grid = $('#AppExamineGrid').data('tGrid');
+          var id = e.row.cells[0].innerHTML;
+          nowmoduleid = id;
+          var window = $('#AppExamine-Window').data('tWindow');
+          window.ajaxRequest("/WidgetAdmin/ApplicationManage/AppExaminceWindow?confid=" + id);
+          window.center().open();
+      }
+
+
+      function Passed() {
+          var id = nowmoduleid;
+          if (id != "#") {
+              $.ajax({
+                  type: "POST",
+                  url: '@Url.Action("Passed", "ApplicationManage", new {Ares = "WidgetAdmin"})',
+                  data: { appid: id },
+                  dataType: "text",
+                  success: function (res) {
+                      if (res != "")
+                          alert(res);
+                      else
+                          alert("审核通过操作失败");
+                      $('#AppExamine-Window').data('tWindow').close();
+                      var grid = $('#AppExamineGrid').data('tGrid'); //重新加载
+                      grid.rebind();
+                  },
+                  traditional: true
+              });
+          }
+
+      }
+
+
+      function NoPassed() {
+          var id = nowmoduleid;
+          if (id != "#") {
+              $.ajax({
+                  type: "POST",
+                  url: '@Url.Action("NoPassed", "ApplicationManage", new {Ares = "WidgetAdmin"})',
+                  data: { appid: id },
+                  dataType: "text",
+                  success: function (res) {
+                      if (res != "")
+                          alert(res);
+                      else
+                          alert("审核通过操作失败");
+                      $('#AppExamine-Window').data('tWindow').close();
+                      var grid = $('#AppExamineGrid').data('tGrid'); //重新加载
+                      grid.rebind();
+                  },
+                  traditional: true
+              });
+          }
+
+      }
+   </script>
+ }
+

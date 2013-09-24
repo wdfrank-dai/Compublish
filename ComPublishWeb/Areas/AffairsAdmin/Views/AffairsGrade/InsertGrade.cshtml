@@ -1,0 +1,31 @@
+﻿@model ComPublishWeb.Areas.AffairsAdmin.Models.AffairsGradeModel
+
+    
+@using Telerik.Web.Mvc.UI
+@using (Ajax.BeginForm("InsertAffairsGrade", "AffairsGrade", new { }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "InsertGraderes" }))
+{  
+        @Html.ValidationSummary(true)
+            <legend>AffairsGradeModel</legend>
+           @Html.HiddenFor(model => model.ID)
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Rank)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Rank)
+                @Html.ValidationMessageFor(model => model.Rank)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Gradename)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Gradename)
+                @Html.ValidationMessageFor(model => model.Gradename)
+            </div>
+    
+            <p>
+                <input type="submit" value="保 存" />
+            </p>
+    }
+   

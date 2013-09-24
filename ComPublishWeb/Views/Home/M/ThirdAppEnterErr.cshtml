@@ -1,0 +1,30 @@
+﻿<div id="box">
+    <div class="block" id="block-login">
+        <h2>
+            第三方代理认证</h2>
+        <div class="content login"  style="margin:30px">
+            <div style="font-size:14px; margin:15px">
+            代理认证中发生错误<br />请重新输入进入系统: "@ViewBag.ThirdAppName "的帐号和密码：</div>
+            @using (Html.BeginForm("PortalPageSet", "Account", FormMethod.Post))
+            {
+                <div class="group wat-cf">
+                    <div class="right" style="margin:8px">
+                        帐号： @Html.TextBox("Acount")
+                    </div>
+                </div>
+                <div class="group wat-cf">
+                    <div class="right" style="margin:8px">
+                        密码： @Html.TextBox("PasWord")
+                    </div>
+                </div>
+                <div class="group navform wat-cf">
+                    <div class="right" style="margin:5px">
+                        <button class="button" type="submit">
+                            提交
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

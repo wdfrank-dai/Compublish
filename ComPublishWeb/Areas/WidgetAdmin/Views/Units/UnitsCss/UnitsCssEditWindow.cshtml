@@ -1,0 +1,51 @@
+﻿@model WiGetMS.Models.ShowUnitsCss
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@using (Ajax.BeginForm("Modify", "UnitsCss", new { roleid = Model.id }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "OperateWindowForCssEdit" }))
+{
+
+    <table>
+            <tr>
+                  @Html.HiddenFor(model => model.id)
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.name)：
+              </td>
+			  <td class="PersMS-table-4cols-3">
+                  @Html.EditorFor(m => m.name)
+              </td>
+            </tr>
+            <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.unitname)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.DropDownList("Unitsid", ViewData["Unitsid"] as SelectList, new { @style = "width:180px " })
+              </td>
+            </tr>
+
+            <tr>
+			  <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.css)：
+              </td>
+			  <td class="PersMS-table-4cols-3">
+                  @Html.EditorFor(m => m.css)         
+              </td>
+            </tr>
+            </table><br/>
+        <div style="margin:0 auto;width:170px">
+        <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				保存
+				</button>
+                <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="CloseUnitsCssEditWindow()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+	    </div>
+}

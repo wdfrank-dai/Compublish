@@ -1,0 +1,63 @@
+﻿<div style="margin:15px">
+<form action="" name="composeform" method="post" target="_blank" style="margin-left:-10px;font:宋体; font-size:12px">
+
+      <div class="editor-field" style=" margin:10px">
+        <strong>请选择检索类：</strong>
+            <span class="js-color"><input type="radio" value="book" checked="2" name="v_type"/>馆藏纸本
+
+    <input type="radio" name="v_type" value="e_book" />电子图书
+
+    <input type="radio" name="v_type" value="cnki" />电子期刊论文
+    </span>
+        </div>
+    
+
+        <div class="editor-field" style=" margin:10px">
+         <strong>请输入检索词：</strong>
+            <span class="input-bg"><input id="Text1" name="txtBaseSearchValue" onkeydown="return input_click();" /></span>
+        </div>
+        <div class="editor-field" style=" margin:10px">
+        <strong>请选择检索项：</strong>
+           <span class="js-color"> <input type="radio" value="TITLE" checked="2" name="v_index"/>题名   <input type="radio" name="v_index" value="AUTHOR">作者</span>
+        </div>
+     
+        <p>
+          <input type="hidden" name="v_seldatabase" value="0"/>
+          <input type="hidden" name="v_LogicSrch" value="0"/>
+          <input type="button" value="查询" id="button-1" class="button" style="height: 24px; width: 78px;" onclick="javascript:FrontPage_Form2_Validator();"/>
+        </p>
+        <input name="Field" id="Hidden1" type="hidden"/>
+
+<input type="hidden" name="KeyWord"/>
+
+<input type="hidden" name="v_value"/>
+
+ <input type="hidden" name="v_index"/>
+
+<input id="Hidden2" name="slctBaseSearchFields" type="hidden"/>
+
+<input id="Hidden3" name="slctBaseStartYear" value="1997" type="hidden"/>
+
+<input id="Hidden4" name="slctBaseEndYear" value="2008" type="hidden"/>
+
+<input id="Hidden5" name="basesearchmatch" type="hidden" value="1"/>
+
+<input type="hidden" value="FirstPage" name="FirstPage"/>
+
+<input type="hidden" value="0" name="searchflag"/> 
+
+<input type="hidden" name="baseorder"/> 
+
+<input type="hidden" name="baseextension"/> 
+
+<input type="hidden" value="1" name="basesearchdup"/>
+
+<input type="hidden" name="selectdatabase" value="中国期刊全文数据库"/>
+
+<input type="hidden" name="selectdatabase" value="中国优秀硕士学位论文全文数据库"/>
+
+<input type="hidden" name="selectdatabase" value="中国博士学位论文全文数据库"/>
+
+<input type="hidden" name="selectdatabase" value="中国重要会议论文全文数据库"/>
+</form>
+</div>

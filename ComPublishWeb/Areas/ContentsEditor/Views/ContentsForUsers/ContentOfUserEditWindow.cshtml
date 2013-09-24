@@ -1,0 +1,105 @@
+﻿@model WiGetMS.Models.ContentsModel
+@{
+    ViewBag.Title = "ContentOfUserEditWindow";
+}
+@{
+    var m = Model;
+    }
+
+<h3>审核状态:@m.Passed</h3>
+@{
+    if (m.Passed=="需修改")
+    {
+        <h4 style="color:Red">修改意见：@m.Suggestion</h4>
+    }
+    if(m.Passed == "审核未通过")
+    {
+       <h4 style="color:Red">审核未通过原因：@m.Suggestion</h4>
+    }
+    }
+  <div>
+    @using (Ajax.BeginForm("SaveContentEdit", "ContentsForUsers", new { id = Model.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ContentEditSuccess" }))
+    { 
+        <table>
+               <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Title)：
+                 </td>
+			     <td class="PersMS-table-4cols-3">
+                     @Html.EditorFor(model => model.Title)
+                     @Html.ValidationMessageFor(model => model.Title)
+                 </td>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Creator)：
+                 </td>
+			     <td class="PersMS-table-4cols-3">
+                     @Html.EditorFor(model => model.Creator)
+                     @Html.ValidationMessageFor(model => model.Creator)
+                 </td>           
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Stick)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Html.CheckBoxFor(model => model.Stick)
+                     @Html.ValidationMessageFor(model => model.Stick)
+                 </td>
+               
+               </tr>
+               <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Sorlink)：
+                 </td>
+			     <td class="PersMS-table-4cols-3">
+                     @Html.EditorFor(model => model.Sorlink)
+                     @Html.ValidationMessageFor(model => model.Sorlink)
+                 </td>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Tags)：
+                 </td>
+			     <td class="PersMS-table-4cols-3">
+                     @Html.EditorFor(model => model.Tags)
+                     @Html.ValidationMessageFor(model => model.Tags)
+                 </td>           
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Hotspot)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Html.CheckBoxFor(model => model.Hotspot)
+                     @Html.ValidationMessageFor(model => model.Hotspot)
+                 </td>
+               </tr>
+              
+      
+      
+         </table>
+         <table>
+               <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Summary)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Html.TextAreaFor(model => model.Summary, new { @style = "width:524px;height:50px" })
+                     @Html.ValidationMessageFor(model => model.Summary)
+                 </td>
+               </tr>
+         </table>
+          <textarea cols="80" rows="8" id="editor2" name="ContentEditOfUser">@Model.T_content</textarea> 
+          <br/>
+        <div class="right" style="margin:0 auto; width:200px;">
+         <button class="button" type="submit" name = "edit" value = "修改">
+	     <img src="@Url.Content("~/images/icons/application_edit1.png")" alt="Save" />
+		  修 改
+		 </button>
+         </div>
+    }
+    </div>
+
+
+ <script type="text/javascript">
+          var instance1 = CKEDITOR.instances['editor2'];   
+          if (instance1) {
+              CKEDITOR.remove(instance1);
+          }
+     CKEDITOR.replace('ContentEditOfUser');
+ </script>
+

@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Index_content";
+    Layout = "~/Views/Shared/_LayoutFrame.cshtml";
+}
+
+@{
+    int pageid = ViewBag.pageid == null ? 0: ViewBag.pageid;
+    string theparams = ViewBag.theparams == null ? "" : ViewBag.theparams;
+}
+
+
+
+
+
+@Html.GetPageContent(pageid, theparams)

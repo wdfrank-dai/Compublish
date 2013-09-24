@@ -1,0 +1,50 @@
+﻿@*@{
+    ViewBag.Title = "RoleJsTree";
+     Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}*@
+
+<h2></h2>
+
+<div id="RoleJsTree"  class="RoleJsTree" > </div>
+
+   @* <script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.cookie.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.hotkeys.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/jquery.jstree.js")"></script>
+*@
+	 <script type="text/javascript">
+
+        $(document).ready(Rolerebindtree = function () {
+
+            $("#RoleJsTree").jstree({
+                json_data: {
+                    ajax: {
+                        url: '@Url.Action("GetRoleTreeDataAll","User")',
+                        type: "POST",
+                        dataType: "json",
+                        contentType: "application/json charset=utf-8"
+                    }
+                },  
+
+                themes: { "theme": "default", "dots": true, "icons": true },
+                plugins: ["themes", "json_data", "ui", "cookies"]
+            });
+        })   
+
+
+//         $(document).ready(function () {
+//          
+//            $("#RoleJsTree").bind("select_node.jstree", function (event, data) {   //选中事件 
+
+//                if (data.rslt.obj.length == 1) {
+//                    var value = data.rslt.obj.attr("id");   //获取节点的id值（id值由Controller赋值）
+//                    var child = data.rslt.obj.attr("hid");
+//                    $("input#hidden:hidden").attr("value", value);
+//                    $("#hiddenleaf").attr("value", child);
+
+//                }
+//            });
+//        })
+        
+        </script> 
+	
+	

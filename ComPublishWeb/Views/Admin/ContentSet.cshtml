@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>ContentSet</title>
+</head>
+<body>
+    <h2>第三方信息接入设置</h2>
+    <div>
+    <form action="" name="composeform" method="post" target="_blank" style="margin-left:-10px;font:宋体; font-size:14px">
+      <div class="editor-field" style=" margin:10px">
+            <strong>第三方应用名称：</strong>
+            <span class="input-bg"><input id="Text1" name="txtBaseSearchValue" onkeydown="return input_click();" /></span>
+      </div>
+     
+      <div class="editor-field" style=" margin:10px">
+        <strong>第三方信息获取方式：</strong>
+            <span class="js-color">
+            <input type="radio" name="v_type" value="e_book" />WebService
+            <input type="radio" name="v_type" value="cnki" />DB数据库</span>
+      </div>
+      <div class="editor-field" style=" margin:10px">
+            <strong>第三方信息获取URL/WebService链接地址：</strong>
+            <span class="input-bg"><input id="Text2" name="txtBaseSearchValue" onkeydown="return input_click();" /></span>
+      </div>   
+      
+      <div class="editor-field" style=" margin:10px">
+            <strong>第三方应用认证方式：</strong>
+            <span class="js-color">
+            <input type="radio" name="v_type" value="e_book" />代理认证
+            <input type="radio" name="v_type" value="cnki" />统一认证</span>
+      </div> 
+
+      <div class="editor-field" style=" margin:10px">
+            <strong>认证入口URL地址：</strong>
+            <span class="input-bg"><input id="Text4" name="txtBaseSearchValue" onkeydown="return input_click();" /></span>
+      </div>
+      <div class="editor-field" style=" margin:10px">
+            <strong>第三方应用简介：</strong><br />
+            <span class="input-bg">@Html.TextArea("intro", new { cols = 60, rows = 10 })</span>
+      </div>
+      <input type="button" value="添加" id="button-1" class="button" style="height: 24px; width: 78px;" onclick="javascript:FrontPage_Form2_Validator();"/>
+</form>
+</div>
+
+
+
+</body>
+</html>

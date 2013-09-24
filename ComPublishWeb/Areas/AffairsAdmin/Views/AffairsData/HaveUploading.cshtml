@@ -1,0 +1,51 @@
+﻿@model IList<ComPublishWeb.Areas.AffairsAdmin.Models.AffairsDataModel>
+
+
+<ul type=disc> 
+        @foreach (var item in Model)
+         {
+                @Html.HiddenFor(model => item.ID)
+            <li>
+            @Html.LabelFor(model => item.Dataname)
+            @item.Dataname    
+            @Html.LabelFor(model => item.Uploadername) 
+            @item.Uploadername  
+            @Html.LabelFor(model => item.Uploadtime) 
+            @item.Uploadtime     
+            @if (item.Uploadername == item.Registrantnum)
+             {
+                  <input id = "finishevent" value = "删除资料" type ="button" onclick = "DelectUpload(@item.ID)" /> 
+             }
+              </li>  
+         }
+</ul>
+
+         <script type="text/javascript">
+             function DelectUpload(id) {
+                 if (!confirm("你确定要删除该资料吗？"))
+                     return;
+                 $.ajax({
+                     type: "POST",
+                     async: false,
+                     url: '@Url.Action("DelectUpload", "AffairsData", new { Area = "AffairsAdmin" })',
+                     data: { confid: id },
+                     dataType: "html",
+                     success: function (request) {
+                         if (request == "操作成功")
+                             alert("删除成功！");
+                     },
+                     traditional: true
+                 });
+                 $.ajax({
+                     type: "POST",
+                     async: false,
+                     url: '@Url.Action("HaveUploading", "AffairsData", new { Area = "AffairsAdmin" })',
+                     data: { confid: affairsid },
+                     dataType: "html",
+                     success: function (request) {
+                         $("#adddata").html(request);
+                     },
+                     traditional: true
+                 });
+             }
+          </script>

@@ -1,0 +1,83 @@
+﻿@model IList<ComPublishWeb.Areas.AffairsAdmin.Models.AffairsModel>
+@{
+    ViewBag.Title = "AffairsRefer";
+    Layout = "~/Views/Shared/M/_LayoutAffairs.cshtml";
+}
+    
+<div id="block-create" class="block">
+    <div class="content">
+        <h2 class="title">
+            事务列表</h2>
+        <div class="inner">
+        </div>
+    </div>
+</div>
+<div>
+        @foreach (var item in Model)
+         {
+                @Html.HiddenFor(model => item.ID)
+            <div class="editor-label">
+                @Html.LabelFor(model => item.Name)
+            </div>
+            <div class="editor-field">
+                @item.Name
+            </div>
+            
+            <div class="editor-label">
+                @Html.LabelFor(model => item.Typename)
+            </div>
+            <div class="editor-field">
+                @item.Typename
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => item.Petitionernum)
+            </div>
+            <div class="editor-field">
+                @item.Petitionernum
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => item.Starttime)
+            </div>
+            <div class="editor-field">
+                @item.Starttime
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => item.Statusname)
+            </div>
+            <div class="editor-field">
+                @item.Statusname
+ 
+            </div>
+            
+            <input id = "finishevent" value = "查看详细内容"  type ="button" onclick = "Detail(@item.ID)" /> 
+         }
+      </div> 
+
+@section Footer{       
+   
+<script type="text/javascript">
+    var affairsid;
+    function Detail(id) {
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: '@Url.Action("ManageShow", "AffairsData", new { Area = "AffairsAdmin" })',
+            data: { confid: id },
+            dataType: "html",
+            success: function (request) {
+                window.location.href = "/AffairsAdmin/AffairsData/ManageShow?confid=" + id;
+            },
+            traditional: true
+        });
+    }
+
+    function Edit(id) {
+        window.location.href = "/AffairsAdmin/AffairsData/UploadForShow?confid=" + id;
+//        var window = $('#PlUploadWindow').data('tWindow');
+//        window.ajaxRequest("/AffairsAdmin/AffairsData/UploadForShow?confid=" + id);
+//        window.center().open();
+    }
+</script>

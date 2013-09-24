@@ -1,0 +1,25 @@
+﻿@model IList<ComPublishWeb.Areas.AffairsAdmin.Models.AffairsDataModel>
+
+<div id="block-create" class="block">
+    <div class="content">
+        
+        <div class="inner">
+        </div>
+    </div>
+</div>
+<ul type=disc> 
+        @foreach (var item in Model)
+         {
+                @Html.HiddenFor(model => item.ID)
+
+            <li>
+            @Html.LabelFor(model => item.Dataname)
+            @item.Dataname    
+            @Html.LabelFor(model => item.Uploadername) 
+            @item.Uploadername  
+            @Html.LabelFor(model => item.Uploadtime) 
+            @item.Uploadtime     
+            </li>  
+         }
+</ul> 
+

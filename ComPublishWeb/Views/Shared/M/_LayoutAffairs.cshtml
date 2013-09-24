@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>@ViewBag.Title</title>
+     @*@Assets.CSS("base.css")*@
+    <link href="@Url.Content("~/Content/SiteAffaris.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/basel.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/baseJAffaris.css")" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/plusIns/multiselect/css/jquery.multiselect.css")" /> 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/plusIns/multiselect/css/style.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/plusIns/multiselect/css/prettify.css")" /> 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" /> 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/js/jquery-ui.css")"/>
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="container">
+
+           <div id="navigation">
+                <ul class="wat-cf" >
+                   <li>@Html.ActionLink("个人事务", "AffairsRefer", "AffairsForOneself", new { Area = "PcToMobile" }, null)</li>
+                   <li>@Html.ActionLink("事务申请", "AffairsForApply", "AffairsGovern", new { Area = "PcToMobile" }, null)</li>
+                   <li>@Html.ActionLink("事务等级", "ShowGrade", "AffairsGrade", new { Area = "PcToMobile" }, null)</li>
+                   <li>@Html.ActionLink("负责事务", "ShowAffairs", "AffairsData", new { Area = "PcToMobile" }, null)</li>
+                   <li>@Html.ActionLink("事务搜索", "Index", "SearchAffaris", new { Area = "PcToMobile" }, null)</li>
+                </ul>
+          </div>
+
+        <div id="header">
+            <div id="system_name"></div>
+            <div id="U_name"></div>
+
+        </div>
+        <div id="wrapper" class="wat-cf">
+            <div id="main">
+                @RenderBody()                
+            </div>            
+        </div>
+      @*  @Html.Partial("_Footer")*@
+    </div>
+
+
+    <div class="page">
+        
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.22.custom.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/plusIns/multiselect/jquery.multiselect.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/plusIns/multiselect/jquery.multiselect.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>  
+    <script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.cookie.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.hotkeys.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/jquery.jstree.js")"></script>
+
+        
+    @RenderSection("Footer", false)
+    </div>
+</body>
+</html>

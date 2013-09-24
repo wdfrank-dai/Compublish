@@ -1,0 +1,105 @@
+﻿@model WiGetMS.Models.showApplication
+@{
+    ViewBag.Title = "AppOfUserShowWindow";
+}
+
+@{
+    var m = Model;
+    }
+
+
+     <table class="table_style" style="border-collapse:collapse; width:90%; margin:10px; padding:5px; ">
+		     
+             <tr>
+			   <td class="PersMS-table-4cols-1">
+		           @Html.LabelFor(model => model.Appname)：		
+			   </td>
+			   <td class="PersMS-table-4cols-2">
+                   @m.Appname				
+			   </td>
+		     </tr>
+		     <tr>
+			   <td class="PersMS-table-4cols-1">
+			       @Html.LabelFor(model => model.Priority)：
+			   </td>
+			   <td class="PersMS-table-4cols-2">
+				   @m.Priority
+			   </td>
+		     </tr>
+		     <tr>
+			   <td class="PersMS-table-4cols-1">
+				   @Html.LabelFor(model => model.Publishto)：
+			   </td>
+			   <td class="PersMS-table-4cols-2">
+				   @m.Publishto
+			   </td>
+		</tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+				 @Html.LabelFor(model => model.Logourl)：
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@m.Logourl
+			</td>
+		</tr>
+
+		
+		<tr>
+			<td class="PersMS-table-4cols-1">
+				 @Html.LabelFor(model => model.Tags)：
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@m.Tags
+			</td>
+		</tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			 @Html.LabelFor(model => model.Ispublishstring)：
+
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@m.Ispublishstring
+			</td>
+		</tr>
+
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			 @Html.LabelFor(model => model.IfLoginShow)：
+
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@m.IfLoginShow
+			</td>
+		</tr>
+		<tr>
+			<td  class="PersMS-table-4cols-1">
+			 @Html.LabelFor(model => model.Note)：
+            		
+			</td>
+        	<td class="PersMS-table-4cols-2">
+			@m.Note
+			</td>
+        </tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			 @Html.LabelFor(model => model.Passed)：
+			</td>
+        	<td class="PersMS-table-4cols-2">
+			@m.Passed
+			</td>
+        </tr>
+	</table>
+    <br/>
+     <div style="margin:0 auto;width:170px">
+		        
+                <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				保存
+				</button>
+                 <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="Close()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+	       </div>

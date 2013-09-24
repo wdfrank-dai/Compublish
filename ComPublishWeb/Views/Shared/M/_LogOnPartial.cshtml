@@ -1,0 +1,12 @@
+﻿@if
+    (Request.IsAuthenticated) {
+@*    <text>Welcome <strong>@User.Identity.Name</strong>!*@
+     <text>
+      <a data-icon="back" data-role="button"  class="ui-btn-right" data-theme="c" href="@Url.Action("LogOff","Account")">退出</a>
+     </text>
+}
+else {
+    <a data-icon="forward" data-role="button" class="ui-btn-right" data-theme="c" href="@Url.Action("LogOn","Account")">登录</a>
+    
+}
+

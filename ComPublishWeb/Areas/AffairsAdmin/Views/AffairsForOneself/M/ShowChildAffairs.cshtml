@@ -1,0 +1,33 @@
+﻿@model IList<ComPublishWeb.Areas.AffairsAdmin.Models.AffairsModel>
+
+
+
+<ul class="disc">
+        @foreach (var item in Model)
+         {
+                @Html.HiddenFor(model => item.ID)
+            <li>
+                @Html.LabelFor(model => item.Name)   
+                @item.Name            
+                @Html.LabelFor(model => item.Principal)            
+                @item.Principal
+                @Html.LabelFor(model => item.Registrantnum)
+                @item.Registrantnum
+
+             @if (item.Registrantnum.Contains(item.Collaborativer) || item.Registrantnum.Contains(item.Principal))
+             {
+                  <input id = "editorchild" value = "点击查看" type ="button" onclick = "EditorChild(@item.ID)" /> 
+             }
+             </li>
+         } 
+        <input type = "button" onclick = "InsertChildAffairs()" value = "添 加 子 事 务"/>
+</ul>
+
+
+   <script type="text/javascript">
+
+         function EditorChild(id) {
+             window.location.href = "/AffairsAdmin/AffairsData/ManageShow?confid=" + id;
+         }
+          
+   </script>

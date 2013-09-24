@@ -1,0 +1,94 @@
+﻿@model AuthModelManage.Models.Module
+@{
+    var m = Model;
+    }
+ <table class="table_show" style="border-collapse:collapse; padding:5px;">
+		<tr>
+			<td class="PersMS-table-4cols-1">
+		    @Html.LabelFor(model => model.ModuleParentID)：		
+              
+			</td>
+			<td class="PersMS-table-4cols-2">
+            @m.ModuleParentID
+			
+			</td>
+		</tr>
+         <tr>
+        </tr>
+        <tr>
+			<td class="PersMS-table-4cols-1">
+		    @Html.LabelFor(model => model.ModuleID)：		
+              
+			</td>
+			<td class="PersMS-table-4cols-2">
+            @m.ModuleID
+				
+			</td>
+		</tr>
+        <tr>
+        </tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			 @Html.LabelFor(model => model.ModuleName)：
+            	@*<%//: Html.LabelFor(model => model.ModuleName)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@m.ModuleName
+			</td>
+		</tr>
+        <tr>
+        </tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+				 @Html.LabelFor(model => model.ModuleHierarchy)：
+               @* <%//: Html.LabelFor(model => model.ModuleHierarchy)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@m.ModuleHierarchy
+			</td>
+		</tr>
+        <tr>
+        </tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+				 @Html.LabelFor(model => model.ModulePriority)：
+            		@*<%//: Html.LabelFor(model => model.ModulePriority)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@m.ModulePriority
+			</td>
+		</tr>
+        <tr>
+        </tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+				 @Html.LabelFor(model => model.RouteName)：
+            		@*<%//: Html.LabelFor(model => model.RouteName)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@m.RouteName
+			</td>
+		</tr>
+        <tr>
+        </tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			 @Html.LabelFor(model => model.IsMenu)：
+            		@*<%//: Html.LabelFor(model => model.IsMenu)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@m.IsMenu
+			</td>
+		</tr>
+        <tr>
+        </tr>
+		<tr>
+			<td colspan="2" style=" border:none;">
+			 @Html.LabelFor(model => model.ModuleNotes)：
+            		@*<%//: Html.LabelFor(model => model.ModuleNotes)%>*@
+			</td>
+
+		</tr>
+
+	</table>
+    <div style=" width:380px; height:120px; border:1px #c4c4c4 solid; padding:5px; background:#fff;">   @m.ModuleNotes</div>

@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+@using Telerik.Web.Mvc.UI
+<div class="bigbox">
+<h2>内容审核</h2>
+
+<div>
+@{
+    Html.Telerik().Grid<WiGetMS.Models.ContentsModel>()
+          .Name("ContentGrid")
+          .DataKeys(keys =>
+          {
+              keys.Add(c => c.ID);
+          })
+  
+          .DataBinding(dataBinding => dataBinding.Ajax()
+                .Select("SelectForTelerik", "Contents")
+                )
+          
+          .Columns(columns =>
+          {
+              columns.Bound(o => o.ID).Hidden(true);
+              columns.Bound(c => c.Title).Title("标题").Width(100);
+              columns.Bound(c => c.Summary).Title("内容简介").Width(180);
+              
+              columns.Bound(c => c.Hotspot).Title("是否热点").Width(85);
+              columns.Bound(c => c.Stick).Title("是否置顶").Width(85);
+              columns.Bound(c => c.Tags).Title("标签").Width(100);
+              columns.Bound(c => c.Sorlink).Title("外部链接").Width(150);
+              columns.Bound(c => c.Creator).Title("作者").Width(70);
+              columns.Bound(c => c.Createtime).Title("创作时间").Width(125);
+              columns.Bound(c => c.Operator).Title("操作人").Width(75);
+             
+              columns.Bound(c => c.Passed).Title("审核情况").Width(95);
+              columns.Bound(c => c.Verifier).Title("审核人").Width(75);
+              columns.Bound(c => c.Verifytime).Title("审核时间").Width(125);
+              columns.Bound(c => c.Suggestion).Title("审核意见").Width(180);
+
+          })
+          .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+          .Pageable(pagesizi => pagesizi.PageSize(10))
+          .Selectable()
+
+          .Scrollable(scrolling => scrolling.Height(270))
+          .Sortable()
+          .Filterable()
+          .Resizable(resizing => resizing.Columns(true))
+          .Reorderable(reorder => reorder.Columns(true))          
+          .Footer(true)
+          .Render();
+          }
+</div>
+</div>
+
+<div>
+    @{       
+    Html.Telerik().Window()
+      .Name("EditContentsWindow")    
+      .Title("审 核")
+      .Draggable(true)
+      .Height(630)
+      .Width(900)
+      .Resizable(resizing => resizing
+        .Enabled(true)
+        .MinHeight(400)
+        .MinWidth(700)
+        .MaxHeight(400)
+        .MaxWidth(700)
+        )
+      //.Content(@<text>@Html.Partial("EditUnits", new { roleid = (Model.id == null ? 1 : Model.id) })</text>)
+      .Scrollable(true)
+      .Modal(true)
+      .Buttons(b => b.Maximize().Close())
+      .Visible(false)
+      .Render();
+   } 
+</div>
+
+@section Footer{       
+<script type="text/javascript" src="@Url.Content("~/Content/ckeditor/ckeditor.js")"></script>
+@*<script type="text/javascript" src="/ckfinder/ckfinder.js"></script>   *@
+<script type="text/javascript">
+
+    var contentsid;
+    function onRowSelected(e) {
+        var Grid = $('#ContentGrid').data('tGrid');
+        var id = e.row.cells[0].innerHTML;
+        contentsid = id;
+        var window = $('#EditContentsWindow').data('tWindow');
+        window.ajaxRequest("/ContentsEditor/Contents/PassedContents?confid=" + id);
+        window.center().open();
+    }
+
+    function EditorForContents(rep) {
+        var res = rep;
+        if (res != "")
+            alert(res);
+        else
+            alert("修改成功");
+        $('#EditContentsWindow').data('tWindow').close();
+        var grid = $('#ContentGrid').data('tGrid'); //重新加载
+        grid.rebind();
+    }
+    function CloseWindow() {
+        $('#EditContentsWindow').data('tWindow').close();
+    }
+  </script>
+  }

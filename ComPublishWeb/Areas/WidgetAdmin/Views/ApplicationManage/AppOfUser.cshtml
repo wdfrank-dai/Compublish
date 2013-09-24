@@ -1,0 +1,136 @@
+﻿@using Telerik.Web.Mvc.UI;
+@{
+    ViewBag.Title = "AppOfUser";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+<div class="bigbox">
+<h2>用户第三方应用</h2>
+<div>
+@(Html.Telerik().Grid<WiGetMS.Models.showApplication>()
+          .Name("AppOfUserGrid")
+          .DataKeys(keys =>
+           {
+              keys.Add(c => c.id);
+           })
+    
+          .DataBinding(dataBinding =>
+              {
+                  dataBinding.Ajax()
+                   .Select("GetAllAppOfUser", "ApplicationManage");
+              }) 
+          .Columns(columns =>   
+          {
+              columns.Bound(c => c.id).Hidden(true);    
+              columns.Bound(c => c.Appname).Width(95);
+              columns.Bound(c => c.Note).Width(140);
+              columns.Bound(c => c.Logourl).Width(190);
+              columns.Bound(c => c.Lastmodifytime).Width(130);
+              columns.Bound(c => c.Publishto).Width(120);
+              columns.Bound(c => c.Ispublishstring).Width(90);
+			  columns.Bound(c => c.ShowTypes).Width(90);
+			  columns.Bound(c => c.IfLoginShows).Width(90);
+              columns.Bound(c => c.Tags).Width(150);
+              columns.Bound(c => c.Passed).Width(130);
+              columns.Bound(c => c.Appname)
+                .ClientTemplate("<input type='button' value='删除' class='t-button' onclick='deleteapps(<#= id#>)' />").Title("操作").Width(100);
+          })
+         .Pageable(paging => paging.PageSize(8))
+         .Scrollable(scrolling => scrolling.Height(240))
+		 .Resizable(resizing => resizing.Columns(true))
+		 .Reorderable(reorder => reorder.Columns(true)) 
+         .Sortable()
+         .Selectable()
+         .Filterable()
+         .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+          )
+</div>
+
+<div id="Window">
+@{Html.Telerik().Window()
+            .Name("AppOfUser-Window")
+            .Title("App信息详细")
+            .Content(() => {})
+            .Width(400)
+            .Height(400)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+</div>
+</div>
+ @section Footer{
+ <script type="text/javascript">
+
+//     $(document).ready(function () {
+
+//         var mess = '@(ViewData["ActionMessagesForEdit"].ToString())';
+//         if (mess != "") {
+//             alert(mess);
+//         }
+//     });
+
+
+     function onRowSelected(e) {
+         var Grid = $('#AppOfUserGrid').data('tGrid');
+         var id = e.row.cells[0].innerHTML;
+         nowmoduleid = id;
+         var window = $('#AppOfUser-Window').data('tWindow');
+         var passed = e.row.cells[8].innerHTML;
+         if (passed == "审核通过") {
+             window.ajaxRequest("/WidgetAdmin/ApplicationManage/AppOfUserShowWindow?confid=" + id);
+         }
+         else {
+             window.ajaxRequest("/WidgetAdmin/ApplicationManage/AppOfUserEditWindow?confid=" + id); 
+         }
+         window.center().open();
+     }
+
+
+//     $("#Publishto").multiselect({
+//         selectedList: 3,
+//         //  header: "请选择发布平台"
+//         show: ["bounce", 200],
+//         hide: ["explode", 1000]
+//     });
+
+
+     function deleteapps(id) {
+         if (!confirm("你确定要删除该第三方应用吗？"))
+             return;
+         $.ajax({
+             type: "post",
+             url: '@Url.Action("DeleteApps","ApplicationManage", new {Ares = "WidgetAdmin"})',
+             cache: false,
+             data: "id=" + id,
+             //data: {dataid : id },
+             datatype: "html",
+             success: function () {
+                     alert("删除成功");
+                 var grid = $('#AppOfUserGrid').data('tGrid'); //重新加载
+                 grid.rebind();
+                 //autodisapear();
+             }
+         })
+     }
+
+     function GetResult(result) {
+         var mess = result;
+         if (mess != "") {
+             alert(mess);
+         }
+         $('#AppOfUser-Window').data('tWindow').close();
+         var grid = $('#AppOfUserGrid').data('tGrid'); //重新加载
+         grid.rebind();
+//         autodisapear();
+     }
+
+     function Sure() {
+         $('#AppOfUser-Window').data('tWindow').close();
+     }
+
+     function Close() {
+         $('#AppOfUser-Window').data('tWindow').close();
+     }
+ </script>
+ }

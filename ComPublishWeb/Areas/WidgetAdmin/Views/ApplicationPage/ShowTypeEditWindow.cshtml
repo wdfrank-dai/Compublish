@@ -1,0 +1,72 @@
+﻿@model WiGetMS.Models.ShowTypeModel
+
+@{
+    ViewBag.Title = "ShowTypeEditWindow";
+}
+
+@using (Ajax.BeginForm("EditShowTypeSaveByAppId", "ApplicationPage", new { }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "GetResult" }))
+{
+		@Html.HiddenFor(m => m.id)
+         <div id="Message"> 
+		 
+          <table>
+            <tr>
+				
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.name)：
+              </td>
+			  <td class="PersMS-table-4cols-3">
+                  @Html.EditorFor(m => m.name)
+              </td>
+            </tr>
+            <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.FillMark)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.EditorFor(m => m.FillMark)
+              </td>
+            </tr>
+
+            <tr>
+			  <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.FillCount)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.EditorFor(m => m.FillCount)
+              </td>
+            </tr>
+
+            <tr>
+              <td class="PersMS-table-4cols-1"> 
+                  @Html.LabelFor(m => m.remark)：
+              </td>
+			  <td class="PersMS-table-4cols-3">
+                  @Html.EditorFor(m => m.remark)
+              </td>
+            </tr>
+
+            <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.viewdate)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.TextAreaFor(m => m.viewdate,new { style= "width:400px ;height:280px"})
+              </td>
+            </tr>
+
+         </table>      
+    </div>        
+         <div style="margin:0 auto;width:200px">
+                <button class="button" type="submit">
+				  <img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				  添加
+				</button>
+                <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="ClosePageWindow()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+        </div>
+}

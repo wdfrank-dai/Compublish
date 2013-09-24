@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "AppPageEdit";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";   
+}
+@using Telerik.Web.Mvc.UI
+
+<div class="bigbox">
+
+<div id="us">
+ @(
+     Html.Telerik().Grid<WiGetMS.Models.showApplication>()
+          .Name("APPGrid")
+          .DataKeys(keys =>
+           {
+               keys.Add(c => c.id);
+           })
+          .Pageable(paging =>
+                  paging.PageSize(15)
+                        .Style(GridPagerStyles.NextPreviousAndNumeric)
+                        .Position(GridPagerPosition.Bottom)
+              )
+          .DataBinding(dataBinding =>
+              {
+                  dataBinding.Ajax()
+                   .Select("GetAllApps", "ApplicationPage");
+              })
+          .Columns(columns =>
+          {
+              columns.Bound(c => c.id).Hidden(true);
+              columns.Bound(c => c.Appname).Width(150).Title("第三方应用名称");
+              columns.Bound(c => c.Note).Title("第三方应用备注").Width(200);
+              columns.Bound(c => c.Logourl).Width(210);
+              columns.Bound(c => c.Lastmodifytime).Width(200);
+              columns.Bound(c => c.Publishto).Width(200);
+              columns.Bound(c => c.Tags).Width(270);
+          })
+          .Editable(editing => editing.Mode(GridEditMode.PopUp))
+               .Pageable(pagesizi => pagesizi.PageSize(6))
+          .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+          .Selectable()
+          .Scrollable(scrolling => scrolling.Height(180))
+          .Filterable()
+          .Resizable(resizing => resizing.Columns(true))
+          .Reorderable(reorder => reorder.Columns(true))
+          .Footer(true)
+          )
+</div>
+<br/><br/>
+<div>
+    @(Html.Telerik().Grid<WiGetMS.Models.ShowPage>()
+        .Name("PageGrid")
+        .DataKeys(keys =>
+        {
+            keys.Add(p => p.id);
+        })
+        .ToolBar(commands => commands.Template("<input type='button' value='添加页面模板' class='t-button' onclick=PageAdd()>"))
+        .DataBinding(dataBinding =>
+        {
+            dataBinding.Ajax().Select("_SelectPageAjaxEditing", "ApplicationPage", new { appid = 0 });
+        })
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.id).Width(20);
+            columns.Bound(p => p.pagename).Width(95);
+            columns.Bound(p => p.showtypename).Width(120);
+            columns.Bound(p => p.nextpagename).Width(95);
+            columns.Bound(p => p.actionname).Width(85);
+            columns.Bound(p => p.note).Width(150);
+            columns.Bound(p => p.appname).Width(95);
+            columns.Bound(p => p.actionunitsname).Width(100);
+            columns.Bound(p => p.isStart).ClientTemplate("<input type='text' readonly='readonly'    name='isStart' <#= isStart?  \"value='是'  style=' width:60px;  text-align:center; border-style:none; border-width:0px; color:Blue ;' \" : \"value='否'  style=' width:60px; text-align:center;  border-style:none; border-width:0px; color:Red ;'\" #> />").Width("90");
+            columns.Bound(p => p.isEffictive).ClientTemplate("<input type='text' readonly='readonly'    name='isEffictive' <#= isEffictive?  \"value='是'  style=' width:60px;  text-align:center; border-style:none; border-width:0px; color:Blue ;' \" : \"value='否'  style=' width:60px; text-align:center;  border-style:none; border-width:0px; color:Red ;'\" #> />").Width("90");
+            columns.Bound(p => p.lastmodifytime).Width(125);
+            columns.Bound(p => p.edit)
+                .ClientTemplate("<input type='button' value='编辑' class='t-button' onclick=PageEdit(<#=id#>)> <input type='button' value='删除' class='t-button' onclick=PageDelete(<#=id#>)>")
+                .Width(80).Title("管理").Width(160);
+        })
+          //.Editable(editing => editing.Mode(GridEditMode.PopUp))
+        .Selectable()
+        .Pageable(pagesizi => pagesizi.PageSize(7))
+        .Scrollable(scrolling => scrolling.Height(230))
+        .Sortable()
+        .Filterable()   //筛选
+        .Resizable(resizing => resizing.Columns(true)) //移动属性的距离
+        .Reorderable(reorder => reorder.Columns(true))           
+        )
+</div>
+@*<div >
+@{Html.Telerik().Window()
+            .Name("modifiPage-Window")
+            .Title("修改Page组信息")
+            .Content(() =>
+                {})
+            .Width(390)
+            .Height(395)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+</div>*@
+
+
+<div>
+ @{Html.Telerik().Window()
+            .Name("PageWindow")
+            .Title("页面模板")
+            .Content(() => {})
+            .Width(390)
+            .Height(395)
+            .Draggable(true)
+            .Modal(true)
+            .Resizable(resizing => resizing
+                .Enabled(true)
+                .MinHeight(400)
+                .MinWidth(700)
+                .MaxHeight(400)
+                .MaxWidth(700)
+            )
+            .Content(() =>
+                {})
+            .Visible(false)
+            .Render();
+            }
+</div>
+</div>
+
+
+
+@section Footer{ 
+
+    <script type="text/javascript" language="javascript">
+        //    $("#Units").multiselect({
+        //        selectedList: 3,
+        //        header: "请选择Css"
+        //    });
+
+        //选定APP后刷新PAGE
+        var Appid = 0;
+        function onRowSelected(e) {
+            var PageGrid = $('#PageGrid').data('tGrid');
+            var AppID = e.row.cells[0].innerHTML;
+            Appid = AppID;
+            PageGrid.rebind({
+                appid: AppID
+            });
+        }
+
+        function PageAdd() {
+            if (Appid == 0) {
+                alert("请选择第三方应用");
+                return;
+            }
+            var id = Appid;
+            var window = $('#PageWindow').data('tWindow');
+            window.ajaxRequest("/WidgetAdmin/ApplicationPage/PageAdd?aid=" + id);
+          
+            window.center().open();
+        }
+
+        function AddPageWindow() {
+            alert("添加成功")
+            $('#PageWindow').data('tWindow').close();
+            var grid = $('#PageGrid').data('tGrid'); //重新加载
+            grid.rebind();
+            autodisapear();
+        }
+
+        function PageEdit(id) {
+           
+            var appid= Appid;
+            var window = $('#PageWindow').data('tWindow');
+            window.ajaxRequest("/WidgetAdmin/ApplicationPage/EditPage?pid="+id+"&aid="+appid);
+            window.center().open();
+        }
+
+
+        function PageDelete(id) {
+            if (!confirm("你确定要删除该Page吗？"))
+                return;
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '@Url.Action("_DeletePageAjaxEditing","ApplicationPage")',
+                data: { id: id },
+                dataType: "text",
+                success: function (msg) {
+                    alert(msg);
+                    var grid = $('#APPGrid').data('tGrid'); //重新加载
+                    grid.rebind(); //  alert(data);
+                }
+            });
+            window.location.href = window.location.href;
+        }
+
+
+        function GetResult() {
+            alert("修改成功");
+            $('#PageWindow').data('tWindow').close();
+            var grid = $('#PageGrid').data('tGrid'); //重新加载
+            grid.rebind();
+            autodisapear();
+        }
+
+
+        function ClosePageWindow() {
+            $('#PageWindow').data('tWindow').close();
+        }
+
+</script>
+
+}

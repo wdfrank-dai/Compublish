@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" /> 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/js/jquery.ui.plupload/css/jquery.ui.plupload.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/js/jquery.plupload.queue/css/jquery.plupload.queue.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/js/jquery-ui.css")"/>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+     
+      <div class="page">
+     
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/plupload.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/plupload.gears.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/plupload.silverlight.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/plupload.flash.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/plupload.browserplus.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/plupload.html4.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/plupload.html5.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/jquery.ui.plupload/jquery.ui.plupload.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/jquery.plupload.queue/jquery.plupload.queue.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/plupload.full.js")"></script>
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/i18n/zh-cn.js")"></script> 
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/browserplus-min.js")"></script>
+
+     
+     @RenderSection("Footer", false)
+      </div>
+</body>
+</html>

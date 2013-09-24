@@ -1,0 +1,19 @@
+﻿<div id="main-navigation">
+    <ul class="wat-cf">
+        <li class="first active">@Html.ActionLink("首页", "Index", new {area="", controller = "Home" }, new { id = "home-tab" })</li>
+        <li>@Html.ActionLink("帮助", "About", new { area = "", controller = "Home" }, new { id = "about-tab" }) </li>
+        @if (!Request.IsAuthenticated)
+        {
+            <li>@Html.ActionLink("登录", "LogOn", "Account")</li>
+        }
+            @if (Request.IsAuthenticated)
+    {
+
+            <li>@Html.ActionLink("发布管理", "AdminIndex", "Admin", new { Area = "" }, null)</li>
+            <li>@Html.ActionLink("系统管理", "Index", "rolehome", new { Area = "AuthorityMgt" }, null)</li>
+            @*<li>@Html.ActionLink("页面设置", "PortalPageSet", "Account", new { Area = "" },null)</li>*@
+            <li>@Html.ActionLink("退出系统", "LogOff", "Account", new { Area = "" },null)</li>
+
+    }
+    </ul>
+</div>

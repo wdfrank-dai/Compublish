@@ -1,0 +1,333 @@
+﻿@using Telerik.Web.Mvc.UI;
+@using System.Web.Mvc.Html;
+@{
+    ViewBag.Title = "GetAllUser";
+    Layout = "~/Views/Shared/_LayoutFrame.cshtml";
+}
+<div class="bigbox">
+<h2>用户管理</h2>
+
+
+<div>
+@{
+	Html.Telerik().Grid<AuthUserDataLibrary.Models.AuthUserM>()
+          .Name("UsersGrid")
+          .DataKeys(keys =>
+          {
+              keys.Add(c => c.UserID);
+          })
+         .Pageable(paging =>
+                  paging.PageSize(15)
+                        .Style(GridPagerStyles.NextPreviousAndNumeric)
+                        .Position(GridPagerPosition.Bottom)
+              )
+          .DataBinding(dataBinding => dataBinding.Ajax()
+                .Select("GetAllUser", "User"))
+          .Columns(columns => {
+             columns.Bound(c => c.UserID)
+                  .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= UserID #>' />")
+                  .Title("<input type='checkbox' name='123'  id ='allcheck' onclick='allcheck()' style='text-align:left;' >")//全选
+                  .Width(50)
+                  .HtmlAttributes(new { style = "text-align:center" });
+              columns.Bound(c => c.UserID).Title("账号").Width(100);
+              columns.Bound(c => c.UserName).Title("姓名");
+              columns.Bound(c => c.depName).Title("部门");
+              columns.Bound(c => c.UserType).Title("身份");
+              columns.Bound(c => c.Email).Title("Email");
+              columns.Bound(c => c.Telephone).Title("电话").Width(150);
+              columns.Bound(c => c.QQ).Title("QQ号")
+                .ClientTemplate("<input style='width:50px' class='t-button' type='button' value='编辑'  name = '<#=UserID#>' onclick ='edituser(this)'>").Title("操作")
+                   .Width(100);  }
+          )
+          
+          .Editable(editing => editing.Mode(GridEditMode.PopUp))
+          .Pageable()
+          .Scrollable(scrolling => scrolling.Height(450))
+          .Filterable()
+          .Resizable(resizing => resizing.Columns(true))
+          .Reorderable(reorder => reorder.Columns(true))          
+          .Footer(true)
+          .Render();
+
+		 }
+
+          
+</div>
+<div>
+         @{Html.Telerik().Window()
+           .Name("EditUserWindow")
+           .Title("修改用户")
+           .Draggable(true)
+
+           .Resizable(resizing => resizing
+               .Enabled(true)
+               .MinHeight(280)
+               .MinWidth(400)
+               .MaxHeight(280)
+               .MaxWidth(400)
+            )
+           .Scrollable(true)
+           .Modal(true)
+           .Buttons(b => b.Maximize().Close())
+           .Content(@<text>
+           <div id="EditUser">
+                    </div>
+</text>
+           )           
+		   .Visible(false)
+           .Render();}
+ </div> 
+
+
+<div>
+ @{Html.Telerik().Window()
+           .Name("win-changePaw")
+           .Title("重置密码")
+           .Draggable(true)
+           .Height(150)
+           .Width(200)
+           .Resizable(resizing => resizing
+               .Enabled(true)
+               .MinHeight(50)
+               .MinWidth(100)
+               .MaxHeight(300)
+               .MaxWidth(400)
+            )
+           .Scrollable(true)
+           .Modal(true)
+           .Buttons(b => b.Maximize().Close())
+           .Content(
+                   @<text>
+                   <div id="win-div-changePaw">
+           <p> 
+               <span>密码修改为:</span> <input name="win-changepaw" id="win-changepaw"  />
+           </p> 
+           <p style=' text-align:center;'>
+            <input class="t-button"  type="button" value="保存" onclick="resetpossword()"/>
+            <input class="t-button"  type="button" value="取消" onclick="closewindow()"/>
+            </p>
+                    </div>
+</text>
+            )
+           .Visible(false)        
+           .Render();}
+                    </div>
+
+<div>
+     @{
+		Html.Telerik().Window()
+           .Name("win-Role")
+           .Title("批量修改用户角色")
+           .Draggable(true)
+           .Height(400)
+           .Width(300)
+           .Resizable(resizing => resizing
+               .Enabled(true)
+               .MinHeight(50)
+               .MinWidth(100)
+               .MaxHeight(300)
+               .MaxWidth(400)
+            )
+           .Scrollable(true)
+           .Modal(true)
+           .Buttons(b => b.Maximize().Close())
+           .Content(@<text>
+        <input type="hidden" value="" id="hidden" />
+        <input type="hidden" value ="" id="hiddenleaf" />
+        <input  type="hidden" value="" id="hiddenhaschild"/>
+                    <div id="tree_Role" >
+                                    <h3>选择角色:</h3>
+                                        
+                                        <div style="height: 300px; width: 220px; overflow: auto;" >
+                                            @Html.Partial("RoleJsTree")
+                                        </div>
+                     </div>
+                                <div style=" text-align:center">
+                                <input class="t-button" type="button" value="分配" onclick ="assinUserRole()" />
+                                </div>
+
+                    </text>)
+           .Visible(false)
+         
+           .Render();}
+
+
+</div>
+
+
+<div style=" margin-top:15px;">
+ <input class="PersMS-button t-button" type="button" value="重置密码" onclick="Open_resetpossword()" name="button1" />
+ <input class="PersMS-button t-button" type="button" value="批量添加用户角色" onclick="Open_winRole()" name="button2" />
+ </div>
+ 
+ </div>
+
+
+@section Footer{
+
+
+<script type="text/javascript">  
+$(document).ready(function () {
+               $("#allcheck").click(function () {
+                   if ($("#allcheck").attr("checked")) {
+                       $(":checkbox:visible").not("#allcheck").attr("checked", true);
+                   }
+                   else $(":checkbox:visible").not("#allcheck").attr("checked", false);
+
+                   })
+
+           })
+           function allcheck() {
+               if ($("#allcheck").attr("checked")) {
+                   $(":checkbox:visible").not("#allcheck").attr("checked", true);
+               }
+               else $(":checkbox:visible").not("#allcheck").attr("checked", false);
+           }
+
+           
+           function Open_resetpossword() {
+               var windowElement = $('#win-changePaw').data('tWindow').element;
+               $(windowElement).find(".t-window-content").css("height", "auto").css("width", "auto");
+               $('#win-changePaw').data('tWindow').center().open();
+           }
+
+           function Open_winRole() {
+               var windowElement = $('#win-Role').data('tWindow').element;
+               $(windowElement).find(".t-window-content").css("height", "auto").css("width", "auto");
+               $('#win-Role').data('tWindow').center().open();
+              
+
+               $("#RoleJsTree").jstree({
+                   "json_data": {
+                       "ajax": {
+                           "url": '@Url.Action("GetRoleTreeDataAll","User")',
+                           "data": '{did:1}',                          
+                           "type": "POST",
+                           "dataType": "json",
+                           "contentType": "application/json charset=utf-8"
+                       }
+                   },
+
+                   "themes": { "theme": "default", "dots": true, "icons": true },
+                   "plugins": ["themes", "json_data", "ui", "search", "cookies", "adv_search"]
+               });
+
+               $("#RoleJsTree").bind("select_node.jstree", function (event, data) {   //选中事件 
+
+                   if (data.rslt.obj.length == 1) {
+                       var value = data.rslt.obj.attr("id");   //获取节点的id值（id值由Controller赋值）
+                       var child = data.rslt.obj.attr("hid");
+                       $("input#hidden:hidden").attr("value", value);
+                       $("#hiddenleaf").attr("value", child);
+
+                   }
+               });
+           }
+           
+
+           /////添加用户角色
+           function assinUserRole() {
+               var $checkedRecords = $(':checked:visible').not("#allcheck");
+               var $record = new Array();
+               for (var i = 0; i < $checkedRecords.length; i++)
+                   $record[i] = $($checkedRecords[i]).attr("value");
+
+               if ($checkedRecords.length < 1) {
+                   alert('请选择用户');
+                   return;
+               }
+               $.ajax({
+                   type: "post",
+                   url: '@Url.Action("BatchAddRoleUser","User")',
+                   cache: false,
+                   data: { roleid: $("input#hidden:hidden").attr("value"), check: $record },
+                   datatype: "text",
+                   traditional: true,
+                   success: function (msg) {
+                       alert("操作成功");
+                       closewindow();
+                   },
+                   error: function () { $("#result").text("网络故障"); }
+               })
+           }
+          
+           function resetpossword() {                                           ///////////////////////重置密码 
+               var $checkedRecords = $(':checked:visible').not("#allcheck");
+               var $record = new Array();
+
+               for (var i = 0; i < $checkedRecords.length; i++)
+                   $record[i] = $($checkedRecords[i]).attr("value");
+
+               if ($checkedRecords.length < 1) {
+                   alert('请选择用户');
+                   return;
+               }
+
+               if ($("#win-changepaw").attr("value") == "") {
+                   alert('请输入密码！');
+                   return;
+               }
+               $.ajax({
+                   type: "post",
+                   url: '@Url.Action("PawChange","User")',
+                   cache: false,
+                   data: { checkedRecords: $record, paw: $("#win-changepaw").attr("value") },
+                   datatype: "text",
+                   traditional: true,
+                   success: function (msg) {
+                       alert("操作成功");
+                       closewindow();//sadasda
+                   },
+                   error: function () { $("#result").text("网络故障"); }
+               })
+           }
+
+
+           function edituser(node) {
+               var value = node.name;
+               $.ajax({
+                   type: "post",
+                   url: '@Url.Action("EditUser","User")',
+                   cache: false,
+                   data: "UserID=" + value,
+                   datatype: "html",
+                   success: function (msg) {
+                       $("#EditUser").html(msg);
+                       var windowElement = $('#EditUserWindow').data('tWindow');
+                       $(windowElement).find(".t-window-content").css("height", "auto").css("width", "auto");
+                       $('#EditUserWindow').data('tWindow').center().open();
+                   },
+                   error: function () { alert("网络故障"); }
+               })
+           }
+
+
+           function edit() {
+               $.post('@Url.Action("EditSave","User")', 
+               $("#edituserform").serializeArray(), function (data, textStatus) {
+                   $("#result").text(data);
+                   $("span.PersMS-result-message").text(data);
+                   if (data == "操作成功")
+                   var grid = $('#UsersGrid').data('tGrid'); //重新加载
+                   grid.rebind();
+                   autodisapear();
+               });
+           }
+
+           function closewindow(e) {
+               if ($('#EditUserWindow').is(":visible"))
+                   $('#EditUserWindow').data('tWindow').close();
+               if ($('#AddUserWindow').is(":visible"))
+                   $('#AddUserWindow').data('tWindow').close();
+               if ($('#win-changePaw').is(":visible"))
+                   $('#win-changePaw').data('tWindow').close();
+               if ($('#win-Role').is(":visible"))
+                   $('#win-Role').data('tWindow').close();                    
+               var grid = $('#UsersGrid').data('tGrid');//重新加载
+               grid.rebind();
+               autodisapear();  
+           }
+
+
+</script>
+}

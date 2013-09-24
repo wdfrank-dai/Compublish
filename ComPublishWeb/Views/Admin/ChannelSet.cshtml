@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>频道设置管理</title>
+</head>
+<body>
+    <h2>频道设置管理</h2>
+    <div>
+    <form action="" name="composeform" method="post" target="_blank" style="margin-left:-10px;font:宋体; font-size:14px">
+      <div class="editor-field" style=" margin:10px">
+            <strong>频道名称：</strong>
+            <span class="input-bg"><input id="Text1" name="txtBaseSearchValue" onkeydown="return input_click();" /></span>
+      </div>
+     
+      <div class="editor-field" style=" margin:10px">
+            <strong>上级频道：</strong>
+            <span class="input-bg">@Html.DropDownList("ParentCannel", ViewData["Channels"] as IEnumerable<SelectListItem>, new { style = "width:208px; z-index: inherit;" })
+            </span>
+      </div>
+
+      <div class="editor-field" style=" margin:10px">
+        <strong>频道类型：</strong>
+            <span class="js-color"><input type="radio" value="book" checked="2" name="v_type"/>内容列表
+            <input type="radio" name="v_type" value="e_book" />内容实体
+            <input type="radio" name="v_type" value="cnki" />交互表单</span>
+      </div>
+      <div class="editor-field" style=" margin:10px">
+        <strong>频道内容获取方式：</strong>
+            <span class="js-color"><input type="radio" value="book" checked="2" name="v_type"/>URL链接
+            <input type="radio" name="v_type" value="e_book" />WebService
+            <input type="radio" name="v_type" value="cnki" />DB数据库</span>
+      </div>
+      <div class="editor-field" style=" margin:10px">
+            <strong>频道URL/WebService链接地址：</strong>
+            <span class="input-bg"><input id="Text2" name="txtBaseSearchValue" onkeydown="return input_click();" /></span>
+      </div>   
+      
+      <div class="editor-field" style=" margin:10px">
+            <strong>频道图标地址：</strong>
+            <span class="input-bg"><input id="Text3" name="txtBaseSearchValue" onkeydown="return input_click();" /></span>
+      </div> 
+
+      <div class="editor-field" style=" margin:10px">
+            <strong>Tag标签：</strong>
+            <span class="input-bg"><input id="Text4" name="txtBaseSearchValue" onkeydown="return input_click();" /></span>
+      </div>
+      <div class="editor-field" style=" margin:10px">
+            <strong>频道简介：</strong><br />
+            <span class="input-bg">@Html.TextArea("intro", new { cols = 60, rows = 10 })</span>
+      </div>
+      <input type="button" value="添加" id="button-1" class="button" style="height: 24px; width: 78px;" onclick="javascript:FrontPage_Form2_Validator();"/>
+</form>
+    </div>
+</body>
+</html>

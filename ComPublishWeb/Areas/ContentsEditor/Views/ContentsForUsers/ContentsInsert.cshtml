@@ -1,0 +1,135 @@
+﻿@model WiGetMS.Models.ContentsModel
+
+@{
+    ViewBag.Title = "ContentsInsert";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+
+<div id="block-create" class="block">
+    <div class="bigbox">
+        <h2 class="title">
+            内容添加</h2>
+        <div class="inner">
+@using (Ajax.BeginForm("ContentsInsert", "ContentsForUsers", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "InsertForContents" }))
+{
+    <div class="flash">
+         <p>@Html.ValidationSummary(true,string.Empty, new { @class = "message error" })</p>
+    </div>
+   <table>
+               <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Title)：
+                 </td>
+			     <td class="PersMS-table-4cols-3">
+                     @Html.EditorFor(model => model.Title)
+                     @Html.ValidationMessageFor(model => model.Title)
+                 </td>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Creator)：
+                 </td>
+			     <td class="PersMS-table-4cols-3">
+                     @Html.EditorFor(model => model.Creator)
+                     @Html.ValidationMessageFor(model => model.Creator)
+                 </td>
+               </tr>
+               <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Sorlink)：
+                 </td>
+			     <td class="PersMS-table-4cols-3">
+                     @Html.EditorFor(model => model.Sorlink)
+                     @Html.ValidationMessageFor(model => model.Sorlink)
+                 </td>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Tags)：
+                 </td>
+			     <td class="PersMS-table-4cols-3">
+                     @Html.EditorFor(model => model.Tags)
+                     @Html.ValidationMessageFor(model => model.Tags)
+                 </td>
+               </tr>
+               <tr>
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Stick)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Html.CheckBoxFor(model => model.Stick)
+                     @Html.ValidationMessageFor(model => model.Stick)
+                 </td>
+            
+                 <td class="PersMS-table-4cols-1">
+                     @Html.LabelFor(model => model.Hotspot)：
+                 </td>
+			     <td class="PersMS-table-4cols-2">
+                     @Html.CheckBoxFor(model => model.Hotspot)
+                     @Html.ValidationMessageFor(model => model.Hotspot)
+                 </td>
+               </tr>
+         </table>
+         <table>
+               <tr>
+                 <td class="PersMS-table-4cols-1" style=" vertical-align:top;">
+                     @Html.LabelFor(model => model.Summary)：
+                 </td>
+			     <td class="PersMS-table-4cols-2" >
+                     @Html.TextAreaFor(model => model.Summary, new { @style = "width:450px;height:50px" })
+                     @Html.ValidationMessageFor(model => model.Summary)
+                 </td>
+               </tr>
+         </table>
+
+    <textarea class="PersMS-table-4cols-1" id ="editor1" name="editor1" rows="8" cols="10">请填写内容....</textarea>
+    <br/>
+		<div class="group navform wat-cf">
+		    <div class="right" style="margin:0 auto; width:200px;">
+			    <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				保存
+				</button>
+				<span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="Clear()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+			</div>
+		</div>
+}
+        </div>
+    </div>
+</div>
+
+@section Footer{  
+<script type="text/javascript" src="@Url.Content("~/Content/ckeditor/ckeditor.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/ckfinder/ckfinder.js")"></script>
+
+<script type="text/javascript">
+//    var editor = 
+    CKEDITOR.replace('editor1');
+//    CKFinder.SetupCKEditor(editor, '/ckfinder/');
+
+    function InsertForContents(res) {
+        if (res != "")
+            alert(res);
+        else
+            alert("添加失败！");
+       javascript:window.history.go(-1);
+   }
+
+   function Clear() {
+      // e.preventDefault();                        //zhe li hen zhong  yao
+       var $text = $("table td :text");
+       var $check1 = $("table :checkbox");
+       var $area = $(" table textarea");
+       for (var i = 0; i < $text.length; i++) {
+           $($text[i]).attr('value', "");
+       }
+       for (var k = 0; k < $check1.length; k++) {
+           $($check1[k]).attr('checked', false);
+       }
+       for (var j = 0; j < $area.length; j++) {
+           $($area[j]).attr("value", "");
+       }
+   }
+</script>
+}

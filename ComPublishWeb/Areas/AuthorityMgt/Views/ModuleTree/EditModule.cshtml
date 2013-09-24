@@ -1,0 +1,99 @@
+﻿@model AuthModelManage.Models.Module
+<h2></h2>
+@*    @using (Html.BeginForm("Modify", "ModuleTree", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {*@
+        @using (Ajax.BeginForm("Modify", "ModuleTree", new {  }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "EditWindow" }))
+{
+
+        @Html.ValidationSummary(true)
+	 @Html.HiddenFor(model => model.ModuleID)
+	 
+    <table align="left">
+		<tr>
+			<td class="PersMS-table-4cols-1">
+		    @Html.LabelFor(model => model.ModuleParentID)		
+              
+			</td>
+			<td class="PersMS-table-4cols-2">
+			
+			
+
+				@Html.EditorFor(model => model.ModuleParentID)
+			
+				@Html.ValidationMessageFor(model => model.ModuleParentID)
+			</td>
+		</tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			@Html.LabelFor(model => model.ModuleName)	
+            	@*<%//: Html.LabelFor(model => model.ModuleName)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@Html.EditorFor(model => model.ModuleName)
+				@Html.ValidationMessageFor(model => model.ModuleName)
+			</td>
+		</tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			@Html.LabelFor(model => model.ModuleHierarchy)	
+               @* <%//: Html.LabelFor(model => model.ModuleHierarchy)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@Html.EditorFor(model => model.ModuleHierarchy)
+				@Html.ValidationMessageFor(model => model.ModuleHierarchy)
+			</td>
+		</tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			@Html.LabelFor(model => model.ModulePriority)	
+            		@*<%//: Html.LabelFor(model => model.ModulePriority)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@Html.EditorFor(model => model.ModulePriority)
+				@Html.ValidationMessageFor(model => model.ModulePriority)
+			</td>
+		</tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+			@Html.LabelFor(model => model.RouteName)	
+            		@*<%//: Html.LabelFor(model => model.RouteName)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@Html.EditorFor(model => model.RouteName)
+				@Html.ValidationMessageFor(model => model.RouteName)
+			</td>
+		</tr>
+		<tr>
+			<td class="PersMS-table-4cols-1">
+				@Html.LabelFor(model => model.IsMenu)	
+            		@*<%//: Html.LabelFor(model => model.IsMenu)%>*@
+			</td>
+			<td class="PersMS-table-4cols-2">
+				@Html.EditorFor(model => model.IsMenu)
+				@Html.ValidationMessageFor(model => model.IsMenu)
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				@Html.LabelFor(model => model.ModuleNotes)	
+            		@*<%//: Html.LabelFor(model => model.ModuleNotes)%>*@
+			</td>
+
+		</tr>
+        <tr>
+        	<td colspan="2">
+				@Html.TextAreaFor(model => model.ModuleNotes, new {Style="width:380px;height:120px;"})
+				@Html.ValidationMessageFor(model => model.ModuleNotes)
+			</td>
+
+        </tr>
+		<tr>
+			<td class="PersMS-table-cels-center" colspan="2">
+				<input class="PersMS-button t-button" type="submit" value="保存" name="EditModule" id="Save" />
+				<input class="PersMS-button t-button" type="button" value="重置"  name="EditModule" id="Clear"/>
+			</td>
+		</tr>
+	</table>
+    }   
+
+

@@ -1,0 +1,61 @@
+﻿@model ComPublishWeb.Areas.AffairsAdmin.Models.AffairsDataModel
+
+@{
+    ViewBag.Title = "AffairsData";
+    Layout = "~/Views/Shared/_LayoutUpload.cshtml";
+}
+
+          @Html.HiddenFor(model => model.AffairsName)
+    <div id="uploader">
+	        <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+    </div>
+@section Footer{
+
+<script type="text/javascript">
+
+    var affairsname = $("#AffairsName").val();
+    $('#uploader').pluploadQueue({
+        runtimes: 'html5,flash',
+        url: '@Url.Action("Upload", "AffairsData", new { Area = "AffairsAdmin" })',
+        max_file_size: '5mb',
+        chunk_size: '1mb',
+        unique_names: true,
+        multiple_queues: false,
+        multipart_params: { confid: affairsname },
+        flash_swf_url: '../../Scripts/js/plupload.flash.swf',
+        silverlight_xap_url: '../../Scripts/js/plupload.silverlight.xap',
+        resize: { width: 320, height: 240, quality: 90 }, //是否压缩图片
+
+        preinit: function (uploader) {
+            uploader.bind('FileUploaded', function (up, file, data) {
+                // here file will contain interesting properties like 
+                // id, loaded, name, percent, size, status, target_name, ...
+                // data.response will contain the server response
+            });
+        }
+    });
+//    var uploader = $('#uploader').pluploadQueue();
+//    uploader.bind('BeforeUpload', function (up) {
+//        up.settings.multipart_params.tags = 7;
+//    });
+            $('form').submit(function (e) {
+                var uploader = $('#uploader').pluploadQueue();
+
+                // Files in queue upload them first
+                if (uploader.files.length > 0) {
+                    // When all files are uploaded submit form
+                    uploader.bind('StateChanged', function () {
+                        if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
+                            $('form')[0].submit();
+                        }
+                    });
+                    uploader.start();
+                } else {
+                    alert('You must queue at least one file.');
+                }
+                uploader.init();             
+                return false;
+            });
+
+    </script>
+}

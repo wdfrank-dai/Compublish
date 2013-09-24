@@ -1,0 +1,72 @@
+﻿@using Telerik.Web.Mvc.UI;
+
+@model AuthUserDataLibrary.Models.AuthUserEditModel
+@*@{
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}*@
+
+
+
+ <form id="edituserform"  action="#" style=" margin:0px 10px 10px 10px;">
+    @Html.ValidationSummary(true)
+    
+         
+        <table>
+        <tr>
+        <td colspan="3" style=" height:15px;"><span  class="PersMS-result-message" style=" color:Orange;"></span></td>
+        </tr>
+        <tr>
+        <td>旧帐号：</td>
+        <td>@Html.EditorFor(model => model.OldUserID)</td>
+        <td>@Html.ValidationMessageFor(model => model.OldUserID)</td>
+        </tr>
+         
+         <tr>
+         <td>新帐号：</td>
+         <td>@Html.EditorFor(model => model.NewUserID)</td>
+         <td>@Html.ValidationMessageFor(model => model.NewUserID)</td>
+         </tr>  
+          
+         <tr>
+         <td> 用户类型：</td>
+         <td>@Html.DropDownList("PID", null, new { rows = "8", style = "width:131px" })
+
+          @* @{
+		   Html.Telerik().DropDownList()
+                  .Name("PID")
+                  .BindTo(ViewBag.pid as  SelectList);
+				  }*@
+         </td>
+         <td></td>
+         </tr>
+         <tr>
+         <td>QQ：</td>
+         <td>@Html.EditorFor(model => model.QQ)</td>
+         <td>@Html.ValidationMessageFor(model => model.QQ)</td>
+         </tr>
+         <tr>
+         <td>Email：</td>
+         <td>@Html.EditorFor(model => model.Email)</td>
+         <td>@Html.ValidationMessageFor(model => model.Email)</td>
+         </tr>
+         <tr>
+         <td>电话：</td>
+         <td>@Html.EditorFor(model => model.Telephone)</td>
+         <td>@Html.ValidationMessageFor(model => model.Telephone)</td>
+         </tr>
+         <tr>
+         <td colspan="3" style=" padding:5px;">
+         <input class="t-button" type="button" onclick="edit()" value="保存" />
+         <input class="t-button" type="button" onclick="closewindow()" value="取消" /></td>
+         </tr> 
+       
+        </table>
+    </form>
+
+    
+  
+
+	@section Footer{
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.5.1.min.js")"></script>
+	
+	}

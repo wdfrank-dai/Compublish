@@ -1,0 +1,47 @@
+﻿@model WiGetMS.Models.UnitsShowStyle
+
+@using (Ajax.BeginForm("EditUnitsShowStyle", "UnitsShowStyle", new { }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "EditWindow" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div id="Message" style="color:Red"></div>
+
+        @Html.HiddenFor(model => model.id)
+    <table>
+       <tr>
+         <td class="PersMS-table-4cols-1">
+            @Html.LabelFor(model => model.name)：
+         </td>
+       </tr>
+       <tr>
+         <td  class="PersMS-table-4cols-J">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+         </td>
+       </tr>
+       <tr>
+         <td class="PersMS-table-4cols-1">
+            @Html.LabelFor(model => model.note)：
+         </td>
+       </tr>
+       <tr>
+         <td class="PersMS-table-4cols-1">
+            @Html.TextAreaFor(model => model.note, new { @style = "width:220px;height:70px" })
+            @Html.ValidationMessageFor(model => model.note)
+         </td>
+       </tr>
+    </table>
+          <div style="margin:0 auto;width:200px">
+       <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				保存
+				</button>
+                <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="CloseUnitsStyleWindow()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+        </div>
+}
+

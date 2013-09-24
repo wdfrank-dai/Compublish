@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.25" name="AuthMSLinq">
+  <DataContextMoniker Name="/AuthMSLinqDataContext" />
+  <nestedChildShapes>
+    <classShape Id="eaebc79b-c115-4a22-bff9-bc142002fdfc" absoluteBounds="0.75, 0.75, 2, 1.7855859375">
+      <DataClassMoniker Name="/AuthMSLinqDataContext/T_UserRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6fa8c13e-412e-4bba-a796-6a8a939d80e6" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.2255859375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="65636ce2-0533-40ca-a058-2a1550eb176a" absoluteBounds="3.75, 0.75, 2, 3.3031640625000005">
+      <DataClassMoniker Name="/AuthMSLinqDataContext/T_User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="45640e34-128d-4fd2-a331-8aed488bed75" absoluteBounds="3.765, 1.21, 1.9700000000000002, 2.7431640625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7560fda4-9962-4bd9-860d-042a88e534c6" absoluteBounds="0.75, 5.75, 2, 1.9542057291666666">
+      <DataClassMoniker Name="/AuthMSLinqDataContext/T_RoleModule" />
+      <nestedChildShapes>
+        <elementListCompartment Id="550b9ee0-be5c-4393-9d91-04683128f88a" absoluteBounds="0.765, 6.21, 1.9700000000000002, 1.3942057291666665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7d0349d6-bfe5-4a20-b5b3-373570f6d292" absoluteBounds="3.75, 5.75, 2, 2.2914453125000005">
+      <DataClassMoniker Name="/AuthMSLinqDataContext/T_Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1e9edc66-2380-4c91-8bb4-f844c435ea3f" absoluteBounds="3.765, 6.21, 1.9700000000000002, 1.7314453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4a09217c-6709-4985-94e4-2719c659ff5d" absoluteBounds="6.75, 0.75, 2, 2.7973046875000005">
+      <DataClassMoniker Name="/AuthMSLinqDataContext/T_Module" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6d2c2bf3-14e1-428f-83e9-bef423a31b71" absoluteBounds="6.765, 1.21, 1.9700000000000002, 2.2373046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="14e96d82-0c41-40e9-8431-7a91f4acca65" absoluteBounds="6.75, 4.75, 2, 2.1228255208333344">
+      <DataClassMoniker Name="/AuthMSLinqDataContext/T_Department" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1010c300-7ebd-4fe6-af0d-af7a8a6c4165" absoluteBounds="6.765, 5.21, 1.9700000000000002, 1.5628255208333335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ab175573-e72b-423c-bb04-1dec2fd43475" absoluteBounds="6.75, 7.75, 2, 2.2914453124999996">
+      <DataClassMoniker Name="/AuthMSLinqDataContext/DIC_PID" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a8bca9eb-1a9a-4541-9e01-49d184ecc903" absoluteBounds="6.765, 8.21, 1.9700000000000002, 1.7314453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

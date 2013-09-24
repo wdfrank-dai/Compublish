@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAffairs.cshtml";
+}
+
+<h2>事务搜索查询</h2>
+@*@model ComPublishWeb.Areas.AffairsAdmin.Models.SearchModel*@
+ 
+@*@using (Html.BeginForm("Index", "SearchAffairs", FormMethod.Get)) {*@
+ 
+        <div class="editor-field">
+           <p>请输入关键字：</p> <input type = "text" id = "affairsname" />
+        </div>
+ 
+        <p>
+            <input onclick = "BeginSearch()" name="SearchButton" type="submit" value="搜 索" />
+        </p>
+@*}*@
+ <div id = "search"></div>
+
+   @section Footer{  
+         <script type="text/javascript">
+             function BeginSearch() {
+                 var affairsname = document.getElementById("affairsname").value;
+                 $.ajax({
+                     type: "POST",
+                     async: false,
+                     url: '@Url.Action("SearchAffairsForName", "SearchAffaris", new { Area = "AffairsAdmin" })',
+                     data: { confid: affairsname1 },
+                     dataType: "html",
+                     success: function (request) {
+                         $("#search").html(request);
+                     },
+                     traditional: true
+                 });
+             }
+
+         </script>

@@ -1,0 +1,106 @@
+﻿@{ 
+    ViewBag.Title = "AffairsRefer";
+    Layout = "~/Views/Shared/_LayoutAffairs.cshtml";
+}
+
+<h2  class="title">个人事务列表</h2>
+@using Telerik.Web.Mvc.UI
+<div  class="information">
+@{
+    Html.Telerik().Grid<ComPublishWeb.Areas.AffairsAdmin.Models.AffairsModel>()
+          .Name("AffairsGrid")
+          .DataKeys(keys =>
+          {
+              keys.Add(c => c.ID);
+          })
+
+          //.ToolBar(commands =>commands.Template("<a type ='button' value='添 加' class='t-button' onclick = Add()><b>添   加</b></a>"))
+          
+          .DataBinding(dataBinding => dataBinding.Ajax()
+                .Select("AffairsShow", "AffairsForOneself", new { Areas = "AffairsAdmin" })
+                )
+          
+          .Columns(columns =>
+          {
+              columns.Bound(o => o.ID).Hidden(true);
+              columns.Bound(c => c.Name).Title("事务名称");
+              columns.Bound(c => c.Typename).Title("类型");
+              columns.Bound(c => c.Petitionernum).Title("发起人");
+              columns.Bound(c => c.Gradename).Title("事务等级");
+              columns.Bound(c => c.Starttime).Title("事务起始时间");
+              columns.Bound(c => c.Endtime).Title("事务截止时间");
+              columns.Bound(c => c.Statusname).Title("事务状态");
+          })
+          .Editable(editing => editing.Mode(GridEditMode.PopUp))
+          .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+          .Pageable()
+          .Selectable()
+          .Scrollable()
+          .Sortable()
+          .Filterable()
+          .Resizable(resizing => resizing.Columns(true))
+          .Reorderable(reorder => reorder.Columns(true))          
+          .Footer(true)
+          .Render();
+          }
+</div>
+
+<div>
+    @{       
+    Html.Telerik().Window()
+      .Name("InformationWindow")    
+      .Title("详细信息")
+      .Draggable(true)
+      .Height(600)
+      .Width(600)
+      .Resizable(resizing => resizing
+        .Enabled(true)
+        .MinHeight(400)
+        .MinWidth(700)
+        .MaxHeight(400)
+        .MaxWidth(700)
+        )
+      //.Content(@<text>@Html.Partial("EditUnits", new { roleid = (Model.id == null ? 1 : Model.id) })</text>)
+      .Scrollable(true)
+      .Modal(true)
+      .Buttons(b => b.Maximize().Close())
+      .Visible(false)
+      .Render();
+   } 
+</div>
+
+@section Footer{       
+   
+<script type="text/javascript">
+    var affairsid;
+    function onRowSelected(e) {
+        var Grid = $('#AffairsGrid').data('tGrid');
+        var id = e.row.cells[0].innerHTML;
+        affairsid = id;
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: '@Url.Action("ShowAffairs", "AffairsForOneself", new { Area = "AffairsAdmin" })',
+            data: { confid: id },
+            dataType: "html",
+            success: function (request) {
+                //                $("#result").html(request);
+                window.location.href = "/AffairsAdmin/AffairsForOneself/ShowAffairs?confid=" + id ;
+            },
+            traditional: true
+        });
+//        var window = $('#InformationWindow').data('tWindow');
+//        window.ajaxRequest("/AffairsAdmin/AffairsForOneself/ShowAffairs?confid=" + id);
+//        window.center().open();
+    }
+
+    function InsertChildAffairs(cid) {
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: '@Url.Action("AffairsChildApply", "AffairsGovern", new { Area = "AffairsAdmin" })',
+            data: { confid: cid },
+            dataType: "html"
+        });
+    }
+</script>

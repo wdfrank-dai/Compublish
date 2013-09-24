@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/M/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "首页";
+}
+<p>
+    MobileIndex</p>
+<div class="block" id="block-text">
+    <div class="content">
+        @if (!Request.IsAuthenticated)
+        {
+            <h2 class="title" style="font-family: 微软雅黑; border-bottom: rgb(185, 175, 157) 1px dashed;
+                margin-right: 15px; height: 40px; padding-top: 10px;">
+                @ViewBag.Message</h2>
+            <div class="inner">
+                <p class="first">
+                    本系统专用于高等院校，可作为对校外的信息发布平台，也可作为对内工作业务的统一信息门户。
+                </p>
+                <p>
+                    该系统作为综合信息发布平台，初Web网站平台外，还搭配了手机终端和电脑桌面终端，为各级用户方便快捷获取校园信息提供全方位的支持。
+                </p>
+                <hr />
+                <p>
+                    手机终端下载请点击：<a href="">下载地址</a>
+                </p>
+                <p>
+                    电脑桌面终端下载请点击：<a href="">下载地址</a>
+                </p>
+            </div>
+        }
+        else
+        {
+            @Html.Partial("M/Channels");
+        }
+    </div>
+</div>

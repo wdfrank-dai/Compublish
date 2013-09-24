@@ -1,0 +1,138 @@
+﻿@using Telerik.Web.Mvc.UI;
+@{
+    ViewBag.Title = "GetAllShowType";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+
+<div class="bigbox">
+
+@(
+ Html.Telerik().Grid<WiGetMS.Models.ShowTypeModel>()
+        .Name("ShowTypeGrid")
+        .DataKeys(keys =>
+        {
+            keys.Add(p => p.id);
+        })
+                .ToolBar(commands => commands.Template("<input type='button' value='添加记录' class='t-button' onclick=ShowTypeInsert()>"))
+            .DataBinding(dataBinding =>
+            {
+                dataBinding.Ajax()
+                    .Select("GetAllShowType", "ApplicationPage");
+            })
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.id).Hidden(true);
+            columns.Bound(p => p.name).Width(95);
+            columns.Bound(p => p.FillMark).Width(120);
+            columns.Bound(p => p.FillCount).Width(95);
+            columns.Bound(p => p.remark).Width(95);
+            columns.Bound(p => p.viewdate).Width(150);
+			columns.Bound(p => p.edit)
+                .ClientTemplate("<input type='button' value='编辑' class='t-button' onclick=ShowTypeEdit(<#=id#>)> <input type='button' value='删除' class='t-button' onclick=ShowTypeDelete(<#=id#>)>")
+                .Width(80).Title("管理").Width(160); 
+        })
+        //.Editable(editing => editing.Mode(GridEditMode.PopUp))
+        //.ClientEvents(events => events.OnRowSelect("onRowSelected"))
+        .Pageable(pagesizi => pagesizi.PageSize(8))
+        .Scrollable(scrolling => scrolling.Height(250))
+        .Sortable()
+        .Filterable()   //筛选
+        .Resizable(resizing => resizing.Columns(true)) //移动属性的距离
+        .Reorderable(reorder => reorder.Columns(true))      
+)
+</div>
+
+<div id="somediv">
+     @{ Html.Telerik().Window()
+            .Name("ShowTypeAdd")
+            .Title("添加ShowType信息")
+            .Content(() => {})
+            .Width(500)
+            .Height(470)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+    </div>
+
+<div id="somediv">
+     @{ Html.Telerik().Window()
+            .Name("ShowTypeEdit")
+            .Title("修改ShowType信息")
+            .Content(() => {})
+            .Width(500)
+            .Height(470)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+    </div>
+
+	@section Footer{
+    <script type="text/javascript" language="javascript">
+
+	  var ShowTypeID=0;
+      function onRowSelected(e) {
+         var Grid = $('#ShowTypeGrid').data('tGrid');
+         var id = e.row.cells[0].innerHTML;
+		 ShowTypeID=id;
+         nowmoduleid = id;
+         var window = $('#ShowTypeEdit').data('tWindow');
+         window.ajaxRequest("/WidgetAdmin/ApplicationManage/AppOfUserEditWindow?confid=" + id); 
+     }
+
+	 function ShowTypeInsert()
+	 {
+	        var window = $('#ShowTypeAdd').data('tWindow');
+			window.ajaxRequest("/WidgetAdmin/ApplicationPage/AddShowType");
+            window.center().open();  
+	 }
+
+	 function ShowTypeEdit(id) {
+            var window = $('#ShowTypeEdit').data('tWindow');
+            window.ajaxRequest("/WidgetAdmin/ApplicationPage/EditShowType?sid=" + id);
+            window.center().open();
+        }
+
+	function ShowTypeDelete(id) {
+            if (!confirm("你确定要删除该Page吗？"))
+                return;
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: '@Url.Action("_DeleteShowType","ApplicationPage")',
+                data: { id: id },
+                dataType: "text",
+                success: function (msg) {
+                    alert(msg);
+                    var grid = $('#APPGrid').data('tGrid'); //重新加载
+                    grid.rebind(); //  alert(data);
+                }
+            });
+            window.location.href = window.location.href;
+        }
+
+	function GetResult() {
+            alert("修改成功");
+            $('#ShowTypeEdit').data('tWindow').close();
+            var grid = $('#ShowTypeGrid').data('tGrid'); //重新加载
+            grid.rebind();
+            autodisapear();
+        }
+
+		
+	function GetResult2() {
+            alert("修改成功");
+            $('#ShowTypeAdd').data('tWindow').close();
+            var grid = $('#ShowTypeGrid').data('tGrid'); //重新加载
+            grid.rebind();
+            autodisapear();
+        }
+
+		 function ClosePageWindow() {
+            $('#PageWindow').data('tWindow').close();
+        }
+</script>
+}

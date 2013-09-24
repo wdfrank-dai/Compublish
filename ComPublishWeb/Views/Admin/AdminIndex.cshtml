@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ModularControl.Models.MenuNodeModel>
+@using Telerik.Web.Mvc.UI;
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Views/Shared/_LayoutFrame.cshtml";
+}
+
+
+
+ @{Html.Telerik().Menu()
+        .Name("Menu")
+        .BindTo(Model, mappings =>
+        {
+            mappings.For<ModularControl.Models.MenuNodeModel>(binding => binding
+                    .ItemDataBound((item, MenuNodeModel) =>
+                    {
+
+                        item.Text = MenuNodeModel.data.title;
+                        //item.ImageUrl = Url.Content("~/Areas/AttendMS/Content/Common/Icons/")+MenuNodeModel.data.icon;
+                        if (MenuNodeModel.data.attr != null)
+                            item.Url = "javascript:onSelected('/Menus/Dispatch?routeName=" + MenuNodeModel.data.attr.href + "')";
+
+                    })
+                    .Children(category => category.children));
+        }).Render();
+        }
+
+<div id="main_iframe"></div>
+
+
+<script type="text/javascript">
+    function onSelected(e) {
+        var IFrameContainerUrl = '@Url.Action("IFrameContainer", "Menus")';
+        var endurl = IFrameContainerUrl + "?WebURL=" + e;
+        $("#main_iframe").load(endurl);
+        //window.open(e, target = "main");
+    }
+</script>
+    

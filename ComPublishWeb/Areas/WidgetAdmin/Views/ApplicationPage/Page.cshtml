@@ -1,0 +1,115 @@
+﻿@using Telerik.Web.Mvc.UI;
+@{
+    ViewBag.Title = "Page";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+<div class="bigbox">
+<h2>页面管理</h2>
+@(
+ Html.Telerik().Grid<WiGetMS.Models.ShowPage>()
+        .Name("PageGrid")
+        .DataKeys(keys =>
+        {
+            keys.Add(p => p.id);
+        })
+                .ToolBar(commands => commands.Template("<input type='button' value='添加记录' class='t-button' onclick=PageInsert()>"))
+            .DataBinding(dataBinding =>
+            {
+                dataBinding.Ajax()
+                    .Select("SelectAllPage", "ApplicationPage");
+            })
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.id).Width(20);
+            columns.Bound(p => p.pagename).Width(95);
+            columns.Bound(p => p.showtypename).Width(120);
+            columns.Bound(p => p.nextpagename).Width(95);
+            columns.Bound(p => p.actionname).Width(95);
+            columns.Bound(p => p.note).Width(150);
+            columns.Bound(p => p.appname).Width(95);
+            columns.Bound(p => p.actionunitsname).Width(100);
+            columns.Bound(p => p.isStart).Width(118);
+            columns.Bound(p => p.isEffictive).Width(95);
+            columns.Bound(p => p.lastmodifytime).Width(125);
+            columns.Bound(p => p.edit)
+                .ClientTemplate("<input type='button' value='编辑' class='t-button' onclick=PageEdit(<#=id#>)> <input type='button' value='删除' class='t-button' onclick=PageDelete(<#=id#>)>")
+                .Width(80).Title("管理").Width(170);
+        })
+        //.Editable(editing => editing.Mode(GridEditMode.PopUp))
+        .Selectable()
+        //.ClientEvents(events => events.OnRowSelect("onRowSelected"))
+        .Pageable(pagesizi => pagesizi.PageSize(8))
+        .Scrollable(scrolling => scrolling.Height(250))
+        .Sortable()
+        .Filterable()   //筛选
+        .Resizable(resizing => resizing.Columns(true)) //移动属性的距离
+        .Reorderable(reorder => reorder.Columns(true))      
+)
+</div>
+<div id="somediv">
+     @{ Html.Telerik().Window()
+            .Name("Page-Window")
+            .Title("修改Page信息")
+            .Content(() => {})
+            .Width(350)
+            .Height(400)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+    </div>
+@section Footer{
+
+
+<script type="text/javascript" language="javascript">
+    function PageEdit(id) {
+        var window = $('#Page-Window').data('tWindow');
+        window.ajaxRequest("/WidgetAdmin/ApplicationPage/PageEditWindow?confid=" + id);
+        window.center().open()
+    }
+
+    function PageDelete(id) {
+        if (!confirm("你确定要删除该Page吗？"))
+            return;
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: '@Url.Action("_DeletePage", "ApplicationPage")',
+            data: { id: id },
+            dataType: "html",
+            success: function (data) {
+                //  alert(data);
+                var grid = $('#PageGrid').data('tGrid'); //重新加载
+                grid.rebind();
+            }
+        });
+        //window.location.href = window.location.href;
+    }
+
+
+       function PageInsert() {
+           var window = $('#Page-Window').data('tWindow');
+           window.ajaxRequest("/WidgetAdmin/ApplicationPage/PageInsertWindow");
+           window.center().open()
+        }
+
+
+        function OperateWindow(result) {
+         if (result != "")
+            alert(result);
+         else
+            alert("修改失败");
+         $('#Page-Window').data('tWindow').close();
+        var grid = $('#PageGrid').data('tGrid'); //重新加载
+        grid.rebind();
+        autodisapear();
+
+    }
+
+    function ClosePageWindow() {
+        $('#Page-Window').data('tWindow').close();
+    }
+
+</script>
+}

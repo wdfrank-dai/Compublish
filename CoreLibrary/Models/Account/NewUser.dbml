@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WHSMPERSAUTH" Class="NewUserDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=D:\综合发布平台\ComPublishWeb_总项目\ComPublishWeb_总项目\ComPublishWeb\App_Data\WHSMPERSAUTH.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="CoreLibrary.Properties.Settings" SettingsPropertyName="WHSMPERSAUTHConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.T_User" Member="T_User">
+    <Type Name="T_User">
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(31) NOT NULL" CanBeNull="false" />
+      <Column Name="PID" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="IDNo" Type="System.String" DbType="NVarChar(13) NOT NULL" CanBeNull="false" />
+      <Column Name="DepNO" Type="System.String" DbType="NVarChar(21) NOT NULL" CanBeNull="false" />
+      <Column Name="DepSectionNO" Type="System.String" DbType="NVarChar(21)" CanBeNull="true" />
+      <Column Name="SexNo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CardNo" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="AccountNo" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IDCard" Type="System.String" DbType="NVarChar(21) NOT NULL" CanBeNull="false" />
+      <Column Name="Flag" Type="System.String" DbType="NVarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="Telephone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="QQ" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.T_Department" Member="T_Department">
+    <Type Name="T_Department">
+      <Column Name="DepNO" Type="System.String" DbType="NVarChar(21) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SuitPeople" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DepName" Type="System.String" DbType="NVarChar(41) NOT NULL" CanBeNull="false" />
+      <Column Name="DepNickName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DepTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DepType" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DepNotes" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="IsDelete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

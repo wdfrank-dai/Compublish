@@ -1,0 +1,216 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFrame.cshtml";
+}
+
+<!DOCTYPE html>
+<div class="bigbox">
+<h2> 角 色 管 理 </h2>
+
+<table class="tree_tb">
+<tr>
+<td>
+<div id="RoleTree" style=" width:400px; height:490px; padding:5px;"></div>
+</td>
+<td>
+<div id="result" style=" border-left: 1px rgb(122, 122, 122) dashed; padding-left:5px;"></div> 
+</td>   
+</tr>
+</table>
+
+<div style=" margin-top:15px;">
+<input class="t-button" type="button" value = "添加角色" onclick = "Add()"/>
+<input class="t-button" type="button" value = "修改角色" onclick = "Edit()"/>
+<input class="t-button" type="button" value = "删除角色" onclick = "Delete()"/>
+<input class="t-button" type="button" value = "角色分配模块" onclick = "window.location='@Url.Action("RoleModule")  '"/>
+<input class="t-button" type="button" value = "角色分配模块" onclick = "window.location='@Url.Action("UserRole")  '"/>
+
+    <input  type="hidden" value="" id="hiddenrole"/>
+    <input type="hidden" value ="" id="hiddenleaf" />
+    <input  type="hidden" value="" id="hiddenhaschild"/>
+    <input  type="hidden" value="" id="addrole"/>
+ </div>    
+ <div id="somediv">
+ @using Telerik.Web.Mvc.UI;
+   @{       
+    Html.Telerik().Window()
+      //.ClientEvents(events => events.OnClose("autoclosewindow"))
+      .Name("AddRoleWindow")    
+      .Title("添加角色")
+      .Draggable(true)
+      .Height(300)
+      .Width(280)
+      .Resizable(resizing => resizing
+        .Enabled(true)
+
+        )
+      .Scrollable(true)
+      .Modal(true)
+      .Buttons(b => b.Maximize().Close())
+      .Visible(false)
+      .Render();
+   }     
+    </div>
+
+     <div id="somediv1">
+ @using Telerik.Web.Mvc.UI;
+   @{       
+       Html.Telerik().Window()
+           //.ClientEvents(events => events.OnClose("autoclosewindow"))
+         .Name("EditRoleWindow")
+         .Title("修改角色")
+         .Draggable(true)
+         .Height(300)
+         .Width(280)
+         .Resizable(resizing => resizing
+           .Enabled(true)
+
+           )
+         .Scrollable(true)
+         .Modal(true)
+         .Buttons(b => b.Maximize().Close())
+         .Visible(false)
+         .Render();
+   }     
+    </div>
+</div>
+@section Footer{
+
+    <script src="@Url.Content("~/Scripts/plusIns/multiselect/prettify.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.cookie.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.hotkeys.js")" type="text/javascript" ></script>
+    <script src="@Url.Content("~/Scripts/plusIns/jsTree/jquery.jstree.js")" type="text/javascript" ></script>
+
+    <script type="text/javascript">
+        var nowroleid;
+        $(document).ready(function () {
+            $("#PersonSequenceSubmit").attr('disabled', true);
+            $("#SpecialDifine").hide();
+
+            $("#RoleTree").jstree({
+                json_data: {
+                    ajax: {
+                        url: '@Url.Action("GetRoleTreeDataAll", "Tree")',
+                        data: function (n) {
+                            if (n == -1)
+                                return '{SystemID:' + systemid + '}';
+                            else {
+                                var nid = n[0].id;
+                                return '{SystemID:' + nid + '}';
+                            }
+                        },
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json charset=utf-8'
+                    }
+                },
+
+                "themes": { "theme": "classic", "dots": true, "icons": true },
+                "plugins": ["themes", "json_data", "ui"]
+            });
+
+            $("#RoleTree").bind("select_node.jstree", function (event, data) {
+                if (data.rslt.obj.length == 1) {
+
+                    var value = data.rslt.obj.attr("id");   //获取节点的id值（id值由Controller赋值）
+                    nowroleid = value;
+                    var child = data.rslt.obj.attr("hid");
+                    if (value != "#") {
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("DisplayCheckedRole", "Tree")',
+                            data: { checkedRecords: value },
+                            dataType: "html",
+                            success: function (request) {
+                                $("#result").html(request);
+                            },
+                            traditional: true
+                        });
+                    }
+                }
+            });
+            var systemid = 0;
+        });
+
+        var nowSelectWorknum = 0;
+        var SelectedRoleNum = 0;
+        var SelectedRoles = new Array();
+
+        function Add() {
+            var window = $('#AddRoleWindow').data('tWindow');
+            window.ajaxRequest("/AuthorityMgt/Role/AddRoleForRoleParentID?confid=" + nowroleid);
+            $("input#RoleParentID").attr("readonly", true);
+            window.center().open();
+
+
+        }
+
+        function Edit() {
+            var window = $('#EditRoleWindow').data('tWindow');
+            window.ajaxRequest("/AuthorityMgt/Role/EditRole?confid=" + nowroleid);
+            window.center().open();
+        }
+
+        function EditWindow(ms) {
+            alert("修改成功！");
+            $('#RoleTree').jstree('refresh', -1);
+            $('#EditRoleWindow').data('tWindow').close();
+
+        }
+
+        function Delete() {
+
+            if (!confirm("你确定要删除该用户吗？"))
+                return;
+
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("DeleteRole","Role")',
+                cache: false,
+                data: "roleid=" + nowroleid,
+                datatype: "html",
+                success: function (ms) {
+                    var res = ms;
+                    if (res != "")
+                        alert(res);
+                    else
+                        alert("删除失败");
+                    $('#RoleTree').jstree('refresh', -1);
+                }
+            })
+        }
+
+        function closewindow(e) {
+            if ($('#EditRoleWindow').is(":visible"))
+                $('#EditRoleWindow').data('tWindow').close();
+            if ($('#AddRoleWindow').is(":visible"))
+                $('#AddRoleWindow').data('tWindow').close();
+        }
+
+        function removeclass(jstreeid) {
+            var $lilist = $("#" + jstreeid).find("li");
+            var length = $lilist.length;
+            for (var i = 0; i < length; i++) {
+                if ($($lilist.get(i)).hasClass("jstree-leaf"))
+                    $($lilist.get(i)).removeClass().addClass("jstree-unchecked").addClass("jstree-leaf").addClass("jstree-open");
+                else {
+                    var $li = $($lilist.get(i)).removeClass().addClass("jstree-unchecked jstree-closed");
+                    var $check = $($($lilist.get(i)).children("a").get(0)).removeClass();
+                }
+            }
+        }
+
+        function AddWindow(ms) {
+            var res = ms;
+            if (res != "")
+                alert(res);
+            else
+                alert("添加失败");
+            $('#RoleTree').jstree('refresh', -1);
+            $('#AddRoleWindow').data('tWindow').close();
+        }
+  </script>
+
+    }

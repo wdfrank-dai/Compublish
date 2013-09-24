@@ -1,0 +1,97 @@
+﻿@model WiGetMS.Models.Units
+
+<div>
+@using (Ajax.BeginForm("AddUnits", "Units", new { }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "AddWindow()" }))
+{
+    @Html.ValidationSummary(true)
+   <div id="Message" style="color:Red"></div>
+	
+	<table>
+	   <tr>
+		<td class="PersMS-table-4cols-1">
+			@Html.LabelFor(model => model.unitname):  
+		</td>
+		<td class="PersMS-table-4cols-3">
+			@Html.EditorFor(model => model.unitname)
+        </td>
+	   </tr>
+
+	   <tr>
+	     <td class="PersMS-table-4cols-1">
+			@Html.LabelFor(model => model.dsname):  
+		 </td>
+		 <td class="PersMS-table-4cols-2">
+		   @Html.DropDownList("datasourceid", ViewData["datasourceid"] as SelectList, "--请选择--", new { rows = "8", style = "width:183px" })
+          </td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+           @Html.LabelFor(model => model.NextPage): 
+		 </td>  
+		 <td class="PersMS-table-4cols-2">
+		   @Html.DropDownList("NextPageid",null,"--请选择--",new { @style = "width:183px " })
+		</td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+           @Html.LabelFor(model => model.nextpageshowtype): 
+		 </td>  
+		 <td class="PersMS-table-4cols-2">
+		   @Html.DropDownList("NextPageShowTypeid",null,"--请选择--",new { @style = "width:183px " })
+		</td>
+		</tr>
+
+		<tr>
+		 <td class="PersMS-table-4cols-1">
+            @Html.LabelFor(model => model.utype):
+		 </td>
+		 <td class="PersMS-table-4cols-3">       
+            @Html.EditorFor(model => model.utype)
+          </td>
+		 </tr>
+       
+
+         <tr>
+		  <td class="PersMS-table-4cols-1">
+            @Html.LabelFor(model => model.ucontent):
+          </td>
+		  <td class="PersMS-table-4cols-3" >
+            @Html.EditorFor(model => model.ucontent)
+          </td>
+		</tr>
+
+        <tr>
+		<td class="PersMS-table-4cols-1">
+           @Html.LabelFor(model => model.showstyleid):
+		</td>
+		<td class="PersMS-table-4cols-1">	
+			@Html.DropDownList("showstyleid", ViewData["showstyleid"] as SelectList, "--请选择--", new { @style = "width:183px " })
+        </td>
+		</tr>
+        
+		<tr>
+		<td class="PersMS-table-4cols-1">
+            @Html.LabelFor(model => model.iseffictive):
+        </td>
+        <td class="PersMS-table-4cols-2">
+            @Html.EditorFor(model => model.iseffictive)
+         </td>
+		 </tr>
+         </table><br/>
+		<div style="margin:0 auto;width:170px">
+        <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				添加
+				</button>
+                <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="CloseAddUnitsWindow()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+	    </div>
+		
+}
+</div>

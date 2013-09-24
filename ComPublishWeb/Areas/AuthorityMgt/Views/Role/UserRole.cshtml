@@ -1,0 +1,287 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFrame.cshtml";
+}
+<div class="bigbox">
+<h2>用户分配角色</h2>
+ <div>
+      @{
+          Html.Telerik().Window()
+           .Name("EditUserWindow")
+           .Title("修改用户")
+           .Draggable(true)
+           .Height(450)
+           .Width(400)
+           .Resizable(resizing => resizing
+               .Enabled(true)
+               .MinHeight(280)
+               .MinWidth(400)
+               .MaxHeight(280)
+               .MaxWidth(400)
+            )
+           .Scrollable(true)
+           .Modal(true)
+           .Buttons(b => b.Maximize().Close())
+           .Visible(false)
+           .Render();          
+       }
+                    </div> 
+<table style="border: 1px rgb(122, 122, 122) dashed; padding:5px;">
+<tr>
+<td>
+<div id="RoleTree" style="width:200px; height:300px;"></div>
+</td>
+<td>
+<div id="result"></div> 
+</td>
+<td>
+@using Telerik.Web.Mvc.UI;
+@{
+    Html.Telerik().Grid<UserGovern.Models.AuthUser>()
+          .Name("UsersGrid")
+          .DataKeys(keys =>
+          {
+              keys.Add(c => c.UserID);
+          })
+         .Pageable(paging =>
+                  paging.PageSize(15)
+                        .Style(GridPagerStyles.NextPreviousAndNumeric)
+                        .Position(GridPagerPosition.Bottom)
+              )
+          
+          .Columns(columns =>
+          {
+              columns.Bound(o => o.InRole)
+              .ClientTemplate("<input type='checkbox'  value='<#= UserID #>' name='record' <#= InRole?  \"checked='checked'\" : \"\" #> />")
+              .Title("<input type='checkbox' name='123' id ='checkall' onclick='checkedall()'/>").Width(60);
+              columns.Bound(o => o.InRole)
+              .ClientTemplate("<input type='text' name='inrole' <#= InRole?  \"value='是'  style=' width:60px;  border-style:none; border-width:0px; color:Red ;' \" : \"value='否'  style=' width:60px;  border-style:none; border-width:0px;'\" #> />")
+              .Title("角色").Width(60);           
+              columns.Bound(c => c.UserID).Title("账号");
+              columns.Bound(c => c.UserName).Title("姓名");
+              columns.Bound(c => c.depName).Title("部门");
+              columns.Bound(c => c.UserType).Title("身份");
+          }).HtmlAttributes(new { style = "text-align:left" })
+          .ClientEvents(clientEvents => clientEvents.OnDataBinding("databind"))
+          .DataBinding(dataBinding => dataBinding.Ajax()
+                .Select("RoleUsersAjaxEvent", "Role"))         
+          .Editable(editing => editing.Mode(GridEditMode.PopUp))
+          .Pageable()
+          .Scrollable()
+          .Sortable()
+          .Filterable()
+          .Resizable(resizing => resizing.Columns(true))
+          .Reorderable(reorder => reorder.Columns(true))          
+          .Footer(true)
+          .Render();
+}
+</td>
+</tr>
+
+</table>
+<div>
+ <input class="PersMS-button t-button" type="button" style=" width:120px;" value="添加用户角色" onclick="AddUserRole()" />
+                    <input class="PersMS-button t-button" type="button" style=" width:120px;margin: 5px 0;" value="删除用户角色" id="Submit" onclick="DelUserRole()" />
+                    <input class="PersMS-button t-button" type="button" style=" width:120px;" value="返回" id="GoBack" onclick="javascript:window.history.go(-1)" />
+</div>
+        <input type="hidden" value="" id="hidden" />
+        <input type="hidden" value ="" id="hiddenleaf" />
+        <input type="hidden" value="" id="hiddenhaschild"/>
+
+@*<button value = "保 存" onclick = "displayChecked()">保 存</button>
+<button value = "返 回" onclick = "/Role/GetRole"  onclick = "javascript:window.history.go(-1)">返 回</button>*@
+</div>
+@section Footer{
+    <script src="@Url.Content("~/Scripts/plusIns/multiselect/prettify.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.cookie.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.hotkeys.js")" type="text/javascript" ></script>
+    <script src="@Url.Content("~/Scripts/plusIns/jsTree/jquery.jstree.js")" type="text/javascript" ></script>
+
+    <script type="text/javascript">
+        var nowroleid;
+        $(document).ready(function () {
+            $("#PersonSequenceSubmit").attr('disabled', true);
+
+//            $("#checkedall").click(function () {
+//                if ($("#checkedall").attr("checked")) {
+//                    $(":checkbox:visible").not("#checkedall").attr("checked", true);
+//                }
+//                else $(":checkbox:visible").not("#checkedall").attr("checked", false);
+
+//            })
+
+            $("#RoleTree").jstree({
+                json_data: {
+                    ajax: {
+                        url: '@Url.Action("GetRoleTreeDataAll", "Tree")',
+                        data: '{did:1}',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json charset=utf-8'
+                    }
+                },
+
+                "themes": { "theme": "default", "dots": true, "icons": true },
+                "plugins": ["themes", "json_data", "ui"]
+            });
+            $("#RoleTree").bind("select_node.jstree", function (event, data) {
+                if (data.rslt.obj.length == 1) {
+
+                    var value = data.rslt.obj.attr("id");   //获取节点的id值（id值由Controller赋值）
+                    nowroleid = value;
+                    var child = data.rslt.obj.attr("ifPerson");
+
+                }
+            });
+        });
+            var SelectedRoles = new Array();
+            var systemid = 265;
+
+            function checkedall() {
+                var $box = $("input[name='record']:checkbox");
+                var a = $("#checkall").attr("checked");
+                for (var i = 0; i < $box.length; i++)
+                    $($box.get(i)).attr("checked", a);
+            }
+
+            function AddUserRole() {
+                var $rec = $("input[name='record']:checkbox:visible:checked").not("#checkall");
+                var $records = new Array();
+                for (var i = 0; i < $rec.length; i++)
+                    $records[i] = $($rec[i]).attr("value");
+
+                if ($rec.length < 1) {
+                    alert('请选择用户');
+                    return;
+                }
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("BatchAddRoleUser","Role")',
+                    cache: false,
+                    data: { roleid: nowroleid, check: $records },
+                    datatype: "text",
+                    traditional: true,
+                    success: function (msg) {
+                       if(msg != "")
+                           alert(msg);
+                       $('#RoleTree').jstree('refresh', -1);
+                       var grid = $('#UsersGrid').data('tGrid'); //重新加载
+                       grid.rebind();
+                       autodisapear();
+
+                    },
+                    error: function () { $("#result").text("网络故障"); }
+                })
+            }
+
+            //批量删除
+            function DelUserRole() {
+                var $rec = $("input[name='record']:checkbox:visible:checked").not("#checkall");
+                var $records = new Array();
+                if ($rec.length == 0)
+                { alert("请选择用户"); return; }
+
+                if (!confirm("你确定要删除该用户吗？"))
+                    return;
+                if ($("input#hidden:hidden").attr("value") == "" || $("#hiddenleaf").attr("value") == "False") {
+                    alert("请选择一个叶子角色");
+                    return;
+                }
+                for (var i = 0; i < $rec.length; i++)
+                    $records[i] = $($rec.get(i)).attr("value");
+                if (confirm("确定要删除选中的用户角色吗")) {
+                    $.ajax({
+                        type: "post",
+                        url: '@Url.Action("DelUserRole","Role")',
+                        cache: false,
+                        data: { roleid: nowroleid, check: $records },
+                        traditional: true,
+                        datatype: "json",
+                        success: function (msg) {
+                            if (msg != "")
+                                alert(msg);
+//                            $("span.PersMS-result-message").text(msg);
+//                            resultmessagedisppear();
+//                            selectUserWithRole();
+                            $('#RoleTree').jstree('refresh', -1);
+                            var grid = $('#UsersGrid').data('tGrid'); //重新加载
+                            grid.rebind();
+                            autodisapear();
+                            //  selectUser($("input#hidden:hidden").attr("value"));
+                        },
+                        error: function () { $("span.PersMS-result-message").html("网络故障！"); }
+                    })
+                }
+            }
+
+
+       function selectUser(role) {
+            $("#UserGrid").data("tGrid").rebind(
+          {
+              roleid: role
+          })
+      }
+
+      function selectUserNotRole() {
+          $("#UserGrid").data("tGrid").rebind(
+          {
+              UserID: $("#UserID").val(),
+              UserName: $("#UserName").val(),
+              DepName: $("#DepName").val(),
+              DepSectionName: $("#DepSectionName").val(),
+              roleid: -1
+          })
+      }
+
+       function selectUserWithRole() {
+        $("#UserGrid").data("tGrid").rebind(
+          {
+              UserID: $("#UserID").val(),
+              UserName: $("#UserName").val(),
+              DepName: $("#DepName").val(),
+              DepSectionName: $("#DepSectionName").val(),
+              roleid: $("input#hidden:hidden").attr("value")
+          })
+      }
+
+
+      function closewindow(e) {
+          if ($('#EditUserWindow').is(":visible"))
+              $('#EditUserWindow').data('tWindow').close();
+
+//          var grid = $('#UsersGrid').data('tGrid'); //重新加载
+//          grid.rebind();
+//          autodisapear();
+      }
+
+      var inum = 0;
+      function databind(args) {
+          if (inum > 0) {
+              args.data = $.extend(args.data, {
+
+                  roleid: $("input#hidden:hidden").attr("value"),
+                  UserID: $("#UserID").val(),
+                  UserName: $("#UserName").val(),
+                  DepName: $("#DepName").val(),
+                  DepSectionName: $("#DepSectionName").val()
+
+              });
+          }
+          inum++;
+      }
+
+   </script>
+
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.jstree.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/plusIns/multiselect/jquery.multiselect.js")" type="text/javascript" charset="gb2312"></script>
+    <script src="@Url.Content("~/Scripts/plusIns/multiselect/prettify.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.cookie.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/plusIns/jsTree/_lib/jquery.hotkeys.js")"></script>
+
+   }

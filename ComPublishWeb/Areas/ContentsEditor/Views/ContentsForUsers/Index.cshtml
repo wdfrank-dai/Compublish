@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+@using Telerik.Web.Mvc.UI
+<div class="bigbox">
+<h2>欢迎您：@ViewBag.Operator</h2>
+
+     <div class="PersMS-table-4cols-1">
+                <button class="button" type="button" onclick = "ContentsInsert()">
+				<img src="@Url.Content("~/images/icons/application_edit1.png")" alt="Save" />
+				添加内容
+				</button>
+     </div>
+     <br /><br />
+<div class="PersMS-table-4cols-1">
+@{
+    Html.Telerik().Grid<WiGetMS.Models.ContentsModel>()
+          .Name("ContentForUsersGrid")
+          .DataKeys(keys =>
+          {
+              keys.Add(c => c.ID);
+          })
+          //.ToolBar(commands => commands.Template("<input type='button' value='添加内容' class='t-button' onclick = ContentsInsert()>"))
+          .DataBinding(dataBinding => dataBinding.Ajax()
+                .Select("SelectForTelerik", "ContentsForUsers")
+                )
+          
+          .Columns(columns =>
+          {
+              columns.Bound(o => o.ID).Width(20).Hidden(true);
+              columns.Bound(c => c.Title).Width(120).Title("标题");
+              columns.Bound(c => c.Summary).Width(250).Title("内容简介");
+              //columns.Bound(c => c.Priority).Title("优先级");
+              //columns.Bound(c => c.Hotspot).Title("是否热点");
+              //columns.Bound(c => c.Stick).Title("是否置顶");             
+              columns.Bound(c => c.Tags).Width(120).Title("标签");
+              //columns.Bound(c => c.Sorlink).Title("外部链接");
+              columns.Bound(c => c.Creator).Width(85).Title("作者");
+              columns.Bound(c => c.Createtime).Width(125).Title("创作时间");
+              //columns.Bound(c => c.Operator).Title("操作人");
+              columns.Bound(c => c.Lastmodifytime).Width(125).Title("修改时间");
+              columns.Bound(c => c.Passed).Width(95).Title("审核情况");
+              columns.Bound(c => c.Verifier).Width(85).Title("审核人");
+              columns.Bound(c => c.Verifytime).Width(125).Title("审核时间");
+
+          })
+          .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+          .Pageable(pagesizi => pagesizi.PageSize(10))
+          .Selectable()
+          .Scrollable(scrolling => scrolling.Height(250))
+          .Sortable()
+          .Filterable()
+          .Resizable(resizing => resizing.Columns(true))
+          .Reorderable(reorder => reorder.Columns(true))          
+          .Footer(true)
+          .Render();
+          }
+</div>
+
+<div id="Window">
+@{Html.Telerik().Window()
+            .Name("ContentOfUserEdit-Window")
+            .Title("内容详细信息")
+            .Content(() => {})
+            .Width(900)
+            .Height(630)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+</div>
+<div id="Window1">
+@{Html.Telerik().Window()
+            .Name("ContentOfUserShow-Window")
+            .Title("内容详细信息")
+            .Content(() => {})
+            .Width(400)
+            .Height(400)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+</div>
+
+</div>
+@section Footer{       
+<script type="text/javascript" src="@Url.Content("~/Content/ckeditor/ckeditor.js")"></script>
+<script type="text/javascript">
+    function ContentsInsert() {
+        window.open("@Url.Action("ContentsInsert","ContentsForUsers",new {Areas = "ContentsEditor"})","内容编辑",null,null);
+    }
+
+    function onRowSelected(e) {
+        var Grid = $('#ContentGrid').data('tGrid');
+        var id = e.row.cells[0].innerHTML;
+        //var window = $('#ContentOfUser-Window').data('tWindow');
+        var passed = e.row.cells[7].innerHTML;
+        if (passed == "审核通过") {
+            var window1 = $('#ContentOfUserShow-Window').data('tWindow');
+            window1.ajaxRequest("/ContentsEditor/ContentsForUsers/ContentOfUserShowWindow?confid=" + id);
+            window1.center().open();
+        }
+        else {
+            var window2 = $('#ContentOfUserEdit-Window').data('tWindow');
+            window2.ajaxRequest("/ContentsEditor/ContentsForUsers/ContentOfUserEditWindow?confid=" + id);
+            window2.center().open();
+        }
+       // window.center().open();
+    }
+
+    function ContentEditSuccess(result) {
+        var mess = result;
+        if (mess != "") {
+            alert(mess);
+        }
+        $('#ContentOfUserEdit-Window').data('tWindow').close();
+        var grid = $('#ContentForUsersGrid').data('tGrid'); //重新加载
+        grid.rebind();
+    }
+
+    function Close()
+    {
+        $('#ContentOfUserShow-Window').data('tWindow').close();
+    }
+  </script>
+  }

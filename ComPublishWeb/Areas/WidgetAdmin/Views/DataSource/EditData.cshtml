@@ -1,0 +1,64 @@
+﻿@model WiGetMS.Models.Datasource
+
+@using (Ajax.BeginForm("EditData", "DataSource", new { roleid = Model.id }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "EditWindow()" }))
+{
+    @Html.ValidationSummary(true)
+   
+      <div id="Message" style="color:Red"></div>
+
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dsname)
+        </div>
+        <div class="PersMS-table-4cols-J">
+            @Html.EditorFor(model => model.dsname)
+            @Html.ValidationMessageFor(model => model.dsname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dsurl)
+        </div>
+        <div class="PersMS-table-4cols-J">
+            @Html.EditorFor(model => model.dsurl)
+            @Html.ValidationMessageFor(model => model.dsurl)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dsparams)
+        </div>
+        <div class="PersMS-table-4cols-J">
+            @Html.EditorFor(model => model.dsparams)
+            @Html.ValidationMessageFor(model => model.dsparams)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dataitems)
+        </div>
+        <div class="PersMS-table-4cols-J">
+            @Html.EditorFor(model => model.dataitems)
+            @Html.ValidationMessageFor(model => model.dataitems)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.isefficetive)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.isefficetive)
+            @Html.ValidationMessageFor(model => model.isefficetive)
+        </div>
+    <br/>
+        <div class="PersMS-table-cels-center" style="margin:0 auto;width:170px">
+         <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				保存
+				</button>
+                <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="Close()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+        </div>
+}
+

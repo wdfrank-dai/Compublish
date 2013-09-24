@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="COMPUB" Class="WiGetMSLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\DELL\Desktop\ComPublishWeb_Widget\ComPublishWeb\App_Data\COMPUB.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="WiGetMSModelsLibrary.Properties.Settings" SettingsPropertyName="COMPUBConnectionString4" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ApplicationUnitsShowStyle" Member="ApplicationUnitsShowStyle">
+    <Type Name="ApplicationUnitsShowStyle">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="ApplicationUnitsShowStyle_ApplicationUnits" Member="ApplicationUnits" ThisKey="id" OtherKey="showstyleid" Type="ApplicationUnits" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Content" Member="Content">
+    <Type Name="Content">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="t_content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stick" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="hotspot" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="tags" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sorlink" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="creator" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="createtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="operator" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="lastmodifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="verifier" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="verifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="passed" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="summary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="suggestion" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ApplicationUnits" Member="ApplicationUnits">
+    <Type Name="ApplicationUnits">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="unitname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="datasourceid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="utype" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ucontent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="showstyleid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iseffictive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="lastmodifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NextPage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NextPageShowType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="res1" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="ApplicationUnits_ApplicationDatasource" Member="ApplicationDatasource" ThisKey="id" OtherKey="unitsid" Type="ApplicationDatasource" />
+      <Association Name="ApplicationUnits_ApplicationUnitsCss" Member="ApplicationUnitsCss" ThisKey="id" OtherKey="unitsid" Type="ApplicationUnitsCss" />
+      <Association Name="ApplicationUnitsShowStyle_ApplicationUnits" Member="ApplicationUnitsShowStyle" ThisKey="showstyleid" OtherKey="id" Type="ApplicationUnitsShowStyle" IsForeignKey="true" />
+      <Association Name="ApplicationDatasource_ApplicationUnits" Member="ApplicationDatasource1" ThisKey="datasourceid" OtherKey="id" Type="ApplicationDatasource" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ApplicationDatasource" Member="ApplicationDatasource">
+    <Type Name="ApplicationDatasource">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="dsname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="unitsid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dsurl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dsparams" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dataitems" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="isefficetive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="modifydate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="operator" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="ApplicationDatasource_ApplicationUnits" Member="ApplicationUnits1" ThisKey="id" OtherKey="datasourceid" Type="ApplicationUnits" />
+      <Association Name="ApplicationUnits_ApplicationDatasource" Member="ApplicationUnits" ThisKey="unitsid" OtherKey="id" Type="ApplicationUnits" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ApplicationUnitsCss" Member="ApplicationUnitsCss">
+    <Type Name="ApplicationUnitsCss">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="unitsid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="css" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="res1" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="ApplicationUnits_ApplicationUnitsCss" Member="ApplicationUnits" ThisKey="unitsid" OtherKey="id" Type="ApplicationUnits" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ApplicationPage" Member="ApplicationPage">
+    <Type Name="ApplicationPage">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="showtypeid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="actionname" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="appid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pagename" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="actionunits" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="isStart" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="isEffictive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="lastmodifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="res1" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="ApplicationShowType_ApplicationPage" Member="ApplicationShowType" ThisKey="showtypeid" OtherKey="id" Type="ApplicationShowType" IsForeignKey="true" />
+      <Association Name="Application_ApplicationPage" Member="Application" ThisKey="appid" OtherKey="id" Type="Application" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ApplicationShowType" Member="ApplicationShowType">
+    <Type Name="ApplicationShowType">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FillMark" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FillCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="remark" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="viewdate" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="res1" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="ApplicationShowType_ApplicationPage" Member="ApplicationPage" ThisKey="id" OtherKey="showtypeid" Type="ApplicationPage" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Application" Member="Application">
+    <Type Name="Application">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="appname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="logourl" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="publishto" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ispublish" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="operator" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="lastmodifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="tags" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="passed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShowType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IfLoginShow" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Application_ApplicationPage" Member="ApplicationPage" ThisKey="id" OtherKey="appid" Type="ApplicationPage" />
+    </Type>
+  </Table>
+</Database>

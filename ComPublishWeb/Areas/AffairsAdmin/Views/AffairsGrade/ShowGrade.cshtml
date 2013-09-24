@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "ShowGrade";
+    Layout = "~/Views/Shared/M/_LayoutAffairs.cshtml";
+}
+
+<h2 class="title">事务等级</h2>
+@using Telerik.Web.Mvc.UI
+
+<div  class="information">
+<input type ='button' value='添 加 等 级' class='t-button' onclick = "InsertGrade()" />
+@{
+    Html.Telerik().Grid<ComPublishWeb.Areas.AffairsAdmin.Models.AffairsGradeModel>()
+          .Name("AffairsGradeGrid")
+          .DataKeys(keys =>
+          {
+              keys.Add(c => c.ID);
+          })
+
+          //.ToolBar(commands =>commands.Template("<a type ='button' value='添 加' class='t-button' onclick = Add()><b>添   加</b></a>"))
+          
+          .DataBinding(dataBinding => dataBinding.Ajax()
+                .Select("AffairsGradeShow", "AffairsGrade", new { Areas = "AffairsAdmin" })
+                )
+          
+          .Columns(columns =>
+          {
+              columns.Bound(o => o.ID).Hidden(true);
+              columns.Bound(c => c.Rank).Title("事务等级");
+              columns.Bound(c => c.Gradename).Title("等级名称");
+          })
+          .Editable(editing => editing.Mode(GridEditMode.PopUp))
+          .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+          .Pageable()
+          .Selectable()
+          .Scrollable()
+          .Sortable()
+          .Filterable()
+          .Resizable(resizing => resizing.Columns(true))
+          .Reorderable(reorder => reorder.Columns(true))          
+          .Footer(true)
+          .Render();
+          }
+
+<div id="somediv">
+     @{ Html.Telerik().Window()
+            .Name("GradeWindow")
+            .Title("事务等级")
+            .Content(() => { })
+            .Width(400)
+            .Height(210)
+            .Draggable(true)
+            .Modal(true)
+            .Visible(false)
+            .Render();
+            }
+    </div>
+
+    </div>
+
+@section Footer{  
+    <script type="text/javascript">
+        var affairsid;
+        function onRowSelected(e) {
+            var Grid = $('#AffairsGradeGrid').data('tGrid');
+            var id = e.row.cells[0].innerHTML;
+            affairsid = id;
+            var window = $('#GradeWindow').data('tWindow');
+            window.ajaxRequest("/AffairsAdmin/AffairsGrade/EditAffairsGrade?confid=" + id);
+            window.center().open();
+        }
+
+        function InsertGrade() {
+            var window = $('#GradeWindow').data('tWindow');
+            window.ajaxRequest("/AffairsAdmin/AffairsGrade/InsertGrade");
+            window.center().open()
+        }
+
+        function InsertGraderes(rs) {
+            if (rs != null)
+                alert(rs);
+            else
+                alert("操作失败");
+            $('#GradeWindow').data('tWindow').close();
+            var grid = $('#AffairsGradeGrid').data('tGrid'); //重新加载
+            grid.rebind();
+        }
+
+   </script>
+   }

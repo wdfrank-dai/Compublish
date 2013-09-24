@@ -1,0 +1,31 @@
+﻿@model IList<ComPublishWeb.Areas.AffairsAdmin.Models.AffairsSummaryModel>
+    
+    <div>
+@*@using Telerik.Web.Mvc.UI
+@using (Ajax.BeginForm("InsertAffairsGrade", "AffairsGrade", new { }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "InsertGraderes" }))
+{  *@
+
+<ul class="disc">
+        @foreach (var item in Model)
+        {
+                @Html.HiddenFor(model => item.ID)
+            <li>
+            @Html.LabelFor(model => item.T_content)
+            @item.T_content 
+            @Html.LabelFor(model => item.Writer)
+            @item.Writer
+            @Html.LabelFor(model => item.Writetime)
+            @item.Writetime
+            </li>
+       if (@item.Writer == @item.Registrantnum && @item.Statusname != "3")
+       { 
+               <input id = "editor1" value = "修改本人小结"  type ="button" onclick = "EditorSummary(@item.AffairsID)" />
+       }
+        }
+</ul>
+
+      
+               <script type="text/javascript">
+//                   $('#editor').click(function () { alert('1') })
+               </script> 
+

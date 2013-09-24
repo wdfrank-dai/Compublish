@@ -1,0 +1,10 @@
+﻿@model ComPublishWeb.Areas.AffairsAdmin.Models.AffairsSummaryModel
+
+@{
+    var item = Model;
+    }
+
+@Html.TextAreaFor(model => item.T_content)
+
+<p>是否可见：@Html.CheckBoxFor(model => item.T_open)</p>
+<input type="submit" value="确 定" class = "hide1" onclick="HideSummary()"/>

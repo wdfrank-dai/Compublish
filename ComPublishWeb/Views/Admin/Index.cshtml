@@ -1,0 +1,20 @@
+﻿
+@using Telerik.Web.Mvc.UI;
+
+<div>
+@{Html.Telerik().TabStrip()
+.Name("ConfDetailInfo")
+           .Items(parent => {
+               parent.Add().Text("频道设置管理") /* this tab will be opened initially - no need to get it with ajax */
+                   .LoadContentFrom("ChannelSet", "Admin")
+                   .Selected(true);
+               parent.Add()
+                   .Text("内容管理")
+                   .LoadContentFrom("ContentSet", "Admin");
+              })
+           .Render();
+           }
+</div>
+
+@{Html.RenderAction("Index", "ModelTree", new { UserID = "000000", SystemID = 0});}
+

@@ -1,0 +1,42 @@
+.field-validation-error
+{
+    color: #ff0000;
+    font-family:Î¢ÈíÑÅºÚ;
+    font-size:12px;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+    font-family:Î¢ÈíÑÅºÚ;
+    font-size:12px;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    font-family:Î¢ÈíÑÅºÚ;
+    color: #ff0000;
+    font-size:12px;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+
+
+
+.lable_title span
+{
+   display:inline-block;
+   margin:0px 5px;
+   
+    }

@@ -1,0 +1,279 @@
+﻿@model ComPublishWeb.Areas.AffairsAdmin.Models.AffairsModel
+@{ 
+    ViewBag.Title = "ShowAffairsReadOnly";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+
+       <h2  class="title">  事务详细信息(事务名称:
+       @Model.Name
+       @Html.ValidationMessageFor(model => model.Name))
+       </h2>
+
+        @Html.ValidationSummary(true)
+        
+            @Html.HiddenFor(model => model.ID)
+    
+           
+   <div  class="information">
+           <table>
+		<tr>
+		<td>
+                @Html.LabelFor(model => model.Typename)
+		</td>
+		<td>
+                @Model.Typename
+                @Html.ValidationMessageFor(model => model.Typename)
+		</td>
+        <td>
+                @Html.LabelFor(model => model.Principal)
+  
+		</td>
+		<td>
+                @Model.Principal
+                @Html.ValidationMessageFor(model => model.Principal)
+		</td>
+		<td>
+                @Html.LabelFor(model => model.Petitionernum)
+		</td>
+		<td>
+                @Model.Petitionernum
+                @Html.ValidationMessageFor(model => model.Petitionernum)
+		</td>
+        <td>
+                @Html.LabelFor(model => model.Collaborativer)
+		</td>
+		<td>
+                @Model.Collaborativer
+                @Html.ValidationMessageFor(model => model.Collaborativer)
+		</td>
+		</tr>
+		
+		<tr>
+         <td>
+                @Html.LabelFor(model => model.Starttime)
+		</td>
+		<td>
+                @Model.Starttime
+                @Html.ValidationMessageFor(model => model.Starttime)
+		</td>
+        <td>
+                @Html.LabelFor(model => model.Endtime)
+		</td>
+		<td>
+                @Model.Endtime
+                @Html.ValidationMessageFor(model => model.Endtime)
+		</td>
+		<td>
+                @Html.LabelFor(model => model.Statusname)
+		</td>
+		<td>
+                @Model.Statusname
+                @Html.ValidationMessageFor(model => model.Statusname)
+		</td>
+        <td>
+                @Html.LabelFor(model => model.Gradename)
+        </td>
+		<td>
+                @Model.Gradename
+                @Html.ValidationMessageFor(model => model.Gradename)
+		</td> 
+		</tr>
+
+		<tr>
+        <td>
+                @Html.LabelFor(model => model.Registrantnum)
+		</td>
+		<td>
+                @Model.Registrantnum
+                @Html.ValidationMessageFor(model => model.Registrantnum)
+		</td>
+        <td>
+                @Html.LabelFor(model => model.Registertime)
+		</td>
+		<td>
+                @Model.Registertime
+                @Html.ValidationMessageFor(model => model.Registertime)
+		</td>
+      
+		<td>
+                @Html.LabelFor(model => model.ParentID) 
+		</td>
+		<td>
+                @Model.ParentID
+                @Html.ValidationMessageFor(model => model.ParentID)
+		</td>
+        <td>
+                @Html.LabelFor(model => model.Securityname)
+		</td>
+		<td>
+                @Model.Securityname
+                @Html.ValidationMessageFor(model => model.Securityname)
+		</td>
+		</tr>
+         <tr>
+          <td valign=top>
+                @Html.LabelFor(model => model.T_content)
+		</td>
+		<td >
+                @Html.TextAreaFor(model => model.T_content, new { style = "width:530px ;height:90px" })
+                @Html.ValidationMessageFor(model => model.T_content)
+		</td>
+        </tr>
+		</table>
+        </div>
+
+        <div ><br/>
+
+          <h3 class = "hidefordataing">·该事务小结</h3>
+          <div id = "result1" class = "resultforhavingsummary"></div><br/>
+
+          <h3 class="hide">·填写事务小结</h3>
+          <div class="ex" id = "editor"></div><br/>       
+
+           <h3 class = "childaffairs">·拥有的子事务</h3>
+           <div id = "childaffairs" class = "resultforchildaffairs"></div><br/>
+
+          <h3 class="hideforupload">·已上传资料</h3>
+          <div id = "adddata" class="resultforhavingupload"></div><br/>
+
+           <h3 class="hide2">·上传资料</h3>
+           <div class="ex2">
+                    <div id = "upload"></div>
+                    <input type="submit" value="确 定" class = "hide3" onclick = "SaveData()"/>
+           </div><br/>
+ 
+            <p>
+                <input type="submit" value="确 认 提 交" onclick = "SaveAffairs()"/>
+                <input type="submit" value="返 回" onclick = "javascript:window.history.go(-1)"/>
+            </p>
+           </div>
+              
+ @section Footer{  
+     <script type="text/javascript">
+             var affairsid = $("#ID").val();
+             $("input#RoleParentID").attr("readonly", true);
+             $(document).ready(function () {
+                 $(".resultforhavingsummary").show();
+                 $(".resultforhavingupload").show();
+                 $(".hide").hide();
+                 $(".childaffairs").click(function () {
+                     $(".resultforchildaffairs").slideToggle("slow");
+                 });
+                 $(".hidefordataing").click(function () {
+                     $(".resultforhavingsummary").slideToggle("slow");
+                 });
+                 $(".hide").click(function () {
+                     $(".ex").slideToggle("slow");
+                 });
+                 $(".hideforupload").click(function () {
+                     $(".resultforhavingupload").slideToggle("slow");
+                 });
+                 $(".hide2").click(function () {
+                     $(".ex2").slideToggle("slow");
+                 });
+                 $.ajax({
+                     type: "POST",
+                     async: false,
+                     url: '@Url.Action("ShowSummaryFromAll", "AffairsSummary", new { Area = "AffairsAdmin" })',
+                     data: { confid: affairsid },
+                     dataType: "html",
+                     success: function (request) {
+                         $("#result1").html(request);
+                     },
+                     traditional: true
+                 });
+          $.ajax({
+                 type: "POST",
+                 async: false,
+                 url: '@Url.Action("ShowChildAffairs", "AffairsForOneself", new { Area = "AffairsAdmin" })',
+                 data: { confid: affairsid },
+                 dataType: "html",
+                 success: function (request) {
+                     $("#childaffairs").html(request);
+                 },
+                 traditional: true
+             });
+                 $.ajax({
+                     type: "POST",
+                     async: false,
+                     url: '@Url.Action("HaveUploading", "AffairsData", new { Area = "AffairsAdmin" })',
+                     data: { confid: affairsid },
+                     dataType: "html",
+                     success: function (request) {
+                         $("#adddata").html(request);
+                     },
+                     traditional: true
+                 });
+                 $.ajax({
+                     type: "POST",
+                     async: false,
+                     url: '@Url.Action("UploadForShow", "AffairsData", new { Area = "AffairsAdmin" })',
+                     data: { confid: affairsid },
+                     dataType: "html",
+                     success: function (request) {
+                         $("#upload").html(request);
+                     },
+                     traditional: true
+                 });
+             });
+             $(".hide1").click(function () {
+                 $(".ex").hide("slow");
+             });
+             $(".hide3").click(function () {
+                 $(".ex2").hide("slow");
+             });
+
+             function SaveAffairs() {
+                 var ifopen = document.getElementById("item_T_open").checked;
+                 var summary = document.getElementById("item_T_content").value;
+                 $.ajax({
+                     type: "POST",
+                     async: false,
+                     url: '@Url.Action("UpdataSummaryFromAffairs", "AffairsSummary", new { Area = "AffairsAdmin" })', ///添加个人小结
+                     data: { confid: affairsid, summary: summary, open: ifopen },
+                     dataType: "html",
+                     success: function (request) {
+                          if(request =="确认返回")
+                             javascript:window.history.go(-1);
+                     },
+                 });
+                 $.ajax({
+                     type: "POST",
+                     async: false,
+                     url: '@Url.Action("ShowSummaryFromAll", "AffairsSummary", new { Area = "AffairsAdmin" })',
+                     data: { confid: affairsid },
+                     dataType: "html",
+                     success: function (request) {
+                         $("#result1").html(request);
+                         $("#Summary").attr("readonly", true);
+                         $("#T_open").attr("readonly", true);
+                     },
+                     traditional: true
+                 });
+             }
+
+             function EditorSummary(id) {
+                 $.ajax({
+                     type: "GET",
+                     async: false,
+                     url: '@Url.Action("EditorSummary", "AffairsSummary", new { Area = "AffairsAdmin" })',
+                     data: { confid: id },
+                     dataType: "html",
+                     success: function (request) {
+                         $("#editor").html(request);
+                         $(".ex").show("slow");
+                         $(".hide1").show("slow");
+                         $(".hide").show("slow");
+                     },
+                     traditional: true
+                 });
+             }
+             function  HideSummary()
+             {
+                $(".hide").hide("slow");
+                $(".ex").hide("slow");
+
+             }
+     </script>
+
+}

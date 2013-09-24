@@ -1,0 +1,119 @@
+﻿@model WiGetMS.Models.ShowPage
+@{
+    Layout = null;
+}
+
+@{
+    var a = Model;
+    }
+<!DOCTYPE html>
+
+@using (Ajax.BeginForm("EditPageSave", "ApplicationPage", new { id = Model.id }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "OperateWindow" }))
+{
+
+         <div id="Message"></div>  
+           <table>
+            <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.pagename)：
+              </td>
+			  <td class="PersMS-table-4cols-3">
+                  @Html.EditorFor(m => m.pagename)
+              </td>
+            </tr>
+            <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.showtypename)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.DropDownList("showtype", null, new { style = "width:180px" })
+              </td>
+            </tr>
+
+@*            <tr>
+			  <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.nextpagename)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.DropDownList("pagelist", null, new { style = "width:180px" })         
+              </td>
+            </tr>*@
+
+            <tr>
+              <td class="PersMS-table-4cols-1"> 
+                  @Html.LabelFor(m => m.actionname)：
+              </td>
+			  <td class="PersMS-table-4cols-3">
+                  @Html.EditorFor(m => m.actionname)
+              </td>
+            </tr>
+
+            <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.appname)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.DropDownList("Appname",null, new { style = "width:180px" })
+              </td>
+            </tr>
+
+            <tr>
+			  <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.actionunits)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.DropDownList("Units", ViewData["Units"] as SelectList, "--请选择--", new { multiple = "multiple", style = "z-index:999;" })
+              </td>
+            </tr>
+
+            <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.isStart)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.CheckBoxFor(m => m.isStart)                 
+              </td>
+            </tr>
+
+            <tr>
+              <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.isEffictive)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.CheckBoxFor(m => m.isEffictive)                 
+              </td>
+            </tr>
+
+            
+            <tr>
+			  <td class="PersMS-table-4cols-1">
+                  @Html.LabelFor(m => m.note)：
+              </td>
+			  <td class="PersMS-table-4cols-2">
+                  @Html.TextAreaFor(m => m.note, new { @style = "width:180px;height:90px" })
+              </td>
+            </tr>
+        </table>      
+                <div style="margin:0 auto;width:200px">
+       <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				保存
+				</button>
+                <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="ClosePageWindow()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+        </div>
+}
+
+ <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.js")" type="text/javascript"></script>
+     <script src="@Url.Content("~/Scripts/plusIns/multiselect/jquery.multiselect.js")" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        $("#Units").multiselect({
+            selectedList: 3,
+            minWidth: 180,
+//           header: "请选择Css"
+        });
+    </script>

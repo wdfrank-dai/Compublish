@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComPublishWeb", "ComPublishWeb\ComPublishWeb.csproj", "{970A5FB1-4803-45D7-8FBB-494D798AAEC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WidgetDateLibrary", "WidgetDateLibrary\WidgetDateLibrary.csproj", "{4CDB4551-B1EF-423A-AEFD-168BF69789F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiGetMSModelsLibrary", "WiGetMSModelsLibrary\WiGetMSModelsLibrary.csproj", "{0303DE17-BDAE-4313-B202-9EF3FDA4C2B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiGetMSControllers", "WiGetMSControllers\WiGetMSControllers.csproj", "{B1DBB670-7481-4714-9ECF-8C8E4CD7E566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularControlLibrary", "ModularControlLibrary\ModularControlLibrary.csproj", "{F9AD51F6-E03A-4CD8-B092-0B7CFD03BE54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreLibrary", "CoreLibrary\CoreLibrary.csproj", "{AD3FE855-5278-4C4B-8A0F-1A96A386B42C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthMSModelsLibrary", "AuthMSModelsLibrary\AuthMSModelsLibrary.csproj", "{3C2B5822-7314-4C85-B870-334E711D5B75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthMSControllerLibrary", "AuthMSControllerLibrary\AuthMSControllerLibrary.csproj", "{03D46BA6-BFA2-4DCF-BFEB-42BB3A116C91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{970A5FB1-4803-45D7-8FBB-494D798AAEC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{970A5FB1-4803-45D7-8FBB-494D798AAEC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{970A5FB1-4803-45D7-8FBB-494D798AAEC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{970A5FB1-4803-45D7-8FBB-494D798AAEC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CDB4551-B1EF-423A-AEFD-168BF69789F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CDB4551-B1EF-423A-AEFD-168BF69789F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CDB4551-B1EF-423A-AEFD-168BF69789F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CDB4551-B1EF-423A-AEFD-168BF69789F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0303DE17-BDAE-4313-B202-9EF3FDA4C2B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0303DE17-BDAE-4313-B202-9EF3FDA4C2B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0303DE17-BDAE-4313-B202-9EF3FDA4C2B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0303DE17-BDAE-4313-B202-9EF3FDA4C2B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1DBB670-7481-4714-9ECF-8C8E4CD7E566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1DBB670-7481-4714-9ECF-8C8E4CD7E566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1DBB670-7481-4714-9ECF-8C8E4CD7E566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1DBB670-7481-4714-9ECF-8C8E4CD7E566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9AD51F6-E03A-4CD8-B092-0B7CFD03BE54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9AD51F6-E03A-4CD8-B092-0B7CFD03BE54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9AD51F6-E03A-4CD8-B092-0B7CFD03BE54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9AD51F6-E03A-4CD8-B092-0B7CFD03BE54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD3FE855-5278-4C4B-8A0F-1A96A386B42C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD3FE855-5278-4C4B-8A0F-1A96A386B42C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD3FE855-5278-4C4B-8A0F-1A96A386B42C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD3FE855-5278-4C4B-8A0F-1A96A386B42C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2B5822-7314-4C85-B870-334E711D5B75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2B5822-7314-4C85-B870-334E711D5B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2B5822-7314-4C85-B870-334E711D5B75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2B5822-7314-4C85-B870-334E711D5B75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D46BA6-BFA2-4DCF-BFEB-42BB3A116C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D46BA6-BFA2-4DCF-BFEB-42BB3A116C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D46BA6-BFA2-4DCF-BFEB-42BB3A116C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D46BA6-BFA2-4DCF-BFEB-42BB3A116C91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = ..\..\..\..\Repositories\CompublishWebMain
+	EndGlobalSection
+EndGlobal
