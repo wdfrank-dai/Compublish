@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WidgetDate.Models;
+using WidgetDateLibrary.Models;
 
 namespace WidgetDate.Repository
 {

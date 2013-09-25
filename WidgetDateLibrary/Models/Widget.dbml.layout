@@ -20,12 +20,6 @@
         <elementListCompartment Id="1d32cb09-7295-426b-91be-8e55b04fa407" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 1.5628255208333335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="cc414784-a4ac-4214-bb0e-e953e44d544a" absoluteBounds="5.125, 3.375, 2, 2.7973046875">
-      <DataClassMoniker Name="/WidgetDataContext/ApplicationUnits" />
-      <nestedChildShapes>
-        <elementListCompartment Id="4a518dc3-b02a-4b3e-8da6-a0a1378bc2d2" absoluteBounds="5.14, 3.835, 1.9700000000000002, 2.2373046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="e183b332-2c7a-4340-a153-f009f5c76d6a" absoluteBounds="2.75, 4.75, 2, 1.7855859375">
       <DataClassMoniker Name="/WidgetDataContext/ApplicationUnitsCss" />
       <nestedChildShapes>
@@ -38,10 +32,16 @@
         <elementListCompartment Id="51223041-14b6-4adf-b46f-b3d25ffb8b8c" absoluteBounds="2.89, 0.96, 1.9700000000000002, 0.7197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="cff7bddb-0c9d-46d5-bedb-b432bbd3ebb5" absoluteBounds="5.125, 0.5, 2, 2.9659244791666666">
+    <classShape Id="cff7bddb-0c9d-46d5-bedb-b432bbd3ebb5" absoluteBounds="5.375, 0.5, 2, 2.9659244791666666">
       <DataClassMoniker Name="/WidgetDataContext/Application" />
       <nestedChildShapes>
-        <elementListCompartment Id="fca596b1-7aa8-4d09-a03d-ece2db46d55c" absoluteBounds="5.14, 0.96, 1.9700000000000002, 2.4059244791666665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="fca596b1-7aa8-4d09-a03d-ece2db46d55c" absoluteBounds="5.39, 0.96, 1.9700000000000002, 2.4059244791666665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="342f754b-1763-4a3e-b9d3-dbce98bbd3cb" absoluteBounds="5.375, 3.875, 2, 2.7973046875">
+      <DataClassMoniker Name="/WidgetDataContext/ApplicationUnits" />
+      <nestedChildShapes>
+        <elementListCompartment Id="11a54de5-eee0-443c-b86d-163049a80bd6" absoluteBounds="5.39, 4.335, 1.9700000000000002, 2.2373046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

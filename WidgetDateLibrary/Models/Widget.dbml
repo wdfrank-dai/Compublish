@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="COMPUB" Class="WidgetDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=D:\综合发布平台\ComPublishWeb\ComPublishWeb_Widget\ComPublishWeb\App_Data\COMPUB.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="WidgetDateLibrary.Properties.Settings" SettingsPropertyName="COMPUBConnectionString2" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="COMPUB.MDF" Class="WidgetDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=210.42.159.78;Initial Catalog=COMPUB.MDF;Persist Security Info=True;User ID=developer" SettingsObjectName="WidgetDateLibrary.Properties.Settings" SettingsPropertyName="COMPUB_MDFConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ApplicationDatasource" Member="ApplicationDatasource">
     <Type Name="ApplicationDatasource">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -41,22 +41,6 @@
       <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ApplicationUnits" Member="ApplicationUnits">
-    <Type Name="ApplicationUnits">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="unitname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="datasourceid" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="utype" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ucontent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="showstyleid" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="iseffictive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="lastmodifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="NextPage" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NextPageShowType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="res1" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.ApplicationUnitsCss" Member="ApplicationUnitsCss">
     <Type Name="ApplicationUnitsCss">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -89,6 +73,22 @@
       <Column Name="passed" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ShowType" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IfLoginShow" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ApplicationUnits" Member="ApplicationUnits">
+    <Type Name="ApplicationUnits">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="unitname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="datasourceid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="utype" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ucontent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="showstyleid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iseffictive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="lastmodifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NextPage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NextPageShowType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="params" Member="theparams" Storage="_params" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

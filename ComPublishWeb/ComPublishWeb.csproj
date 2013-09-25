@@ -123,22 +123,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\AffairsMSAuth.mdf" />
-    <Content Include="App_Data\AffairsMSAuth_log.ldf">
-      <DependentUpon>AffairsMSAuth.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\COMPUB.mdf" />
-    <Content Include="App_Data\COMPUB_log.ldf">
-      <DependentUpon>COMPUB.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\COMUSERAUTH.mdf" />
-    <Content Include="App_Data\COMUSERAUTH_log.ldf">
-      <DependentUpon>COMUSERAUTH.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\PersMSAuth.mdf" />
-    <Content Include="App_Data\PersMSAuth_log.ldf">
-      <DependentUpon>PersMSAuth.mdf</DependentUpon>
-    </Content>
     <Content Include="Areas\WidgetAdmin\Views\ApplicationManage\AddApps.ascx" />
     <Content Include="Areas\WidgetAdmin\Views\ApplicationManage\EditApps.ascx" />
     <Content Include="Areas\WidgetAdmin\Views\ApplicationManage\GetAllApp.aspx" />
@@ -2301,6 +2285,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\AffairsAdmin\Controllers\" />
     <Folder Include="Areas\AffairsAdmin\Models\" />
     <Folder Include="Areas\AffairsAdmin\Views\AffairsGrade\M\" />

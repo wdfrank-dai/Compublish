@@ -18,7 +18,7 @@ namespace WiGetMS.Models.Repository
                      {
                          id = ad.id,
                          unitname = ad.unitname == null ? "" : ad.unitname,
-                         dsname = ad.ApplicationDatasource == null ? "" : ad.ApplicationDatasource1.dsname,//dsname!??!  //(from rs in db.ApplicationDatasource where rs.id ==ad.datasourceid select rs.dsname).FirstOrDefault(),
+                         dsname = ad.ApplicationDatasource == null ? "" : ad.ApplicationDatasource.dsname,//dsname!??!  //(from rs in db.ApplicationDatasource where rs.id ==ad.datasourceid select rs.dsname).FirstOrDefault(),
                          utype = ad.utype == null ? 0 : ad.utype.Value,
                          ucontent = ad.ucontent == null ? "" : ad.ucontent,
                          showstylename = ad.ApplicationUnitsShowStyle == null ? "" : ad.ApplicationUnitsShowStyle.name,
@@ -73,7 +73,7 @@ namespace WiGetMS.Models.Repository
                             id = m.id,
                             unitname = m.unitname,
                             datasourceid = m.datasourceid,
-                            dsname = m.ApplicationDatasource1.dsname,//dsname!??!
+                            dsname = m.ApplicationDatasource.dsname,//dsname!??!
                             utype = m.utype,
                             ucontent = m.ucontent,
                             showstyleid = m.showstyleid,
@@ -238,7 +238,7 @@ namespace WiGetMS.Models.Repository
             result1 = (from u in res
                        select new Units
                        {
-                           NextPage = u.nextpage.Value,
+                           NextPage = u.nextpage == null ? 0 : u.nextpage.Value,
                        }).ToList();
             return result1.FirstOrDefault();
         }
