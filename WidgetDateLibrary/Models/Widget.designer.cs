@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WidgetDate.Models
+namespace WidgetDateLibrary.Models
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -22,7 +22,7 @@ namespace WidgetDate.Models
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="COMPUB")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="COMPUB.MDF")]
 	public partial class WidgetDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -39,9 +39,6 @@ namespace WidgetDate.Models
     partial void InsertApplicationShowType(ApplicationShowType instance);
     partial void UpdateApplicationShowType(ApplicationShowType instance);
     partial void DeleteApplicationShowType(ApplicationShowType instance);
-    partial void InsertApplicationUnits(ApplicationUnits instance);
-    partial void UpdateApplicationUnits(ApplicationUnits instance);
-    partial void DeleteApplicationUnits(ApplicationUnits instance);
     partial void InsertApplicationUnitsCss(ApplicationUnitsCss instance);
     partial void UpdateApplicationUnitsCss(ApplicationUnitsCss instance);
     partial void DeleteApplicationUnitsCss(ApplicationUnitsCss instance);
@@ -51,11 +48,14 @@ namespace WidgetDate.Models
     partial void InsertApplication(Application instance);
     partial void UpdateApplication(Application instance);
     partial void DeleteApplication(Application instance);
+    partial void InsertApplicationUnits(ApplicationUnits instance);
+    partial void UpdateApplicationUnits(ApplicationUnits instance);
+    partial void DeleteApplicationUnits(ApplicationUnits instance);
     #endregion
 		
 		public WidgetDataContext() :
         base(global::System.Configuration.ConfigurationManager.ConnectionStrings["COMPUBConnectionString"].ConnectionString, mappingSource)
-		{
+       {
 			OnCreated();
 		}
 		
@@ -107,14 +107,6 @@ namespace WidgetDate.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<ApplicationUnits> ApplicationUnits
-		{
-			get
-			{
-				return this.GetTable<ApplicationUnits>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ApplicationUnitsCss> ApplicationUnitsCss
 		{
 			get
@@ -136,6 +128,14 @@ namespace WidgetDate.Models
 			get
 			{
 				return this.GetTable<Application>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ApplicationUnits> ApplicationUnits
+		{
+			get
+			{
+				return this.GetTable<ApplicationUnits>();
 			}
 		}
 	}
@@ -950,332 +950,6 @@ namespace WidgetDate.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ApplicationUnits")]
-	public partial class ApplicationUnits : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _unitname;
-		
-		private System.Nullable<int> _datasourceid;
-		
-		private System.Nullable<int> _utype;
-		
-		private string _ucontent;
-		
-		private System.Nullable<int> _showstyleid;
-		
-		private System.Nullable<bool> _iseffictive;
-		
-		private System.Nullable<System.DateTime> _lastmodifytime;
-		
-		private System.Nullable<int> _NextPage;
-		
-		private string _NextPageShowType;
-		
-		private string _res1;
-		
-		private string _res2;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnunitnameChanging(string value);
-    partial void OnunitnameChanged();
-    partial void OndatasourceidChanging(System.Nullable<int> value);
-    partial void OndatasourceidChanged();
-    partial void OnutypeChanging(System.Nullable<int> value);
-    partial void OnutypeChanged();
-    partial void OnucontentChanging(string value);
-    partial void OnucontentChanged();
-    partial void OnshowstyleidChanging(System.Nullable<int> value);
-    partial void OnshowstyleidChanged();
-    partial void OniseffictiveChanging(System.Nullable<bool> value);
-    partial void OniseffictiveChanged();
-    partial void OnlastmodifytimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnlastmodifytimeChanged();
-    partial void OnNextPageChanging(System.Nullable<int> value);
-    partial void OnNextPageChanged();
-    partial void OnNextPageShowTypeChanging(string value);
-    partial void OnNextPageShowTypeChanged();
-    partial void Onres1Changing(string value);
-    partial void Onres1Changed();
-    partial void Onres2Changing(string value);
-    partial void Onres2Changed();
-    #endregion
-		
-		public ApplicationUnits()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitname", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string unitname
-		{
-			get
-			{
-				return this._unitname;
-			}
-			set
-			{
-				if ((this._unitname != value))
-				{
-					this.OnunitnameChanging(value);
-					this.SendPropertyChanging();
-					this._unitname = value;
-					this.SendPropertyChanged("unitname");
-					this.OnunitnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_datasourceid", DbType="Int")]
-		public System.Nullable<int> datasourceid
-		{
-			get
-			{
-				return this._datasourceid;
-			}
-			set
-			{
-				if ((this._datasourceid != value))
-				{
-					this.OndatasourceidChanging(value);
-					this.SendPropertyChanging();
-					this._datasourceid = value;
-					this.SendPropertyChanged("datasourceid");
-					this.OndatasourceidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_utype", DbType="Int")]
-		public System.Nullable<int> utype
-		{
-			get
-			{
-				return this._utype;
-			}
-			set
-			{
-				if ((this._utype != value))
-				{
-					this.OnutypeChanging(value);
-					this.SendPropertyChanging();
-					this._utype = value;
-					this.SendPropertyChanged("utype");
-					this.OnutypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ucontent", DbType="NVarChar(MAX)")]
-		public string ucontent
-		{
-			get
-			{
-				return this._ucontent;
-			}
-			set
-			{
-				if ((this._ucontent != value))
-				{
-					this.OnucontentChanging(value);
-					this.SendPropertyChanging();
-					this._ucontent = value;
-					this.SendPropertyChanged("ucontent");
-					this.OnucontentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_showstyleid", DbType="Int")]
-		public System.Nullable<int> showstyleid
-		{
-			get
-			{
-				return this._showstyleid;
-			}
-			set
-			{
-				if ((this._showstyleid != value))
-				{
-					this.OnshowstyleidChanging(value);
-					this.SendPropertyChanging();
-					this._showstyleid = value;
-					this.SendPropertyChanged("showstyleid");
-					this.OnshowstyleidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iseffictive", DbType="Bit")]
-		public System.Nullable<bool> iseffictive
-		{
-			get
-			{
-				return this._iseffictive;
-			}
-			set
-			{
-				if ((this._iseffictive != value))
-				{
-					this.OniseffictiveChanging(value);
-					this.SendPropertyChanging();
-					this._iseffictive = value;
-					this.SendPropertyChanged("iseffictive");
-					this.OniseffictiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastmodifytime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> lastmodifytime
-		{
-			get
-			{
-				return this._lastmodifytime;
-			}
-			set
-			{
-				if ((this._lastmodifytime != value))
-				{
-					this.OnlastmodifytimeChanging(value);
-					this.SendPropertyChanging();
-					this._lastmodifytime = value;
-					this.SendPropertyChanged("lastmodifytime");
-					this.OnlastmodifytimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextPage", DbType="Int")]
-		public System.Nullable<int> NextPage
-		{
-			get
-			{
-				return this._NextPage;
-			}
-			set
-			{
-				if ((this._NextPage != value))
-				{
-					this.OnNextPageChanging(value);
-					this.SendPropertyChanging();
-					this._NextPage = value;
-					this.SendPropertyChanged("NextPage");
-					this.OnNextPageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextPageShowType", DbType="NVarChar(20)")]
-		public string NextPageShowType
-		{
-			get
-			{
-				return this._NextPageShowType;
-			}
-			set
-			{
-				if ((this._NextPageShowType != value))
-				{
-					this.OnNextPageShowTypeChanging(value);
-					this.SendPropertyChanging();
-					this._NextPageShowType = value;
-					this.SendPropertyChanged("NextPageShowType");
-					this.OnNextPageShowTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_res1", DbType="NChar(10)")]
-		public string res1
-		{
-			get
-			{
-				return this._res1;
-			}
-			set
-			{
-				if ((this._res1 != value))
-				{
-					this.Onres1Changing(value);
-					this.SendPropertyChanging();
-					this._res1 = value;
-					this.SendPropertyChanged("res1");
-					this.Onres1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_res2", DbType="NChar(10)")]
-		public string res2
-		{
-			get
-			{
-				return this._res2;
-			}
-			set
-			{
-				if ((this._res2 != value))
-				{
-					this.Onres2Changing(value);
-					this.SendPropertyChanging();
-					this._res2 = value;
-					this.SendPropertyChanged("res2");
-					this.Onres2Changed();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ApplicationUnitsCss")]
 	public partial class ApplicationUnitsCss : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1893,6 +1567,332 @@ namespace WidgetDate.Models
 					this._IfLoginShow = value;
 					this.SendPropertyChanged("IfLoginShow");
 					this.OnIfLoginShowChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ApplicationUnits")]
+	public partial class ApplicationUnits : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _unitname;
+		
+		private System.Nullable<int> _datasourceid;
+		
+		private System.Nullable<int> _utype;
+		
+		private string _ucontent;
+		
+		private System.Nullable<int> _showstyleid;
+		
+		private System.Nullable<bool> _iseffictive;
+		
+		private System.Nullable<System.DateTime> _lastmodifytime;
+		
+		private System.Nullable<int> _NextPage;
+		
+		private string _NextPageShowType;
+		
+		private string _params;
+		
+		private string _res2;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnunitnameChanging(string value);
+    partial void OnunitnameChanged();
+    partial void OndatasourceidChanging(System.Nullable<int> value);
+    partial void OndatasourceidChanged();
+    partial void OnutypeChanging(System.Nullable<int> value);
+    partial void OnutypeChanged();
+    partial void OnucontentChanging(string value);
+    partial void OnucontentChanged();
+    partial void OnshowstyleidChanging(System.Nullable<int> value);
+    partial void OnshowstyleidChanged();
+    partial void OniseffictiveChanging(System.Nullable<bool> value);
+    partial void OniseffictiveChanged();
+    partial void OnlastmodifytimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnlastmodifytimeChanged();
+    partial void OnNextPageChanging(System.Nullable<int> value);
+    partial void OnNextPageChanged();
+    partial void OnNextPageShowTypeChanging(string value);
+    partial void OnNextPageShowTypeChanged();
+    partial void OntheparamsChanging(string value);
+    partial void OntheparamsChanged();
+    partial void Onres2Changing(string value);
+    partial void Onres2Changed();
+    #endregion
+		
+		public ApplicationUnits()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitname", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string unitname
+		{
+			get
+			{
+				return this._unitname;
+			}
+			set
+			{
+				if ((this._unitname != value))
+				{
+					this.OnunitnameChanging(value);
+					this.SendPropertyChanging();
+					this._unitname = value;
+					this.SendPropertyChanged("unitname");
+					this.OnunitnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_datasourceid", DbType="Int")]
+		public System.Nullable<int> datasourceid
+		{
+			get
+			{
+				return this._datasourceid;
+			}
+			set
+			{
+				if ((this._datasourceid != value))
+				{
+					this.OndatasourceidChanging(value);
+					this.SendPropertyChanging();
+					this._datasourceid = value;
+					this.SendPropertyChanged("datasourceid");
+					this.OndatasourceidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_utype", DbType="Int")]
+		public System.Nullable<int> utype
+		{
+			get
+			{
+				return this._utype;
+			}
+			set
+			{
+				if ((this._utype != value))
+				{
+					this.OnutypeChanging(value);
+					this.SendPropertyChanging();
+					this._utype = value;
+					this.SendPropertyChanged("utype");
+					this.OnutypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ucontent", DbType="NVarChar(MAX)")]
+		public string ucontent
+		{
+			get
+			{
+				return this._ucontent;
+			}
+			set
+			{
+				if ((this._ucontent != value))
+				{
+					this.OnucontentChanging(value);
+					this.SendPropertyChanging();
+					this._ucontent = value;
+					this.SendPropertyChanged("ucontent");
+					this.OnucontentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_showstyleid", DbType="Int")]
+		public System.Nullable<int> showstyleid
+		{
+			get
+			{
+				return this._showstyleid;
+			}
+			set
+			{
+				if ((this._showstyleid != value))
+				{
+					this.OnshowstyleidChanging(value);
+					this.SendPropertyChanging();
+					this._showstyleid = value;
+					this.SendPropertyChanged("showstyleid");
+					this.OnshowstyleidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iseffictive", DbType="Bit")]
+		public System.Nullable<bool> iseffictive
+		{
+			get
+			{
+				return this._iseffictive;
+			}
+			set
+			{
+				if ((this._iseffictive != value))
+				{
+					this.OniseffictiveChanging(value);
+					this.SendPropertyChanging();
+					this._iseffictive = value;
+					this.SendPropertyChanged("iseffictive");
+					this.OniseffictiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastmodifytime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> lastmodifytime
+		{
+			get
+			{
+				return this._lastmodifytime;
+			}
+			set
+			{
+				if ((this._lastmodifytime != value))
+				{
+					this.OnlastmodifytimeChanging(value);
+					this.SendPropertyChanging();
+					this._lastmodifytime = value;
+					this.SendPropertyChanged("lastmodifytime");
+					this.OnlastmodifytimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextPage", DbType="Int")]
+		public System.Nullable<int> NextPage
+		{
+			get
+			{
+				return this._NextPage;
+			}
+			set
+			{
+				if ((this._NextPage != value))
+				{
+					this.OnNextPageChanging(value);
+					this.SendPropertyChanging();
+					this._NextPage = value;
+					this.SendPropertyChanged("NextPage");
+					this.OnNextPageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextPageShowType", DbType="NVarChar(20)")]
+		public string NextPageShowType
+		{
+			get
+			{
+				return this._NextPageShowType;
+			}
+			set
+			{
+				if ((this._NextPageShowType != value))
+				{
+					this.OnNextPageShowTypeChanging(value);
+					this.SendPropertyChanging();
+					this._NextPageShowType = value;
+					this.SendPropertyChanged("NextPageShowType");
+					this.OnNextPageShowTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="params", Storage="_params", DbType="NVarChar(100)")]
+		public string theparams
+		{
+			get
+			{
+				return this._params;
+			}
+			set
+			{
+				if ((this._params != value))
+				{
+					this.OntheparamsChanging(value);
+					this.SendPropertyChanging();
+					this._params = value;
+					this.SendPropertyChanged("theparams");
+					this.OntheparamsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_res2", DbType="NChar(10)")]
+		public string res2
+		{
+			get
+			{
+				return this._res2;
+			}
+			set
+			{
+				if ((this._res2 != value))
+				{
+					this.Onres2Changing(value);
+					this.SendPropertyChanging();
+					this._res2 = value;
+					this.SendPropertyChanged("res2");
+					this.Onres2Changed();
 				}
 			}
 		}

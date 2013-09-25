@@ -74,7 +74,8 @@ namespace WiGetMS.Models
             //{
             //    var result = resulttemp.ToList();
             //}
-            var resulttemp = (from ad in db.Content
+            var contents = db.Content.ToList();
+            var resulttemp = (from ad in contents
                            select new ContentsModel
                           {
                               ID = ad.id,
@@ -94,8 +95,8 @@ namespace WiGetMS.Models
                               Passed = new ContentsForUsersRepository().GetPassedList(ad.id),
                               Summary = ad.summary == null ? "" : ad.summary,
                               Suggestion = ad.suggestion == null ? "" : ad.suggestion,
-                          }).AsQueryable();
-            var result = resulttemp.Where(predicatestr).ToList();
+                          });
+            var result = resulttemp.AsQueryable().Where(predicatestr).ToList();
             if (listnum != 0 && listnum <= result.Count && startitemid < result.Count)
                 return result.GetRange(startitemid, listnum);
             else

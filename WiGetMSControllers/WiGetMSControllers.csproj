@@ -46,7 +46,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Telerik.Web.Mvc">
-      <HintPath>..\WiGetMS\bin\Telerik.Web.Mvc.dll</HintPath>
+      <HintPath>..\ComPublishWeb\bin\Telerik.Web.Mvc.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

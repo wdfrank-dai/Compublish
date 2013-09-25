@@ -58,5 +58,16 @@ namespace WidgetDateLibrary.Properties {
                 return ((string)(this["COMPUBConnectionString2"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=210.42.159.78;Initial Catalog=COMPUB.MDF;Persist Security Info=True;U" +
+            "ser ID=developer;Password=de@2013")]
+        public string COMPUB_MDFConnectionString {
+            get {
+                return ((string)(this["COMPUB_MDFConnectionString"]));
+            }
+        }
     }
 }
