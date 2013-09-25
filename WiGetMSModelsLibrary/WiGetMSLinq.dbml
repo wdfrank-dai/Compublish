@@ -115,7 +115,7 @@
       <Column Name="lastmodifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="NextPage" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="NextPageShowType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="params" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="params" Member="theparams" Storage="_params" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Association Name="ApplicationUnits_ApplicationUnitsCss" Member="ApplicationUnitsCss" ThisKey="id" OtherKey="unitsid" Type="ApplicationUnitsCss" />
       <Association Name="ApplicationDatasource_ApplicationUnits" Member="ApplicationDatasource" ThisKey="datasourceid" OtherKey="id" Type="ApplicationDatasource" IsForeignKey="true" />

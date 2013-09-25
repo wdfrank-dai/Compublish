@@ -74,7 +74,8 @@ namespace WiGetMS.Models
             //{
             //    var result = resulttemp.ToList();
             //}
-            var resulttemp = (from ad in db.Content
+            var dbtemp = db.Content.ToList();
+            var resulttemp = (from ad in dbtemp
                            select new ContentsModel
                           {
                               ID = ad.id,

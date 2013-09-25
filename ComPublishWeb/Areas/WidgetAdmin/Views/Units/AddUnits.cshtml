@@ -24,7 +24,14 @@
 		   @Html.DropDownList("datasourceid", ViewData["datasourceid"] as SelectList, "--请选择--", new { rows = "8", style = "width:183px" })
           </td>
 		</tr>
-
+        <tr>
+		<td class="PersMS-table-4cols-1">
+			@Html.LabelFor(model => model.theparams):  
+		</td>
+		<td class="PersMS-table-4cols-3">
+			@Html.EditorFor(model => model.theparams)
+        </td>
+	   </tr>
 		<tr>
 		<td class="PersMS-table-4cols-1">
            @Html.LabelFor(model => model.NextPage): 

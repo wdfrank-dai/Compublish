@@ -131,31 +131,25 @@ namespace System.Web.Mvc.Html
                         return MvcHtmlString.Create("未找到AppUnits控件！");
                     }
                     //根据参数获取Json数据
+                    var theparamset = appunits.theparams != null ? appunits.theparams.Split(',') : "".Split(',');
                     var appDatasource = ar.GetApplicationDatasourceByID(appunits.datasourceid.Value);
                     string datasurl = appDatasource.dsurl;
+                    var paramset = appDatasource.dsparams != null ? appDatasource.dsparams.Split(',') : "".Split(',');
 
-                    //string thedatas = "";
-                    #region 拼接参数部分
-                    if (theparams != null)
+                    if (theparamset.Count() != paramset.Count())
+                        return MvcHtmlString.Create("内容数据读取失败，错误代码102，请与系统管理员联系！");
+
+                    string paras = "";
+                    for (int i = 0; i < theparamset.Count(); i++)
                     {
-                        string[] theparamsArre = theparams.Split(',');
-                        string theparamsStr = "";
-                        foreach(string s in theparamsArre)
-                        {
-                            if (appDatasource.dataitems == s.Substring(0, appDatasource.dataitems.Length))
-                                if (theparamsStr == "")
-                                    theparamsStr = s;
-                                else
-                                    theparamsStr = "&" + s;
-                        }
-
-                        datasurl = datasurl + "?" + theparamsStr;
-
-
+                        if (i != 0)
+                            paras = paras + "&";
+                        else
+                            paras = "?";
+                        paras = paras + paramset[i] + "=" + theparamset[i];
                     }
-                    #endregion
 
-                    string thedatas = jr.GetUrlJsonByUrl(datasurl);
+                    string thedatas = jr.GetUrlJsonByUrl(datasurl+paras);
                     if (thedatas == "")
                     {
                         return MvcHtmlString.Create("读取控件的Json数据失败！");

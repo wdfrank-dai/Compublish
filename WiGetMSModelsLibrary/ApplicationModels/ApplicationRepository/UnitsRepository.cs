@@ -19,6 +19,7 @@ namespace WiGetMS.Models.Repository
                          id = ad.id,
                          unitname = ad.unitname == null ? "" : ad.unitname,
                          dsname = ad.ApplicationDatasource == null ? "" : ad.ApplicationDatasource.dsname,//dsname!??!  //(from rs in db.ApplicationDatasource where rs.id ==ad.datasourceid select rs.dsname).FirstOrDefault(),
+                         theparams = ad.theparams,
                          utype = ad.utype == null ? 0 : ad.utype.Value,
                          ucontent = ad.ucontent == null ? "" : ad.ucontent,
                          showstylename = ad.ApplicationUnitsShowStyle == null ? "" : ad.ApplicationUnitsShowStyle.name,
@@ -108,6 +109,8 @@ namespace WiGetMS.Models.Repository
             {
                 if (data.datasourceid != 0)
                     datasource.datasourceid = data.datasourceid;
+                datasource.theparams = data.theparams;
+
                 if (data.showstyleid != 0)
                     datasource.showstyleid = data.showstyleid;
                 if (data.NextPage != 0)
@@ -150,6 +153,7 @@ namespace WiGetMS.Models.Repository
                               id = user.id,
                               unitname = user.unitname,
                               datasourceid = user.datasourceid.Value,
+                              theparams = user.theparams,
                               utype = user.utype.Value,
                               ucontent = user.ucontent,
                               showstyleid = user.showstyleid.Value,
@@ -201,8 +205,8 @@ namespace WiGetMS.Models.Repository
             result1 = (from u in res
                        select new Units
                        {
-                           datasourceid = u.datesourceid.Value,
-                           showstyleid = u.showstyleid.Value,
+                           datasourceid = u.datesourceid!=null ?u.datesourceid.Value:0,
+                           showstyleid = u.showstyleid!=null ?u.showstyleid.Value : 0,
                        }).ToList();
             return result1.FirstOrDefault(); 
         }

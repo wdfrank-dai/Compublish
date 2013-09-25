@@ -27,6 +27,7 @@
               columns.Bound(c => c.nextpageshowtype).Width(120);
               columns.Bound(c => c.dsname).Width(180);
               columns.Bound(c => c.utype).Width(100);
+              columns.Bound(c => c.theparams).Width(100);
               columns.Bound(c => c.ucontent).Width(270);
               columns.Bound(c => c.showstylename).Width(130);
               columns.Bound(c => c.iseffictive).ClientTemplate("<input type='text' readonly='readonly'    name='iseffictive' <#= iseffictive?  \"value='是'  style=' width:60px;  text-align:center; border-style:none; border-width:0px; color:Blue ;' \" : \"value='否'  style=' width:60px; text-align:center;  border-style:none; border-width:0px; color:Red ;'\" #> />").Width(90);

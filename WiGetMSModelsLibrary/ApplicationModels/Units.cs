@@ -22,6 +22,9 @@ namespace WiGetMS.Models
         [DisplayName("数据源id")]
         public int datasourceid { get; set; }
 
+        [DisplayName("数据获取参数")]
+        public string theparams { get; set; }
+
         [DisplayName("数据源名称")]
         public string dsname { get; set; }
 
@@ -60,9 +63,6 @@ namespace WiGetMS.Models
         [DisplayName("Css文件")]
         public string Cssname { get; set; }
          
-        [DisplayName("res1")]
-        public string res1 { get; set; }
-
          
         [DisplayName("res2")]
         public string res2 { get; set; }
