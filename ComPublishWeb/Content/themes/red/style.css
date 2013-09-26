@@ -31,7 +31,8 @@ background-position: -490px -20px;
     
     }
 /*²Ëµ¥±³¾°*/
-#main-navigation {
+#main-navigation 
+{
   background-image:url(/Images/tbg1.png);
   -webkit-box-shadow:2px 1px 6px #000;-moz-box-shadow:2px 1px 6px #000;padding:4px 10px;
   border-bottom: orange 1px dashed;

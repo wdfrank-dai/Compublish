@@ -189,97 +189,55 @@ namespace System.Web.Mvc.Html
                     #region 控件分类型显示部分,使用IF
                     var AppUnitsShowType = ar.GetAllApplicationUnitsShowType();
                     //"SimpleTextLable"
-                    if (datemodel.DataSourceType == AppUnitsShowType[0].name)
+                    var showtypetemp = AppUnitsShowType.Where(rep => rep.name == datemodel.DataSourceType).FirstOrDefault();
+                    int showtypeid = 0;
+                    if (showtypetemp != null)
+                        showtypeid = showtypetemp.id;                    
+                    try
                     {
-                        try
+                        switch (showtypeid)
                         {
-                            var datalist = jsonSerializer.Deserialize<SimpleTextLableModel>(datemodel.Datas);
-                            addstr = new WidgetDate.Class.ControlTemplate().CreateLable(datemodel.DataSourceName, "SimpleTextLable", datalist);
-                        }
-                        catch
-                        {
-                            return MvcHtmlString.Create("无法解析的第三方数据格式！");
+                            case 0:
+                                addstr = "显示模式有误";
+                                break;
+                            case 1://"SimpleTextLable": 
+                                var datalist = jsonSerializer.Deserialize<SimpleTextLableModel>(datemodel.Datas);
+                                addstr = new WidgetDate.Class.ControlTemplate().CreateLable(datemodel.DataSourceName, "SimpleTextLable", datalist);
+                                break;
+                            case 2://"HtmlLable": 
+                                var htmllabledatalist = jsonSerializer.Deserialize<HtmlLableModel>(datemodel.Datas);
+                                addstr = htmllabledatalist.LableHtml;
+                                break;
+                            case 3://DataList
+                                var DataListdatalist = jsonSerializer.Deserialize<List<DataListModel>>(datemodel.Datas);
+                                addstr = new WidgetDate.Class.ControlTemplate().CreateDataList(datemodel.DataSourceName, "DataList", DataListdatalist);
+                                break;
+                            case 4://NewList
+                                var NewListdatalist = jsonSerializer.Deserialize<List<NewsListModel>>(datemodel.Datas);
+                                addstr = new WidgetDate.Class.ControlTemplate().CreateNewList(datemodel.DataSourceName, "NewsList", appunits.NextPageShowType, NewListdatalist, appunits.NextPage.Value);
+                                break;
+                            case 5://NewsContent
+                                var NewsContentdatalist = jsonSerializer.Deserialize<NewsContentModel>(datemodel.Datas);
+                                addstr = new WidgetDate.Class.ControlTemplate().CreateNewsContent(datemodel.DataSourceName, "NewsContent", NewsContentdatalist);
+                                break;
+                            case 6://HtmForm
+                                var HtmFormdatalist = jsonSerializer.Deserialize<HtmlFormModel>(datemodel.Datas);
+                                addstr = HtmFormdatalist.FormHtml;
+                                break;
+                            case 7://ImgNewList
+                                var ImgNewListdatalist = jsonSerializer.Deserialize<List<ImgNewsListModel>>(datemodel.Datas);
+                                addstr = new WidgetDate.Class.ControlTemplate().CreateImgNewList(datemodel.DataSourceName, "ImgNewsList", appunits.NextPageShowType, ImgNewListdatalist, appunits.NextPage.Value);
+                                break;
+                            default:
+                                break;
                         }
                     }
-                    //"HtmlLable":  
-                    if (datemodel.DataSourceType == AppUnitsShowType[1].name)
+                    catch
                     {
-                        try
-                        {
-                            var datalist = jsonSerializer.Deserialize<HtmlLableModel>(datemodel.Datas);
-                            addstr = datalist.LableHtml;
-                        }
-                        catch
-                        {
-                            return MvcHtmlString.Create("无法解析的第三方数据格式！");
-                        }
-                        break;
+                        return MvcHtmlString.Create("无法解析的第三方数据格式！");
                     }
-                    //DataList
-                    if (datemodel.DataSourceType == AppUnitsShowType[2].name)
-                    {
-                        try
-                        {
-                            var datalist = jsonSerializer.Deserialize<List<DataListModel>>(datemodel.Datas);
-                            addstr = new WidgetDate.Class.ControlTemplate().CreateDataList(datemodel.DataSourceName, "DataList", datalist);
-                        }
-                        catch
-                        {
-                            return MvcHtmlString.Create("无法解析的第三方数据格式！");
-                        }
-                    }
-                    //NewList
-                    if (datemodel.DataSourceType == AppUnitsShowType[3].name)
-                    {
-                        try
-                        {
-                            var datalist = jsonSerializer.Deserialize<List<NewsListModel>>(datemodel.Datas);
-                            addstr = new WidgetDate.Class.ControlTemplate().CreateNewList(datemodel.DataSourceName, "NewsList", appunits.NextPageShowType, datalist, appunits.NextPage.Value);
-                        }
-                        catch
-                        {
-                            return MvcHtmlString.Create("无法解析的第三方数据格式！");
-                        }
-                    }
-                    //"NewsContent":  
-                    if (datemodel.DataSourceType == AppUnitsShowType[4].name)
-                    {
-                        try
-                        {
-                            var datalist = jsonSerializer.Deserialize<NewsContentModel>(datemodel.Datas);
-                            addstr = new WidgetDate.Class.ControlTemplate().CreateNewsContent(datemodel.DataSourceName, "NewsContent", datalist);
-                        }
-                        catch
-                        {
-                            return MvcHtmlString.Create("无法解析的第三方数据格式！");
-                        }
-                    }
-                    //HtmForm
-                    if (datemodel.DataSourceType == AppUnitsShowType[5].name)
-                    {
-                        try
-                        {
-                            var datalist = jsonSerializer.Deserialize<HtmlFormModel>(datemodel.Datas);
-                            addstr = datalist.FormHtml;
-                        }
-                        catch
-                        {
-                            return MvcHtmlString.Create("无法解析的第三方数据格式！");
-                        }
-                    }
-                    //ImgNewList
-                    if (datemodel.DataSourceType == AppUnitsShowType[6].name)
-                    {
-                        try
-                        {
-                            var datalist = jsonSerializer.Deserialize<List<ImgNewsListModel>>(datemodel.Datas);
-                            addstr = new WidgetDate.Class.ControlTemplate().CreateImgNewList(datemodel.DataSourceName, "ImgNewsList", appunits.NextPageShowType, datalist, appunits.NextPage.Value);
-                        }
-                        catch
-                        {
-                            return MvcHtmlString.Create("无法解析的第三方数据格式！");
-                        }
-                    }
+
+
                     #endregion
                     #region 控件分类型显示部分，使用Swith
                     //switch (datemodel.DataSourceType)

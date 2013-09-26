@@ -69,10 +69,15 @@ namespace WidgetDate.Class
                         
                     }else
                     {
-                        if (showtype == "ShowDataDetail")
-                            str.Append("<a href=/WidgetDateView/Show/ShowDataDetail?pageid=" + nextpageid + "&theparams=id=" + m.NewsId + " target='_blank' title='" + m.NewsTitle + "'>" + m.NewsTitle + "</a>");
-                        if (showtype == "OnWindow")
-                            str.Append("<a href='javascript:void(0);' title='" + m.NewsTitle + "' onclick=OnWindows(" + nextpageid + ",'id=" + m.NewsId + "')> " + m.NewsTitle + "</a>");
+                        if (m.NewsUrl == null || m.NewsUrl == "")
+                        {
+                            if (showtype == "ShowDataDetail")
+                                str.Append("<a href=/WidgetDateView/Show/ShowDataDetail?pageid=" + nextpageid + "&theparams=id=" + m.NewsId + " target='_blank' title='" + m.NewsTitle + "'>" + m.NewsTitle + "</a>");
+                            if (showtype == "OnWindow")
+                                str.Append("<a href='javascript:void(0);' title='" + m.NewsTitle + "' onclick=OnWindows(" + nextpageid + ",'id=" + m.NewsId + "')> " + m.NewsTitle + "</a>");
+                        }
+                        else
+                            str.Append("<a href=" + m.NewsUrl + " target='_blank' title='" + m.NewsTitle + "'>" + m.NewsTitle + "</a>");
                     }
                     str.Append("<span>" + m.NewsDataTime + "</span>");
                     str.Append("</p>");
