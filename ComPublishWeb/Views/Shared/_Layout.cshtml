@@ -37,7 +37,7 @@
             <div id="main">
                 @RenderBody()                
             </div>
-            @Html.Action("_SideBar","Home")
+            @Html.Action("_SideBar", "Home", new { area = "" })
         </div>
         @Html.Partial("_Footer")
     </div>

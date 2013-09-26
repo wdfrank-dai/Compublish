@@ -63,17 +63,7 @@ namespace WiGetMS.Models
                         predicatestr = predicatestr+ " || Tags.Contains(\"" + mtemp[i] + "\")";
                 }
             }
-            //{
-            //    var result = resulttemp.Where(m => m.Tags.Contains(musthaskeywords) || m.Tags.Contains(maybehaskeywords));
-            //}
-            //else if (maybehaskeywords == null && musthaskeywords != null)
-            //{
-            //    var result = resulttemp.Where(m => m.Tags.Contains(musthaskeywords));
-            //}
-            //else
-            //{
-            //    var result = resulttemp.ToList();
-            //}
+
             var dbtemp = db.Content.ToList();
             var resulttemp = (from ad in dbtemp
                            select new ContentsModel
@@ -103,14 +93,13 @@ namespace WiGetMS.Models
                 return result;
         }
 
-        public ContentsModel PassedForContents(int confid)
+        public ContentsModel PassedForContents(int nid)
         {
             IList<ContentsModel> result;
             WiGetMSLinqDataContext db = new WiGetMSLinqDataContext();
-            //var rep = new WiGetMSLinqDataContext().Content.Where(c => c.)
-            var temp = (from ad in db.Content
-                        where ad.id == confid
-                        select new
+            result = (from ad in db.Content
+                        where ad.id == nid
+                        select new ContentsModel
                         {
                             ID = ad.id,
                             Title = ad.title == null ? "" : ad.title,
@@ -120,7 +109,7 @@ namespace WiGetMS.Models
                             Hotspot = ad.hotspot == null ? false : ad.hotspot.Value,
                             Tags = ad.tags == null ? "" : ad.tags,
                             Sorlink = ad.sorlink == null ? "" : ad.sorlink,
-                            Createtime = Convert.ToDateTime(ad.createtime),
+                            Createtime = ad.createtime.ToString(),
                             Creator = ad.creator == null ? "" : ad.creator,
                             Operator = ad.@operator == null ? "" : ad.@operator,
                             //Lastmodifytime = ad.lastmodifytime.HasValue ? ad.lastmodifytime.Value.ToString("yyyy-MM-dd HH:mm") : "",
@@ -129,26 +118,7 @@ namespace WiGetMS.Models
                             Passed = ad.passed == null ? "0" : ad.passed,
                             Summary = ad.summary == null ? "" : ad.summary,
                         }).ToList();
-            result = (from ad in temp
-                      select new ContentsModel
-                      {
-                          ID = ad.ID,
-                          Title = ad.Title,
-                          T_content = ad.T_content,
-                          Priority = ad.Priority,
-                          Stick = ad.Stick,
-                          Hotspot = ad.Hotspot,
-                          Tags = ad.Tags,
-                          Sorlink = ad.Sorlink,
-                          Createtime = Convert.ToDateTime(ad.Createtime).ToString(),
-                          Creator = ad.Creator,
-                          Operator = ad.Operator,
-                          //Lastmodifytime = ad.Lastmodifytime,
-                          Verifier = ad.Verifier,
-                          //Verifytime = ad.Verifytime,
-                          Passed = ad.Passed,
-                          Summary = ad.Summary,
-                      }).ToList();
+
             return result.FirstOrDefault();
         }
 

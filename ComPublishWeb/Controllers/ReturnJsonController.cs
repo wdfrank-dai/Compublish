@@ -89,10 +89,12 @@ namespace ComPublishWeb.Controllers
             theresult.DataSourceType = "NewsContent";
             theresult.DataSourceName = "NewsContent1";
             NewsContentModel re = new NewsContentModel();
-            re.NewsTitle = "转发－－关于2014年度省教育厅人文社会科学研究项目（专项任务项目）申报工作的通知";
-            re.NewsCollateralTitle = "2013-7-15";
-            re.NewsText = "是减肥了奇偶问卷理科的世界观了十几个了开始就耽搁了几十个，是减肥了奇偶问卷理科的世界观了十几个了开始就耽搁了几十个，是减肥了奇偶问卷理科的世界观了十几个了开始就耽搁了几十个，是减肥了奇偶问卷理科的世界观了十几个了开始就耽搁了几十个，";
-            re.NewsEnd = "作者：XXXX";
+            var rep = new ContentsRepository();
+            var thedata = rep.PassedForContents(id);
+            re.NewsTitle = thedata.Title;
+            re.NewsCollateralTitle = thedata.Createtime;
+            re.NewsText = thedata.T_content;
+            re.NewsEnd = "作者："+thedata.Creator;
 
        
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
@@ -189,12 +191,30 @@ namespace ComPublishWeb.Controllers
 
         public JsonResult getAnnounceList(int startitemid, int listnum)
         {
+            var theresult = getContentList("公告", "通知", startitemid, listnum);
+            return Json(theresult, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult getPolicyList(int startitemid, int listnum)
+        {
+            var theresult = getContentList("国家政策法规", null, startitemid, listnum);
+            return Json(theresult, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult getRegulationsList(int startitemid, int listnum)
+        {
+            var theresult = getContentList("校内规章制度", null, startitemid, listnum);
+            return Json(theresult, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult getContentList(string musthaskeywords, string maybehaskeywords, int startitemid, int listnum)
+        {
             ContentsRepository rp = new ContentsRepository();
             GetDataSourceModel theresult = new GetDataSourceModel();
             theresult.DataSourceType = "NewsList";
-            theresult.DataSourceName = "通知公告";
+            theresult.DataSourceName = musthaskeywords;
 
-            var res = rp.GetContentListByTag("公告","通知", startitemid, listnum);
+            var res = rp.GetContentListByTag(musthaskeywords, maybehaskeywords, startitemid, listnum);
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
             List<NewsListModel> listresult = new List<NewsListModel>();
             for (int i = 0; i < res.Count; i++)
@@ -208,31 +228,18 @@ namespace ComPublishWeb.Controllers
                 temp.NewsDataTime = datatemp.Createtime;
                 listresult.Add(temp);
             }
-            theresult.Datas = jsonSerializer.Serialize(listresult);
-
-            return Json(theresult, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult getPolicyList(int startitemid, int listnum)
-        {
-            ContentsRepository rp = new ContentsRepository();
-            GetDataSourceModel theresult = new GetDataSourceModel();
-            theresult.DataSourceType = "NewsList";
-            theresult.DataSourceName = "国家政策法规";
-
-            var res = rp.GetContentListByTag("国家政策法规", null, startitemid, listnum);
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            List<NewsListModel> listresult = new List<NewsListModel>();
-            for (int i = 0; i < res.Count; i++)
+            if (res.Count < listnum)
             {
-                NewsListModel temp = new NewsListModel();
-                var datatemp = res.ElementAt(i);
-                temp.NewsId = datatemp.ID.ToString();
-                temp.NewsTitle = datatemp.Title;
-                temp.NewsIntro = datatemp.Summary;
-                temp.NewsUrl = datatemp.Sorlink;
-                temp.NewsDataTime = datatemp.Createtime;
-                listresult.Add(temp);
+                for (int i = res.Count; i < listnum; i++)
+                {
+                    NewsListModel temp = new NewsListModel();
+                    temp.NewsId = "";
+                    temp.NewsTitle = "";
+                    temp.NewsIntro = "";
+                    temp.NewsUrl = "";
+                    temp.NewsDataTime = "";
+                    listresult.Add(temp);
+                }
             }
             theresult.Datas = jsonSerializer.Serialize(listresult);
 

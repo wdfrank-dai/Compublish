@@ -130,26 +130,33 @@ namespace System.Web.Mvc.Html
                     {
                         return MvcHtmlString.Create("未找到AppUnits控件！");
                     }
-                    //根据参数获取Json数据
-                    var theparamset = appunits.theparams != null ? appunits.theparams.Split(',') : "".Split(',');
                     var appDatasource = ar.GetApplicationDatasourceByID(appunits.datasourceid.Value);
                     string datasurl = appDatasource.dsurl;
-                    var paramset = appDatasource.dsparams != null ? appDatasource.dsparams.Split(',') : "".Split(',');
-
-                    if (theparamset.Count() != paramset.Count())
-                        return MvcHtmlString.Create("内容数据读取失败，错误代码102，请与系统管理员联系！");
-
-                    string paras = "";
-                    for (int i = 0; i < theparamset.Count(); i++)
+                    if (theparams == null || theparams == "")
                     {
-                        if (i != 0)
-                            paras = paras + "&";
-                        else
-                            paras = "?";
-                        paras = paras + paramset[i] + "=" + theparamset[i];
-                    }
+                        //根据参数获取Json数据
+                        var theparamset = appunits.theparams != null ? appunits.theparams.Split(',') : "".Split(',');
 
-                    string thedatas = jr.GetUrlJsonByUrl(datasurl+paras);
+                        var paramset = appDatasource.dsparams != null ? appDatasource.dsparams.Split(',') : "".Split(',');
+
+                        if (theparamset.Count() != paramset.Count())
+                            return MvcHtmlString.Create("内容数据读取失败，错误代码102，请与系统管理员联系！");
+
+                        string paras = "";
+                        for (int i = 0; i < theparamset.Count(); i++)
+                        {
+                            if (i != 0)
+                                paras = paras + "&";
+                            else
+                                paras = "?";
+                            paras = paras + paramset[i] + "=" + theparamset[i];
+                        }
+                        theparams = paras;
+                    }
+                    else
+                        theparams = "?" + theparams;
+
+                    string thedatas = jr.GetUrlJsonByUrl(datasurl + theparams);
                     if (thedatas == "")
                     {
                         return MvcHtmlString.Create("读取控件的Json数据失败！");

@@ -33,9 +33,12 @@ body {font-size:0.8em; font-family:Arial,Verdana,Sans-Serif; }
 .widgetpic_content { text-indent:25px; border-top:1px #c4c4c4 dashed;}
 
 /*newslist*/
-.Newslist_a { margin: 5px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: inline-block;width: 75%;}
-.Newslist_img {height:12px;width:32px; float:left; margin-top: 2px;margin-right: 5px;}
-.Newslist_time { float:right;  margin-right:5px; line-height:1.8;}
+.NewsList { font-size:14px;}
+.NewsList p {height:20px; margin-top:5px; margin-left:5px; margin-right:5px;}
+.NewsList span { float:right}
+.NewsList_a { margin: 5px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: inline-block;width: 75%;}
+.NewsList_img {height:14px;width:32px; float:left; margin-top: 2px;margin-right: 5px;}
+.NewsList_time { float:right;  margin-right:5px; line-height:1.8;}
 
 /*lable样式*/
 .lable_a { line-height:1.8; margin: 5px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: inline-block; color:#495a76; width:99%; border-bottom:1px #c7c7c7 dashed;}
@@ -165,9 +168,7 @@ h2
 h3                   
 {
     font-size: 18px;
-    margin: 10px 0;
-    font-weight: normal;
-    font-family:微软雅黑;
+    font:bold 18px/24px "微软雅黑",tahoma;   
 }
 h4         
 {
