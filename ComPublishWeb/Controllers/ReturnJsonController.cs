@@ -192,19 +192,19 @@ namespace ComPublishWeb.Controllers
         public JsonResult getAnnounceList(int startitemid, int listnum)
         {
             var theresult = getContentList("公告", "通知", startitemid, listnum);
-            return Json(theresult, JsonRequestBehavior.AllowGet);
+            return theresult;
         }
 
         public JsonResult getPolicyList(int startitemid, int listnum)
         {
             var theresult = getContentList("国家政策法规", null, startitemid, listnum);
-            return Json(theresult, JsonRequestBehavior.AllowGet);
+            return theresult;
         }
 
         public JsonResult getRegulationsList(int startitemid, int listnum)
         {
             var theresult = getContentList("校内规章制度", null, startitemid, listnum);
-            return Json(theresult, JsonRequestBehavior.AllowGet);
+            return theresult;
         }
 
         public JsonResult getContentList(string musthaskeywords, string maybehaskeywords, int startitemid, int listnum)
