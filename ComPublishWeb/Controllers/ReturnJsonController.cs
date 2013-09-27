@@ -207,6 +207,12 @@ namespace ComPublishWeb.Controllers
             return theresult;
         }
 
+        public JsonResult getRegulationsList(int startitemid, int listnum)
+        {
+            var theresult = getContentList("办事流程", null, startitemid, listnum);
+            return theresult;
+        }
+
         public JsonResult getContentList(string musthaskeywords, string maybehaskeywords, int startitemid, int listnum)
         {
             ContentsRepository rp = new ContentsRepository();

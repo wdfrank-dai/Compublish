@@ -24,6 +24,11 @@
 
                     }
                 </ul>
+                <ul id="columnimg" class="column0">
+                <li class="widget my-widget">
+                <div class="widget-content" style="padding:0px"><img src="../../Content/ContentImg/公正廉洁.png"  /></div>
+                </li>
+                </ul>
                 @{ var mList = Model.Where(o => o.ShowType == 0 && o.FirstPageId != 0).ToList(); }
                 <ul id="column1" class="column">
                     @for (int i = 0; i < mList.Count(); i += 2)
