@@ -203,15 +203,15 @@ namespace ComPublishWeb.Controllers
 
         public JsonResult getRegulationsList(int startitemid, int listnum)
         {
-            var theresult = getContentList("校内规章制度", null, startitemid, listnum);
+            var theresult = getContentList("校内规章", null, startitemid, listnum);
             return theresult;
         }
 
-        public JsonResult getRegulationsList(int startitemid, int listnum)
-        {
-            var theresult = getContentList("办事流程", null, startitemid, listnum);
-            return theresult;
-        }
+        //public JsonResult getRegulationsList(int startitemid, int listnum)
+        //{
+        //    var theresult = getContentList("办事流程", null, startitemid, listnum);
+        //    return theresult;
+        //}
 
         public JsonResult getContentList(string musthaskeywords, string maybehaskeywords, int startitemid, int listnum)
         {

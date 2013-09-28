@@ -41,7 +41,7 @@ namespace WiGetMS.Models
             WiGetMSLinqDataContext db = new WiGetMSLinqDataContext();
             var rep = new WiGetMSLinqDataContext().Content.ToList();
             string predicatestr = "";
-            if (musthaskeywords != null)
+            if (musthaskeywords != null && musthaskeywords != "")
             {
                 var mtemp = musthaskeywords.Split(',');
                 for (int i = 0; i < mtemp.Count();i++ )
@@ -52,7 +52,7 @@ namespace WiGetMS.Models
                         predicatestr = "Tags.Contains(\"" + mtemp[i] + "\")";
                 }
             }
-            if (maybehaskeywords != null)
+            if (maybehaskeywords != null && maybehaskeywords != "")
             {
                 var mtemp = maybehaskeywords.Split(',');
                 for (int i = 0; i < mtemp.Count(); i++)

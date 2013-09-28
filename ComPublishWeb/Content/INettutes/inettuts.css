@@ -7,8 +7,8 @@ a { text-decoration:none;}
 
 h3
 {
-    font-family:Î¢ÈíÑÅºÚ;
-    }
+        font-family:"Î¢ÈíÑÅºÚ";
+}
 /* Colors */
 .color-yellow {background:#f2bc00;}
 .color-red    {background:#dd0000;}
@@ -41,10 +41,9 @@ h3
 	
 .h3title
 {
-    color:#78401b;
-    font-family:Î¢ÈíÑÅºÚ;
-    
-    }
+    color:#78401b;    
+    font-family:"Î¢ÈíÑÅºÚ";
+ }
 /* End Colors */
 
 /* Head section */
@@ -72,8 +71,8 @@ h3
 #columns .column {
     float: left;
     width: 50%;
-		/* Min-height: */
-		min-height: 400px;
+		/* Min-height: 
+		min-height: 400px;*/
 		height: auto !important; 
 		height: 400px;
 }
@@ -82,10 +81,10 @@ h3
 /*	#columns #column1 { background: url(img/column-bg-left.png) no-repeat right top; }*/
 /*	#columns #column3 { background: url(img/column-bg-right.png) no-repeat left top; }*/
 	
-#columns #column1 .widget { margin: 10px 10px 0 10px; }
+#columns #column1 .widget { margin: 10px 10px 10px 10px; }
 #columns #column3 .widget { margin: 10px 15px 0 25px; }
 #columns .widget {
-    margin: 10px 10px 0 10px;
+    margin: 10px 10px 0px 10px;
     padding: 2px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;

@@ -41,9 +41,10 @@ background-position: -490px -20px;
 #sidebar h3 {  
   background-image:url(/Images/tbg1.png);
   background-position: -80px 0;
+  font: normal 18px "Î¢ÈíÑÅºÚ",tahoma; 
   color: #FFF;
   border-bottom:rgb(255, 137, 10) 5px solid;
-  -webkit-box-shadow:1px 1px 1px #000;-moz-box-shadow:1px 1px 1px #000;padding:4px 10px;
+  -webkit-box-shadow:1px 1px 1px #000;-moz-box-shadow:1px 1px 1px #000;padding:5px 10px;
 }
 
 

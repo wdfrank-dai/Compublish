@@ -34,7 +34,7 @@ body {font-size:0.8em; font-family:Arial,Verdana,Sans-Serif; }
 
 /*newslist*/
 .NewsList { font-size:14px;}
-.NewsList p {height:20px; margin-top:5px; margin-left:5px; margin-right:5px;}
+.NewsList p {height:20px; margin-top:5px; margin-left:5px; margin-right:5px; border-bottom:1px #c7c7c7 dashed;}
 .NewsList span { float:right}
 .NewsList_a { margin: 5px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: inline-block;width: 75%;}
 .NewsList_img {height:14px;width:32px; float:left; margin-top: 2px;margin-right: 5px;}
@@ -311,7 +311,7 @@ body
 
 #wrapper
 {
-    padding-top: 20px;
+    padding-top: 5px;
 }
 
 

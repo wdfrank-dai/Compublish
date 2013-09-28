@@ -56,6 +56,11 @@ namespace WidgetDate.Class
                 {
                     //m.title = m.title.Substring(0,22);
                     str.Append("<p>");
+                    if (m.NewsId == null || m.NewsId == "")
+                    {
+                        str.Append("</p>");
+                        continue;
+                    }
                     if (showtype == null || showtype == "")
                     {
                         if (m.NewsUrl == null || m.NewsUrl == "")
