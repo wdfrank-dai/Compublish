@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="COMPUB" Class="WebpageDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\COMPUB.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="WiGetMSModelsLibrary.Properties.Settings" SettingsPropertyName="COMPUBConnectionString7" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.WebPageSet" Member="WebPageSet">
+    <Type Name="WebPageSet">
+      <Column Name="pageno" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pagename" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="pageshowscape" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="descripte" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="iffrist" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="layoutstyle" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WebPageUnits" Member="WebPageUnits">
+    <Type Name="WebPageUnits">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pageid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pageunitid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ifloginshow" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="showcontainer" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="widgettype" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="showtitle" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="showorder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="specialCssFile" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UnitsTheparams" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ApplicationUnits" Member="AppUnits">
+    <Type Name="AppUnits">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="applicationid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="unitname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="datasourceid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="utype" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="containUnits" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ucontent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="showstyleid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iseffictive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="lastmodifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NextUnit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NextUnitShowType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="unitparams" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuthErrorAlertUnit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

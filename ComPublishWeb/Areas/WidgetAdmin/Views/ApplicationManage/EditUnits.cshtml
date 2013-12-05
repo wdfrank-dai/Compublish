@@ -1,0 +1,112 @@
+﻿@model WiGetMS.Models.Units
+
+@using (Ajax.BeginForm("EditUnits", "Units", new { roleid = Model.id }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Message", OnSuccess = "EditWindow()" }))
+{
+    @Html.ValidationSummary(true)
+        <div id="Message" style="color:Red"></div>
+
+        @Html.HiddenFor(model => model.id)
+
+		<table>
+		<tr>
+		<td class="PersMS-table-4cols-1">        
+            @Html.LabelFor(model => model.unitname):    
+		</td>
+		<td class="PersMS-table-4cols-3">
+            @Html.EditorFor(model => model.unitname)       
+		</td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+           @Html.LabelFor(model => model.dsname): 
+		 </td>  
+		 <td class="PersMS-table-4cols-2">
+		   @Html.DropDownList("datasourceid", ViewData["datasourceid"] as SelectList, Model.dsname, new { @style = "width:183px " })
+		</td>
+		</tr>
+        <tr>
+		<td class="PersMS-table-4cols-1">
+			@Html.LabelFor(model => model.unitparams):  
+		</td>
+		<td class="PersMS-table-4cols-3">
+			@Html.EditorFor(model => model.unitparams)
+        </td>
+	   </tr>
+		<tr>
+		<td class="PersMS-table-4cols-1">
+           @Html.LabelFor(model => model.NextUnit): 
+		 </td>  
+		 <td class="PersMS-table-4cols-2">
+		   @Html.DropDownList("NextUnitid",null,new { @style = "width:183px " })
+		</td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+           @Html.LabelFor(model => model.nextunitshowtype): 
+		 </td>  
+		 <td class="PersMS-table-4cols-2">
+		   @Html.DropDownList("NextUnitShowTypeid",null,new { @style = "width:183px " })
+		</td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+           @Html.LabelFor(model => model.AuthErrorAlertUnit): 
+		 </td>  
+		 <td class="PersMS-table-4cols-2">
+		   @Html.DropDownList("AuthErrorAlertUnit",null,"--请选择--",new { @style = "width:183px " })
+		</td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+            @Html.LabelFor(model => model.utype):
+		</td>
+		<td class="PersMS-table-4cols-3">    
+            @Html.EditorFor(model => model.utype)
+		</td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+            @Html.LabelFor(model => model.ucontent):
+		</td>
+		<td class="PersMS-table-4cols-3">
+            @Html.EditorFor(model => model.ucontent)
+		</td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+             @Html.LabelFor(model => model.showstyleid):
+		</td>
+		<td class="PersMS-table-4cols-2">	
+			@Html.DropDownList("showstyleid", ViewData["showstyleid"] as SelectList, Model.showstylename, new { @style = "width:183px " })
+        </td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+            @Html.LabelFor(model => model.iseffictive):
+		</td>
+		<td class="PersMS-table-4cols-2">
+            @Html.EditorFor(model => model.iseffictive)
+		</td>
+		</tr>
+		</table><br/>
+        <div style="margin:0 auto;width:170px">
+        <button class="button" type="submit">
+				<img src="@Url.Content("~/images/icons/tick1.png")" alt="Save" />
+				保存
+				</button>
+                <span class="text_button_padding"> </span>
+				 
+                 <button class="button" type="button" onclick="CloseEditUnitsWindow()">
+				<img src="@Url.Content("~/images/icons/close.png")" alt="Save" />
+				取消
+				</button>
+	    </div>
+
+}

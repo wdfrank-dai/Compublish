@@ -1,0 +1,11 @@
+﻿@using Telerik.Web.Mvc.UI
+@using System.Web.Mvc
+@using System.Collections
+
+
+
+        @{Html.Telerik().DropDownList()
+        .Name("pageunitid")
+        .BindTo(ViewData["pageunitidlist"] as SelectList)
+        .Render();
+        }

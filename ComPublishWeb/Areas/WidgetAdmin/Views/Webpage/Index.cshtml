@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutRole.cshtml";
+}
+
+@using Telerik.Web.Mvc.UI
+
+@*/WidgetAdmin/webpage*@
+
+@{ Html.Telerik().Grid<WiGetMS.Models.WebPageSetModel>()
+        .Name("WebPageSetGrid")
+        .DataKeys(keys =>
+        {
+            keys.Add(p => p.pageno);
+        })
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        .DataBinding(dataBinding =>
+        {
+            dataBinding.Ajax()
+                .Select("SelectWebPageSet", "WebPage")
+                .Insert("InsertWebPageSet", "WebPage")
+                .Update("SaveWebPageSet", "WebPage")
+                .Delete("DeleteWebPageSet", "WebPage");
+        })
+        .Columns(columns =>
+        {
+            //columns.Bound(p => p.pageno).Width(0).ReadOnly();
+            columns.Bound(p => p.pagename);
+            columns.Bound(p => p.layoutstyle);
+            columns.Bound(p => p.iffrist).ClientTemplate("<input type='checkbox' disabled='disabled' name='iffrist' <#= iffrist? checked='checked' : '' #> />").Width(110).Format("{0:d}");
+            columns.Bound(p => p.pageshowscape);
+            columns.Bound(p => p.descripte);
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.Text);
+                commands.Delete().ButtonType(GridButtonType.Text);
+            }).Width(200).Title("");
+        })
+        .Editable(editing => editing.Mode(GridEditMode.PopUp))
+        .Pageable(paging => paging.PageSize(5))
+        .Scrollable(scrolling => scrolling.Height(150))
+        .Sortable()
+        .Selectable()
+        .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+        .Render();
+        }
+
+
+@{ Html.Telerik().Grid<WiGetMS.Models.WebPageUnitsModel>()
+        .Name("WebPageUnitsGrid")
+        .DataKeys(keys =>
+        {
+            keys.Add(p => p.id);
+        })
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        .DataBinding(dataBinding =>
+        {
+            dataBinding.Ajax()
+                .Select("SelectWebPageUnits", "WebPage", new { name = "" })
+                .Insert("InsertWebPageUnits", "WebPage")
+                .Update("SaveWebPageUnits", "WebPage")
+                .Delete("DeleteWebPageUnits", "WebPage");
+        })
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.ifloginshow).ClientTemplate("<input type='checkbox' disabled='disabled' name='ifloginshow' <#= ifloginshow? checked='checked' : '' #> />").Width(110).Format("{0:d}"); ;
+            columns.Bound(p => p.pageunitid);
+            columns.Bound(p => p.showcontainer);
+            columns.Bound(p => p.showorder);
+            columns.Bound(p => p.showtitle);
+            columns.Bound(p => p.specialCssFile);
+            columns.Bound(p => p.widgettype);
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.Text);
+                commands.Delete().ButtonType(GridButtonType.Text);
+            }).Width(200).Title("");
+        })
+        .Editable(editing => editing.Mode(GridEditMode.PopUp))
+        .Pageable()
+        .Scrollable(scrolling => scrolling.Height(100))
+        .Sortable()
+        .ClientEvents(events => events.OnLoad("ifins"))
+        .Render();    
+        }
+
+
+
+<script type="text/javascript">
+    function onRowSelected(e) {
+        var Grid = $('#WebPageUnitsGrid').data('tGrid');
+        var ID = e.row.cells[0].innerHTML;
+        Grid.rebind({
+            name: ID
+        });
+        $("#WebPageUnitsGrid a.t-grid-add").show();
+    }
+
+    function ifins() {
+        var Grid = $('#WebPageUnitsGrid').data('tGrid');
+        Grid.rebind({
+            name: 0
+        });
+        $("#WebPageUnitsGrid a.t-grid-add").hide();
+    }
+    
+</script>
