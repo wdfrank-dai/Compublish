@@ -19,12 +19,40 @@ namespace WiGetMS.Models.Repository
                          id = ad.id,
                          unitname = ad.unitname == null ? "" : ad.unitname,
                          dsname = ad.ApplicationDatasource == null ? "" : ad.ApplicationDatasource.dsname,//dsname!??!  //(from rs in db.ApplicationDatasource where rs.id ==ad.datasourceid select rs.dsname).FirstOrDefault(),
-                         theparams = ad.theparams,
+                         unitparams = ad.unitparams,
+                         NextUnit=ad.NextUnit==null?0: ad.NextUnit.Value,
+                         nextunitshowtype=ad.NextUnitShowType==null?"" : ad.NextUnitShowType,
                          utype = ad.utype == null ? 0 : ad.utype.Value,
                          ucontent = ad.ucontent == null ? "" : ad.ucontent,
                          showstylename = ad.ApplicationUnitsShowStyle == null ? "" : ad.ApplicationUnitsShowStyle.name,
                          iseffictiveS = GetiseffictiveConvert(ad.id),
                          lastmodifytime = ad.lastmodifytime.HasValue ? ad.lastmodifytime.Value.ToString("yyyy-MM-dd HH:mm") : "",
+                         AuthErrorAlertUnit=ad.AuthErrorAlertUnit==null?0:ad.AuthErrorAlertUnit.Value,
+                        // AuthErrorAlertUnitName = (from m in db.ApplicationUnits where m.id == ad.AuthErrorAlertUnit.Value select m.unitname).FirstOrDefault() == null ? "" : (from m in db.ApplicationUnits where m.id == ad.AuthErrorAlertUnit.Value select m.unitname).FirstOrDefault(),
+                     };
+            return re;
+        }
+
+        public IEnumerable<Units> GetAllUnitsByAppid(int appid)
+        {
+            WiGetMSLinqDataContext db = new WiGetMSLinqDataContext();
+            var rep = new WiGetMSLinqDataContext().ApplicationUnits.Where(u=>u.applicationid==appid).ToList();
+            var re = from ad in rep
+                     select new Units
+                     {
+                         id = ad.id,
+                         unitname = ad.unitname == null ? "" : ad.unitname,
+                         dsname = ad.ApplicationDatasource == null ? "" : ad.ApplicationDatasource.dsname,//dsname!??!  //(from rs in db.ApplicationDatasource where rs.id ==ad.datasourceid select rs.dsname).FirstOrDefault(),
+                         unitparams = ad.unitparams,
+                         NextUnit = ad.NextUnit == null ? 0 : ad.NextUnit.Value,
+                         nextunitshowtype = ad.NextUnitShowType == null ? "" : ad.NextUnitShowType,
+                         utype = ad.utype == null ? 0 : ad.utype.Value,
+                         ucontent = ad.ucontent == null ? "" : ad.ucontent,
+                         showstylename = ad.ApplicationUnitsShowStyle == null ? "" : ad.ApplicationUnitsShowStyle.name,
+                         iseffictiveS = GetiseffictiveConvert(ad.id),
+                         lastmodifytime = ad.lastmodifytime.HasValue ? ad.lastmodifytime.Value.ToString("yyyy-MM-dd HH:mm") : "",
+                         AuthErrorAlertUnit = ad.AuthErrorAlertUnit == null ? 0 : ad.AuthErrorAlertUnit.Value,
+                         // AuthErrorAlertUnitName = (from m in db.ApplicationUnits where m.id == ad.AuthErrorAlertUnit.Value select m.unitname).FirstOrDefault() == null ? "" : (from m in db.ApplicationUnits where m.id == ad.AuthErrorAlertUnit.Value select m.unitname).FirstOrDefault(),
                      };
             return re;
         }
@@ -109,12 +137,12 @@ namespace WiGetMS.Models.Repository
             {
                 if (data.datasourceid != 0)
                     datasource.datasourceid = data.datasourceid;
-                datasource.theparams = data.theparams;
+                datasource.unitparams = data.unitparams;
 
                 if (data.showstyleid != 0)
                     datasource.showstyleid = data.showstyleid;
-                if (data.NextPage != 0)
-                    datasource.NextPage = data.NextPage;
+                if (data.NextUnit != 0)
+                    datasource.NextUnit = data.NextUnit;
                 datasource.iseffictive = data.iseffictive;
                 datasource.ucontent = data.ucontent;
                 datasource.utype = data.utype;
@@ -153,7 +181,7 @@ namespace WiGetMS.Models.Repository
                               id = user.id,
                               unitname = user.unitname,
                               datasourceid = user.datasourceid.Value,
-                              theparams = user.theparams,
+                              unitparams = user.unitparams,
                               utype = user.utype.Value,
                               ucontent = user.ucontent,
                               showstyleid = user.showstyleid.Value,
@@ -177,19 +205,19 @@ namespace WiGetMS.Models.Repository
             return showstylename;
         }
 
-        public IQueryable pagelist()
+        public IQueryable unitlist()
         {
             WiGetMSLinqDataContext db = new WiGetMSLinqDataContext();
-            var pagename = from m in db.ApplicationPage select m;
-            return pagename;
+            var unitname = from m in db.ApplicationUnits select m;
+            return unitname;
         }
 
-        public IQueryable nextpageshowtype()
-        {
-            WiGetMSLinqDataContext db = new WiGetMSLinqDataContext();
-            var NextPageShowType = from m in db.ApplicationUnits select m;
-            return NextPageShowType;
-        }
+        //public IQueryable nextpageshowtype()
+        //{
+        //    WiGetMSLinqDataContext db = new WiGetMSLinqDataContext();
+        //    var NextPageShowType = from m in db.ApplicationUnits select m;
+        //    return NextPageShowType;
+        //}
 
         public Units GetViewDataForUnits(int config)
         {
@@ -237,15 +265,34 @@ namespace WiGetMS.Models.Repository
                        where user.id == config
                        select new
                        {
-                           nextpage = user.NextPage,
+                           nextunit = user.NextUnit,
                        }).ToList();
             result1 = (from u in res
                        select new Units
                        {
-                           NextPage = u.nextpage == null ? 0 : u.nextpage.Value,
+                           NextUnit = u.nextunit == null ? 0 : u.nextunit.Value,
                        }).ToList();
             return result1.FirstOrDefault();
         }
+
+        public Units GetViewDataErrorUnit(int config)
+        {
+            IList<Units> result1;
+            WiGetMSLinqDataContext db = new WiGetMSLinqDataContext();
+            var res = (from user in db.ApplicationUnits
+                       where user.id == config
+                       select new
+                       {
+                           errorunit = user.AuthErrorAlertUnit,
+                       }).ToList();
+            result1 = (from u in res
+                       select new Units
+                       {
+                           AuthErrorAlertUnit = u.errorunit == null ? 0 : u.errorunit.Value,
+                       }).ToList();
+            return result1.FirstOrDefault();
+        }
+
 
         public Units GetViewDatanextpageshowtype(int config)
         {
@@ -255,12 +302,12 @@ namespace WiGetMS.Models.Repository
                        where user.id == config
                        select new
                        {
-                           nextpageshowtype = user.NextPageShowType,
+                           nextunitshowtype = user.NextUnitShowType,
                        }).ToList();
             result1 = (from u in res
                        select new Units
                        {
-                           nextpageshowtype = u.nextpageshowtype,
+                           nextunitshowtype = u.nextunitshowtype,
                        }).ToList();
             return result1.FirstOrDefault();
         }

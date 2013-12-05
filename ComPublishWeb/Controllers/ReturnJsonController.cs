@@ -43,7 +43,7 @@ namespace ComPublishWeb.Controllers
             theresult.DataSourceName = "newlist1";
             List<NewsListModel> nownewslist = new List<NewsListModel>();
             NewsListModel re = new NewsListModel();
-            re.NewsId = "386";
+            re.NewsTheparams = "386";
             re.NewsTitle = "转发－－关于2014年度省教育厅人文社会科学研究项目（专项任务项目）申报工作的通知";
             re.NewsDataTime = "2013-7-15";
             
@@ -66,7 +66,7 @@ namespace ComPublishWeb.Controllers
             theresult.DataSourceName = "ImgNewsList1";
             List<ImgNewsListModel> nownewslist = new List<ImgNewsListModel>();
             ImgNewsListModel re = new ImgNewsListModel();
-            re.NewsId = "386";
+            re.NewsTheparams = "386";
             re.NewsTitle = "转发－－关于2014年度省教育厅人文社会科学研究项目（专项任务项目）申报工作的通知";
             re.NewsDataTime = "2013-7-15";
             re.NewsImgUrl = "../../Content/ContentImg/bq1.png";
@@ -227,7 +227,7 @@ namespace ComPublishWeb.Controllers
             {
                 NewsListModel temp = new NewsListModel();
                 var datatemp = res.ElementAt(i);
-                temp.NewsId = datatemp.ID.ToString();
+                temp.NewsTheparams = datatemp.ID.ToString();
                 temp.NewsTitle = datatemp.Title;
                 temp.NewsIntro = datatemp.Summary;
                 temp.NewsUrl = datatemp.Sorlink;
@@ -239,7 +239,7 @@ namespace ComPublishWeb.Controllers
                 for (int i = res.Count; i < listnum; i++)
                 {
                     NewsListModel temp = new NewsListModel();
-                    temp.NewsId = "";
+                    temp.NewsTheparams = "";
                     temp.NewsTitle = "";
                     temp.NewsIntro = "";
                     temp.NewsUrl = "";

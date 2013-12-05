@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>中南民族大学国有资产管理处</title>
+    <title>南方少数民族非物质文化遗产数据库</title>
     @{ 
         var nowstyle = "red";
         if (ViewBag.NowPageStyle != null)
@@ -28,12 +28,12 @@
 <body>
     <div id="container">
         <div id="header">
-            <div id="pic_name"></div>
-            <div id="S_name"></div>
+    @*        <div id="pic_name"></div>
+            <div id="S_name"></div>*@
             @Html.Partial("_UserNavigation")
             @Html.Partial("_MainNavigation")
         </div>
-        <div id="wrapper" class="wat-cf"style ="height:650px; background:url(/images/fbbg.png) no-repeat;">
+        <div id="wrapper" class="wat-cf"style ="height:650px; ">
             <div id="main" style="width:100%">
                 @RenderBody()                
             </div>            

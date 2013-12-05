@@ -5,84 +5,84 @@
     <classShape Id="36b99fe4-8979-4dab-bc9c-ece7eeedf4b5" isExpanded="false" absoluteBounds="0.5, 3.75, 2, 0.45">
       <DataClassMoniker Name="/WiGetMSLinqDataContext/ApplicationUnitsShowStyle" />
       <nestedChildShapes>
-        <elementListCompartment Id="e49b4d7b-034d-422d-b0d5-c5e29512c601" absoluteBounds="0.51500000000000012, 4.21, 1.9700000000000002, 0.820526123046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e49b4d7b-034d-422d-b0d5-c5e29512c601" absoluteBounds="0.51500000000000012, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="78a93c48-9adc-4a1f-8795-4c97a926cb5a" isExpanded="false" absoluteBounds="4.5, 0.625, 2, 0.45">
       <DataClassMoniker Name="/WiGetMSLinqDataContext/Content" />
       <nestedChildShapes>
-        <elementListCompartment Id="2f27f543-27fd-4bda-91a8-71777ad070e2" absoluteBounds="4.515, 1.085, 1.9700000000000002, 3.494801839192708" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="718ad44e-ea9e-482f-95aa-8e3d09b151f3" absoluteBounds="3.5, 2.75, 2, 2.5266442871093746">
-      <DataClassMoniker Name="/WiGetMSLinqDataContext/ApplicationDatasource" />
-      <nestedChildShapes>
-        <elementListCompartment Id="7f2f3fae-0fca-4704-80da-95f2ddfb7114" absoluteBounds="3.5149999999999997, 3.21, 1.9700000000000002, 1.966644287109375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2f27f543-27fd-4bda-91a8-71777ad070e2" absoluteBounds="4.515, 1.085, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="dba0966b-9a43-4ea9-801a-f41397a33e0e" isExpanded="false" absoluteBounds="1.875, 0.5, 2, 0.45">
       <DataClassMoniker Name="/WiGetMSLinqDataContext/ApplicationUnitsCss" />
       <nestedChildShapes>
-        <elementListCompartment Id="539929c5-e316-4d67-829e-ffa90eb12d25" absoluteBounds="1.8900000000000001, 0.96, 1.9700000000000002, 1.393585205078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="539929c5-e316-4d67-829e-ffa90eb12d25" absoluteBounds="1.8900000000000001, 0.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="10ba61bb-ad10-46c3-ba7f-1b21de2bb2b9" isExpanded="false" absoluteBounds="6.75, 1.875, 2, 0.45">
       <DataClassMoniker Name="/WiGetMSLinqDataContext/ApplicationPage" />
       <nestedChildShapes>
-        <elementListCompartment Id="e7cd750b-10f6-4fa3-ae14-08a8828a4bfe" absoluteBounds="6.765, 2.335, 1.9700000000000002, 2.539703369140625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e7cd750b-10f6-4fa3-ae14-08a8828a4bfe" absoluteBounds="6.765, 2.335, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="53dee14d-fbdc-439f-acda-f747a1edde33" absoluteBounds="7, 3.375, 2, 2.3356245930989576">
+    <classShape Id="53dee14d-fbdc-439f-acda-f747a1edde33" absoluteBounds="7, 3.375, 2, 2.3478011067708326">
       <DataClassMoniker Name="/WiGetMSLinqDataContext/ApplicationShowType" />
       <nestedChildShapes>
-        <elementListCompartment Id="5b433ed5-b1a3-4a10-b9af-3b97580f8cca" absoluteBounds="7.015, 3.835, 1.9700000000000002, 1.7756245930989583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5b433ed5-b1a3-4a10-b9af-3b97580f8cca" absoluteBounds="7.015, 3.835, 1.9700000000000002, 1.7878011067708333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.875 : 3.375); (7.875 : 2.325)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7.59375 : 3.375); (7.59375 : 2.325)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/WiGetMSLinqDataContext/ApplicationShowType/ApplicationShowType_ApplicationPage" />
       <nodes>
         <classShapeMoniker Id="53dee14d-fbdc-439f-acda-f747a1edde33" />
         <classShapeMoniker Id="10ba61bb-ad10-46c3-ba7f-1b21de2bb2b9" />
       </nodes>
     </associationConnector>
-    <classShape Id="0a05a1f5-d340-413a-acfe-2d6c567ff992" isExpanded="false" absoluteBounds="7.125, 0.5, 2, 0.45">
+    <classShape Id="58f981ab-a7b6-44a5-940e-e74bce4e2e12" isExpanded="false" absoluteBounds="8.25, 0.625, 2, 0.45">
       <DataClassMoniker Name="/WiGetMSLinqDataContext/Application" />
       <nestedChildShapes>
-        <elementListCompartment Id="3ee0118a-dc7b-4c0f-88a6-703c91f81861" absoluteBounds="7.1400000000000006, 0.96, 1.9700000000000002, 2.7307230631510415" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="95801621-768c-4cd0-953c-ea9cacbcdf81" absoluteBounds="8.265, 1.085, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.9375 : 0.95); (7.9375 : 1.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.5 : 1.075); (8.5 : 1.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/WiGetMSLinqDataContext/Application/Application_ApplicationPage" />
       <nodes>
-        <classShapeMoniker Id="0a05a1f5-d340-413a-acfe-2d6c567ff992" />
+        <classShapeMoniker Id="58f981ab-a7b6-44a5-940e-e74bce4e2e12" />
         <classShapeMoniker Id="10ba61bb-ad10-46c3-ba7f-1b21de2bb2b9" />
       </nodes>
     </associationConnector>
-    <classShape Id="32080a94-1e84-4774-9ea7-61644ad3e9a8" absoluteBounds="2, 1.625, 2, 3.0997033691406246">
+    <classShape Id="66b8e47c-5061-47b9-978a-26971e99e648" isExpanded="false" absoluteBounds="1.625, 1.625, 2, 0.45">
       <DataClassMoniker Name="/WiGetMSLinqDataContext/ApplicationUnits" />
       <nestedChildShapes>
-        <elementListCompartment Id="d99650ef-2a7e-43bc-804f-0c1fa9a0cf42" absoluteBounds="2.015, 2.085, 1.9700000000000002, 2.539703369140625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="55297e29-fdf5-443c-9acc-4d3b3f561e03" absoluteBounds="1.6400000000000001, 2.085, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.5 : 4.01332214355469); (1.75 : 4.01332214355469); (1.75 : 3.17485168457031); (2 : 3.17485168457031)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/WiGetMSLinqDataContext/ApplicationDatasource/ApplicationDatasource_ApplicationUnits" />
+    <associationConnector edgePoints="[(2.75 : 1.625); (2.75 : 0.95)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WiGetMSLinqDataContext/ApplicationUnits/ApplicationUnits_ApplicationUnitsCss" />
       <nodes>
-        <classShapeMoniker Id="718ad44e-ea9e-482f-95aa-8e3d09b151f3" />
-        <classShapeMoniker Id="32080a94-1e84-4774-9ea7-61644ad3e9a8" />
+        <classShapeMoniker Id="66b8e47c-5061-47b9-978a-26971e99e648" />
+        <classShapeMoniker Id="dba0966b-9a43-4ea9-801a-f41397a33e0e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.5 : 4.2); (1.5 : 4.97470336914062); (3 : 4.97470336914062); (3 : 4.72470336914062)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.0625 : 3.75); (2.0625 : 2.075)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/WiGetMSLinqDataContext/ApplicationUnitsShowStyle/ApplicationUnitsShowStyle_ApplicationUnits" />
       <nodes>
         <classShapeMoniker Id="36b99fe4-8979-4dab-bc9c-ece7eeedf4b5" />
-        <classShapeMoniker Id="32080a94-1e84-4774-9ea7-61644ad3e9a8" />
+        <classShapeMoniker Id="66b8e47c-5061-47b9-978a-26971e99e648" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.9375 : 1.625); (2.9375 : 0.95)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/WiGetMSLinqDataContext/ApplicationUnits/ApplicationUnits_ApplicationUnitsCss" />
+    <classShape Id="dad776a5-5071-4c6a-8bb6-85fed87f3593" absoluteBounds="3.875, 3.625, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/WiGetMSLinqDataContext/ApplicationDatasource" />
+      <nestedChildShapes>
+        <elementListCompartment Id="82565300-7f15-425c-9366-aa03a84aa22f" absoluteBounds="3.89, 4.085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.875 : 3.625); (4.875 : 1.85); (3.625 : 1.85)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WiGetMSLinqDataContext/ApplicationDatasource/ApplicationDatasource_ApplicationUnits" />
       <nodes>
-        <classShapeMoniker Id="32080a94-1e84-4774-9ea7-61644ad3e9a8" />
-        <classShapeMoniker Id="dba0966b-9a43-4ea9-801a-f41397a33e0e" />
+        <classShapeMoniker Id="dad776a5-5071-4c6a-8bb6-85fed87f3593" />
+        <classShapeMoniker Id="66b8e47c-5061-47b9-978a-26971e99e648" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

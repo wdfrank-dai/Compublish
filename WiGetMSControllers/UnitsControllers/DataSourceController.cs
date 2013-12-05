@@ -15,6 +15,9 @@ namespace WidgetAdmin.WiGetMS.Controllers
         //
         // GET: /Data/
 
+        static int APPID = 0;
+        static int APPID2 = 0;
+
         public ActionResult Index()
         {
             return View();
@@ -37,9 +40,17 @@ namespace WidgetAdmin.WiGetMS.Controllers
 
         //Telerik调用的方法
         [GridAction]
-        public ActionResult Datasource()
-        { 
+        public ActionResult Datasource(int appid)
+        {
+            APPID = appid;
+            APPID2 = appid;
+            if (appid != 0)
+                Session["nowappid"] = appid;
+            else if (Session["nowappid"] != null)
+                appid = int.Parse(Session["nowunitid"].ToString());
             DatasourceRepository rep = new DatasourceRepository();
+            if (appid != 0)
+                return View(new GridModel(rep.GetAllDataByAppId(appid)));
             return View(new GridModel(rep.GetAllData()));
         }
 
@@ -49,6 +60,7 @@ namespace WidgetAdmin.WiGetMS.Controllers
         {
             ApplicationDatasource ads = new ApplicationDatasource();
             ads.@operator = "杨佳";
+            ads.applicationid = APPID;
             string res = "数据元添加成功";
             DatasourceRepository rep = new DatasourceRepository();
             try
@@ -71,6 +83,7 @@ namespace WidgetAdmin.WiGetMS.Controllers
         [HttpPost]
         public ActionResult EditData(Datasource data)
         {
+            data.appid = APPID2;
             new DatasourceRepository().GetEditData(data);
             ViewData["ActionMessagesForEdit"] = "修改成功";
             return PartialView("../Shared/ShowActionMessage");

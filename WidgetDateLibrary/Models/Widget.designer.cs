@@ -11,51 +11,51 @@
 
 namespace WidgetDateLibrary.Models
 {
-	using System.Data.Linq;
-	using System.Data.Linq.Mapping;
-	using System.Data;
-	using System.Collections.Generic;
-	using System.Reflection;
-	using System.Linq;
-	using System.Linq.Expressions;
-	using System.ComponentModel;
-	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="COMPUB.MDF")]
-	public partial class WidgetDataContext : System.Data.Linq.DataContext
-	{
-		
-		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
-		
-    #region 可扩展性方法定义
-    partial void OnCreated();
-    partial void InsertApplicationDatasource(ApplicationDatasource instance);
-    partial void UpdateApplicationDatasource(ApplicationDatasource instance);
-    partial void DeleteApplicationDatasource(ApplicationDatasource instance);
-    partial void InsertApplicationPage(ApplicationPage instance);
-    partial void UpdateApplicationPage(ApplicationPage instance);
-    partial void DeleteApplicationPage(ApplicationPage instance);
-    partial void InsertApplicationShowType(ApplicationShowType instance);
-    partial void UpdateApplicationShowType(ApplicationShowType instance);
-    partial void DeleteApplicationShowType(ApplicationShowType instance);
-    partial void InsertApplicationUnitsCss(ApplicationUnitsCss instance);
-    partial void UpdateApplicationUnitsCss(ApplicationUnitsCss instance);
-    partial void DeleteApplicationUnitsCss(ApplicationUnitsCss instance);
-    partial void InsertApplicationUnitsShowStyle(ApplicationUnitsShowStyle instance);
-    partial void UpdateApplicationUnitsShowStyle(ApplicationUnitsShowStyle instance);
-    partial void DeleteApplicationUnitsShowStyle(ApplicationUnitsShowStyle instance);
-    partial void InsertApplication(Application instance);
-    partial void UpdateApplication(Application instance);
-    partial void DeleteApplication(Application instance);
-    partial void InsertApplicationUnits(ApplicationUnits instance);
-    partial void UpdateApplicationUnits(ApplicationUnits instance);
-    partial void DeleteApplicationUnits(ApplicationUnits instance);
-    #endregion
-		
-		public WidgetDataContext() :
-        base(global::System.Configuration.ConfigurationManager.ConnectionStrings["COMPUBConnectionString"].ConnectionString, mappingSource)
-       {
+    using System.Data.Linq;
+    using System.Data.Linq.Mapping;
+    using System.Data;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.ComponentModel;
+    using System;
+
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name = "COMPUB.MDF")]
+    public partial class WidgetDataContext : System.Data.Linq.DataContext
+    {
+
+        private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
+
+        #region 可扩展性方法定义
+        partial void OnCreated();
+        partial void InsertApplicationDatasource(ApplicationDatasource instance);
+        partial void UpdateApplicationDatasource(ApplicationDatasource instance);
+        partial void DeleteApplicationDatasource(ApplicationDatasource instance);
+        partial void InsertApplicationPage(ApplicationPage instance);
+        partial void UpdateApplicationPage(ApplicationPage instance);
+        partial void DeleteApplicationPage(ApplicationPage instance);
+        partial void InsertApplicationShowType(ApplicationShowType instance);
+        partial void UpdateApplicationShowType(ApplicationShowType instance);
+        partial void DeleteApplicationShowType(ApplicationShowType instance);
+        partial void InsertApplicationUnitsCss(ApplicationUnitsCss instance);
+        partial void UpdateApplicationUnitsCss(ApplicationUnitsCss instance);
+        partial void DeleteApplicationUnitsCss(ApplicationUnitsCss instance);
+        partial void InsertApplicationUnitsShowStyle(ApplicationUnitsShowStyle instance);
+        partial void UpdateApplicationUnitsShowStyle(ApplicationUnitsShowStyle instance);
+        partial void DeleteApplicationUnitsShowStyle(ApplicationUnitsShowStyle instance);
+        partial void InsertApplication(Application instance);
+        partial void UpdateApplication(Application instance);
+        partial void DeleteApplication(Application instance);
+        partial void InsertApplicationUnits(ApplicationUnits instance);
+        partial void UpdateApplicationUnits(ApplicationUnits instance);
+        partial void DeleteApplicationUnits(ApplicationUnits instance);
+        #endregion
+
+        public WidgetDataContext() :
+            base(global::System.Configuration.ConfigurationManager.ConnectionStrings["COMPUBConnectionString"].ConnectionString, mappingSource)
+		{
 			OnCreated();
 		}
 		
@@ -83,6 +83,38 @@ namespace WidgetDateLibrary.Models
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<ApplicationUnitsCss> ApplicationUnitsCss
+		{
+			get
+			{
+				return this.GetTable<ApplicationUnitsCss>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ApplicationUnitsShowStyle> ApplicationUnitsShowStyle
+		{
+			get
+			{
+				return this.GetTable<ApplicationUnitsShowStyle>();
+			}
+		}
+		
+		public System.Data.Linq.Table<WebPageSet> WebPageSet
+		{
+			get
+			{
+				return this.GetTable<WebPageSet>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Application> Application
+		{
+			get
+			{
+				return this.GetTable<Application>();
+			}
+		}
+		
 		public System.Data.Linq.Table<ApplicationDatasource> ApplicationDatasource
 		{
 			get
@@ -107,35 +139,843 @@ namespace WidgetDateLibrary.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<ApplicationUnitsCss> ApplicationUnitsCss
-		{
-			get
-			{
-				return this.GetTable<ApplicationUnitsCss>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ApplicationUnitsShowStyle> ApplicationUnitsShowStyle
-		{
-			get
-			{
-				return this.GetTable<ApplicationUnitsShowStyle>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Application> Application
-		{
-			get
-			{
-				return this.GetTable<Application>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ApplicationUnits> ApplicationUnits
 		{
 			get
 			{
 				return this.GetTable<ApplicationUnits>();
+			}
+		}
+		
+		public System.Data.Linq.Table<WebPageUnits> WebPageUnits
+		{
+			get
+			{
+				return this.GetTable<WebPageUnits>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ApplicationUnitsCss")]
+	public partial class ApplicationUnitsCss : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.Nullable<int> _unitsid;
+		
+		private string _name;
+		
+		private string _css;
+		
+		private string _res1;
+		
+		private string _res2;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnunitsidChanging(System.Nullable<int> value);
+    partial void OnunitsidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OncssChanging(string value);
+    partial void OncssChanged();
+    partial void Onres1Changing(string value);
+    partial void Onres1Changed();
+    partial void Onres2Changing(string value);
+    partial void Onres2Changed();
+    #endregion
+		
+		public ApplicationUnitsCss()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitsid", DbType="Int")]
+		public System.Nullable<int> unitsid
+		{
+			get
+			{
+				return this._unitsid;
+			}
+			set
+			{
+				if ((this._unitsid != value))
+				{
+					this.OnunitsidChanging(value);
+					this.SendPropertyChanging();
+					this._unitsid = value;
+					this.SendPropertyChanged("unitsid");
+					this.OnunitsidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(20)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_css", DbType="NVarChar(20)")]
+		public string css
+		{
+			get
+			{
+				return this._css;
+			}
+			set
+			{
+				if ((this._css != value))
+				{
+					this.OncssChanging(value);
+					this.SendPropertyChanging();
+					this._css = value;
+					this.SendPropertyChanged("css");
+					this.OncssChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_res1", DbType="NChar(10)")]
+		public string res1
+		{
+			get
+			{
+				return this._res1;
+			}
+			set
+			{
+				if ((this._res1 != value))
+				{
+					this.Onres1Changing(value);
+					this.SendPropertyChanging();
+					this._res1 = value;
+					this.SendPropertyChanged("res1");
+					this.Onres1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_res2", DbType="NChar(10)")]
+		public string res2
+		{
+			get
+			{
+				return this._res2;
+			}
+			set
+			{
+				if ((this._res2 != value))
+				{
+					this.Onres2Changing(value);
+					this.SendPropertyChanging();
+					this._res2 = value;
+					this.SendPropertyChanged("res2");
+					this.Onres2Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ApplicationUnitsShowStyle")]
+	public partial class ApplicationUnitsShowStyle : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _name;
+		
+		private string _note;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnnoteChanging(string value);
+    partial void OnnoteChanged();
+    #endregion
+		
+		public ApplicationUnitsShowStyle()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NVarChar(50)")]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this.OnnoteChanging(value);
+					this.SendPropertyChanging();
+					this._note = value;
+					this.SendPropertyChanged("note");
+					this.OnnoteChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WebPageSet")]
+	public partial class WebPageSet : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _pageno;
+		
+		private string _pagename;
+		
+		private string _pageshowscape;
+		
+		private string _descripte;
+		
+		private System.Nullable<bool> _iffrist;
+		
+		private string _layoutstyle;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnpagenoChanging(int value);
+    partial void OnpagenoChanged();
+    partial void OnpagenameChanging(string value);
+    partial void OnpagenameChanged();
+    partial void OnpageshowscapeChanging(string value);
+    partial void OnpageshowscapeChanged();
+    partial void OndescripteChanging(string value);
+    partial void OndescripteChanged();
+    partial void OniffristChanging(System.Nullable<bool> value);
+    partial void OniffristChanged();
+    partial void OnlayoutstyleChanging(string value);
+    partial void OnlayoutstyleChanged();
+    #endregion
+		
+		public WebPageSet()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pageno", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int pageno
+		{
+			get
+			{
+				return this._pageno;
+			}
+			set
+			{
+				if ((this._pageno != value))
+				{
+					this.OnpagenoChanging(value);
+					this.SendPropertyChanging();
+					this._pageno = value;
+					this.SendPropertyChanged("pageno");
+					this.OnpagenoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pagename", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string pagename
+		{
+			get
+			{
+				return this._pagename;
+			}
+			set
+			{
+				if ((this._pagename != value))
+				{
+					this.OnpagenameChanging(value);
+					this.SendPropertyChanging();
+					this._pagename = value;
+					this.SendPropertyChanged("pagename");
+					this.OnpagenameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pageshowscape", DbType="NVarChar(50)")]
+		public string pageshowscape
+		{
+			get
+			{
+				return this._pageshowscape;
+			}
+			set
+			{
+				if ((this._pageshowscape != value))
+				{
+					this.OnpageshowscapeChanging(value);
+					this.SendPropertyChanging();
+					this._pageshowscape = value;
+					this.SendPropertyChanged("pageshowscape");
+					this.OnpageshowscapeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripte", DbType="NVarChar(MAX)")]
+		public string descripte
+		{
+			get
+			{
+				return this._descripte;
+			}
+			set
+			{
+				if ((this._descripte != value))
+				{
+					this.OndescripteChanging(value);
+					this.SendPropertyChanging();
+					this._descripte = value;
+					this.SendPropertyChanged("descripte");
+					this.OndescripteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iffrist", DbType="Bit")]
+		public System.Nullable<bool> iffrist
+		{
+			get
+			{
+				return this._iffrist;
+			}
+			set
+			{
+				if ((this._iffrist != value))
+				{
+					this.OniffristChanging(value);
+					this.SendPropertyChanging();
+					this._iffrist = value;
+					this.SendPropertyChanged("iffrist");
+					this.OniffristChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_layoutstyle", DbType="NVarChar(50)")]
+		public string layoutstyle
+		{
+			get
+			{
+				return this._layoutstyle;
+			}
+			set
+			{
+				if ((this._layoutstyle != value))
+				{
+					this.OnlayoutstyleChanging(value);
+					this.SendPropertyChanging();
+					this._layoutstyle = value;
+					this.SendPropertyChanged("layoutstyle");
+					this.OnlayoutstyleChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Application")]
+	public partial class Application : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _appname;
+		
+		private string _note;
+		
+		private System.Nullable<int> _priority;
+		
+		private string _logourl;
+		
+		private string _publishto;
+		
+		private System.Nullable<bool> _ispublish;
+		
+		private string _operator;
+		
+		private System.Nullable<System.DateTime> _lastmodifytime;
+		
+		private string _tags;
+		
+		private System.Nullable<int> _passed;
+		
+		private System.Nullable<int> _ShowType;
+		
+		private System.Nullable<bool> _IfLoginShow;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnappnameChanging(string value);
+    partial void OnappnameChanged();
+    partial void OnnoteChanging(string value);
+    partial void OnnoteChanged();
+    partial void OnpriorityChanging(System.Nullable<int> value);
+    partial void OnpriorityChanged();
+    partial void OnlogourlChanging(string value);
+    partial void OnlogourlChanged();
+    partial void OnpublishtoChanging(string value);
+    partial void OnpublishtoChanged();
+    partial void OnispublishChanging(System.Nullable<bool> value);
+    partial void OnispublishChanged();
+    partial void OnoperatorChanging(string value);
+    partial void OnoperatorChanged();
+    partial void OnlastmodifytimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnlastmodifytimeChanged();
+    partial void OntagsChanging(string value);
+    partial void OntagsChanged();
+    partial void OnpassedChanging(System.Nullable<int> value);
+    partial void OnpassedChanged();
+    partial void OnShowTypeChanging(System.Nullable<int> value);
+    partial void OnShowTypeChanged();
+    partial void OnIfLoginShowChanging(System.Nullable<bool> value);
+    partial void OnIfLoginShowChanged();
+    #endregion
+		
+		public Application()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_appname", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string appname
+		{
+			get
+			{
+				return this._appname;
+			}
+			set
+			{
+				if ((this._appname != value))
+				{
+					this.OnappnameChanging(value);
+					this.SendPropertyChanging();
+					this._appname = value;
+					this.SendPropertyChanged("appname");
+					this.OnappnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NVarChar(MAX)")]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this.OnnoteChanging(value);
+					this.SendPropertyChanging();
+					this._note = value;
+					this.SendPropertyChanged("note");
+					this.OnnoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Int")]
+		public System.Nullable<int> priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this.OnpriorityChanging(value);
+					this.SendPropertyChanging();
+					this._priority = value;
+					this.SendPropertyChanged("priority");
+					this.OnpriorityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logourl", DbType="NVarChar(50)")]
+		public string logourl
+		{
+			get
+			{
+				return this._logourl;
+			}
+			set
+			{
+				if ((this._logourl != value))
+				{
+					this.OnlogourlChanging(value);
+					this.SendPropertyChanging();
+					this._logourl = value;
+					this.SendPropertyChanged("logourl");
+					this.OnlogourlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publishto", DbType="NVarChar(50)")]
+		public string publishto
+		{
+			get
+			{
+				return this._publishto;
+			}
+			set
+			{
+				if ((this._publishto != value))
+				{
+					this.OnpublishtoChanging(value);
+					this.SendPropertyChanging();
+					this._publishto = value;
+					this.SendPropertyChanged("publishto");
+					this.OnpublishtoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ispublish", DbType="Bit")]
+		public System.Nullable<bool> ispublish
+		{
+			get
+			{
+				return this._ispublish;
+			}
+			set
+			{
+				if ((this._ispublish != value))
+				{
+					this.OnispublishChanging(value);
+					this.SendPropertyChanging();
+					this._ispublish = value;
+					this.SendPropertyChanged("ispublish");
+					this.OnispublishChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="operator", Storage="_operator", DbType="NVarChar(50)")]
+		public string @operator
+		{
+			get
+			{
+				return this._operator;
+			}
+			set
+			{
+				if ((this._operator != value))
+				{
+					this.OnoperatorChanging(value);
+					this.SendPropertyChanging();
+					this._operator = value;
+					this.SendPropertyChanged("@operator");
+					this.OnoperatorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastmodifytime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> lastmodifytime
+		{
+			get
+			{
+				return this._lastmodifytime;
+			}
+			set
+			{
+				if ((this._lastmodifytime != value))
+				{
+					this.OnlastmodifytimeChanging(value);
+					this.SendPropertyChanging();
+					this._lastmodifytime = value;
+					this.SendPropertyChanged("lastmodifytime");
+					this.OnlastmodifytimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tags", DbType="NVarChar(MAX)")]
+		public string tags
+		{
+			get
+			{
+				return this._tags;
+			}
+			set
+			{
+				if ((this._tags != value))
+				{
+					this.OntagsChanging(value);
+					this.SendPropertyChanging();
+					this._tags = value;
+					this.SendPropertyChanged("tags");
+					this.OntagsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passed", DbType="Int")]
+		public System.Nullable<int> passed
+		{
+			get
+			{
+				return this._passed;
+			}
+			set
+			{
+				if ((this._passed != value))
+				{
+					this.OnpassedChanging(value);
+					this.SendPropertyChanging();
+					this._passed = value;
+					this.SendPropertyChanged("passed");
+					this.OnpassedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShowType", DbType="Int")]
+		public System.Nullable<int> ShowType
+		{
+			get
+			{
+				return this._ShowType;
+			}
+			set
+			{
+				if ((this._ShowType != value))
+				{
+					this.OnShowTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ShowType = value;
+					this.SendPropertyChanged("ShowType");
+					this.OnShowTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IfLoginShow", DbType="Bit")]
+		public System.Nullable<bool> IfLoginShow
+		{
+			get
+			{
+				return this._IfLoginShow;
+			}
+			set
+			{
+				if ((this._IfLoginShow != value))
+				{
+					this.OnIfLoginShowChanging(value);
+					this.SendPropertyChanging();
+					this._IfLoginShow = value;
+					this.SendPropertyChanged("IfLoginShow");
+					this.OnIfLoginShowChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -147,6 +987,8 @@ namespace WidgetDateLibrary.Models
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _id;
+		
+		private int _applicationid;
 		
 		private string _dsname;
 		
@@ -164,12 +1006,16 @@ namespace WidgetDateLibrary.Models
 		
 		private string _operator;
 		
+		private string _ifneedauthrity;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
+    partial void OnapplicationidChanging(int value);
+    partial void OnapplicationidChanged();
     partial void OndsnameChanging(string value);
     partial void OndsnameChanged();
     partial void OnunitsidChanging(System.Nullable<int> value);
@@ -186,6 +1032,8 @@ namespace WidgetDateLibrary.Models
     partial void OnmodifydateChanged();
     partial void OnoperatorChanging(string value);
     partial void OnoperatorChanged();
+    partial void OnifneedauthrityChanging(string value);
+    partial void OnifneedauthrityChanged();
     #endregion
 		
 		public ApplicationDatasource()
@@ -209,6 +1057,26 @@ namespace WidgetDateLibrary.Models
 					this._id = value;
 					this.SendPropertyChanged("id");
 					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_applicationid", DbType="Int NOT NULL")]
+		public int applicationid
+		{
+			get
+			{
+				return this._applicationid;
+			}
+			set
+			{
+				if ((this._applicationid != value))
+				{
+					this.OnapplicationidChanging(value);
+					this.SendPropertyChanging();
+					this._applicationid = value;
+					this.SendPropertyChanged("applicationid");
+					this.OnapplicationidChanged();
 				}
 			}
 		}
@@ -369,6 +1237,26 @@ namespace WidgetDateLibrary.Models
 					this._operator = value;
 					this.SendPropertyChanged("@operator");
 					this.OnoperatorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ifneedauthrity", DbType="NChar(10)")]
+		public string ifneedauthrity
+		{
+			get
+			{
+				return this._ifneedauthrity;
+			}
+			set
+			{
+				if ((this._ifneedauthrity != value))
+				{
+					this.OnifneedauthrityChanging(value);
+					this.SendPropertyChanging();
+					this._ifneedauthrity = value;
+					this.SendPropertyChanged("ifneedauthrity");
+					this.OnifneedauthrityChanged();
 				}
 			}
 		}
@@ -950,648 +1838,6 @@ namespace WidgetDateLibrary.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ApplicationUnitsCss")]
-	public partial class ApplicationUnitsCss : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private System.Nullable<int> _unitsid;
-		
-		private string _name;
-		
-		private string _css;
-		
-		private string _res1;
-		
-		private string _res2;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnunitsidChanging(System.Nullable<int> value);
-    partial void OnunitsidChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OncssChanging(string value);
-    partial void OncssChanged();
-    partial void Onres1Changing(string value);
-    partial void Onres1Changed();
-    partial void Onres2Changing(string value);
-    partial void Onres2Changed();
-    #endregion
-		
-		public ApplicationUnitsCss()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitsid", DbType="Int")]
-		public System.Nullable<int> unitsid
-		{
-			get
-			{
-				return this._unitsid;
-			}
-			set
-			{
-				if ((this._unitsid != value))
-				{
-					this.OnunitsidChanging(value);
-					this.SendPropertyChanging();
-					this._unitsid = value;
-					this.SendPropertyChanged("unitsid");
-					this.OnunitsidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(20)")]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_css", DbType="NVarChar(20)")]
-		public string css
-		{
-			get
-			{
-				return this._css;
-			}
-			set
-			{
-				if ((this._css != value))
-				{
-					this.OncssChanging(value);
-					this.SendPropertyChanging();
-					this._css = value;
-					this.SendPropertyChanged("css");
-					this.OncssChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_res1", DbType="NChar(10)")]
-		public string res1
-		{
-			get
-			{
-				return this._res1;
-			}
-			set
-			{
-				if ((this._res1 != value))
-				{
-					this.Onres1Changing(value);
-					this.SendPropertyChanging();
-					this._res1 = value;
-					this.SendPropertyChanged("res1");
-					this.Onres1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_res2", DbType="NChar(10)")]
-		public string res2
-		{
-			get
-			{
-				return this._res2;
-			}
-			set
-			{
-				if ((this._res2 != value))
-				{
-					this.Onres2Changing(value);
-					this.SendPropertyChanging();
-					this._res2 = value;
-					this.SendPropertyChanged("res2");
-					this.Onres2Changed();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ApplicationUnitsShowStyle")]
-	public partial class ApplicationUnitsShowStyle : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _name;
-		
-		private string _note;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OnnoteChanging(string value);
-    partial void OnnoteChanged();
-    #endregion
-		
-		public ApplicationUnitsShowStyle()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NVarChar(50)")]
-		public string note
-		{
-			get
-			{
-				return this._note;
-			}
-			set
-			{
-				if ((this._note != value))
-				{
-					this.OnnoteChanging(value);
-					this.SendPropertyChanging();
-					this._note = value;
-					this.SendPropertyChanged("note");
-					this.OnnoteChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Application")]
-	public partial class Application : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _appname;
-		
-		private string _note;
-		
-		private System.Nullable<int> _priority;
-		
-		private string _logourl;
-		
-		private string _publishto;
-		
-		private System.Nullable<bool> _ispublish;
-		
-		private string _operator;
-		
-		private System.Nullable<System.DateTime> _lastmodifytime;
-		
-		private string _tags;
-		
-		private System.Nullable<int> _passed;
-		
-		private System.Nullable<int> _ShowType;
-		
-		private System.Nullable<bool> _IfLoginShow;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnappnameChanging(string value);
-    partial void OnappnameChanged();
-    partial void OnnoteChanging(string value);
-    partial void OnnoteChanged();
-    partial void OnpriorityChanging(System.Nullable<int> value);
-    partial void OnpriorityChanged();
-    partial void OnlogourlChanging(string value);
-    partial void OnlogourlChanged();
-    partial void OnpublishtoChanging(string value);
-    partial void OnpublishtoChanged();
-    partial void OnispublishChanging(System.Nullable<bool> value);
-    partial void OnispublishChanged();
-    partial void OnoperatorChanging(string value);
-    partial void OnoperatorChanged();
-    partial void OnlastmodifytimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnlastmodifytimeChanged();
-    partial void OntagsChanging(string value);
-    partial void OntagsChanged();
-    partial void OnpassedChanging(System.Nullable<int> value);
-    partial void OnpassedChanged();
-    partial void OnShowTypeChanging(System.Nullable<int> value);
-    partial void OnShowTypeChanged();
-    partial void OnIfLoginShowChanging(System.Nullable<bool> value);
-    partial void OnIfLoginShowChanged();
-    #endregion
-		
-		public Application()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_appname", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string appname
-		{
-			get
-			{
-				return this._appname;
-			}
-			set
-			{
-				if ((this._appname != value))
-				{
-					this.OnappnameChanging(value);
-					this.SendPropertyChanging();
-					this._appname = value;
-					this.SendPropertyChanged("appname");
-					this.OnappnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NVarChar(MAX)")]
-		public string note
-		{
-			get
-			{
-				return this._note;
-			}
-			set
-			{
-				if ((this._note != value))
-				{
-					this.OnnoteChanging(value);
-					this.SendPropertyChanging();
-					this._note = value;
-					this.SendPropertyChanged("note");
-					this.OnnoteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Int")]
-		public System.Nullable<int> priority
-		{
-			get
-			{
-				return this._priority;
-			}
-			set
-			{
-				if ((this._priority != value))
-				{
-					this.OnpriorityChanging(value);
-					this.SendPropertyChanging();
-					this._priority = value;
-					this.SendPropertyChanged("priority");
-					this.OnpriorityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logourl", DbType="NVarChar(50)")]
-		public string logourl
-		{
-			get
-			{
-				return this._logourl;
-			}
-			set
-			{
-				if ((this._logourl != value))
-				{
-					this.OnlogourlChanging(value);
-					this.SendPropertyChanging();
-					this._logourl = value;
-					this.SendPropertyChanged("logourl");
-					this.OnlogourlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publishto", DbType="NVarChar(50)")]
-		public string publishto
-		{
-			get
-			{
-				return this._publishto;
-			}
-			set
-			{
-				if ((this._publishto != value))
-				{
-					this.OnpublishtoChanging(value);
-					this.SendPropertyChanging();
-					this._publishto = value;
-					this.SendPropertyChanged("publishto");
-					this.OnpublishtoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ispublish", DbType="Bit")]
-		public System.Nullable<bool> ispublish
-		{
-			get
-			{
-				return this._ispublish;
-			}
-			set
-			{
-				if ((this._ispublish != value))
-				{
-					this.OnispublishChanging(value);
-					this.SendPropertyChanging();
-					this._ispublish = value;
-					this.SendPropertyChanged("ispublish");
-					this.OnispublishChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="operator", Storage="_operator", DbType="NVarChar(50)")]
-		public string @operator
-		{
-			get
-			{
-				return this._operator;
-			}
-			set
-			{
-				if ((this._operator != value))
-				{
-					this.OnoperatorChanging(value);
-					this.SendPropertyChanging();
-					this._operator = value;
-					this.SendPropertyChanged("@operator");
-					this.OnoperatorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastmodifytime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> lastmodifytime
-		{
-			get
-			{
-				return this._lastmodifytime;
-			}
-			set
-			{
-				if ((this._lastmodifytime != value))
-				{
-					this.OnlastmodifytimeChanging(value);
-					this.SendPropertyChanging();
-					this._lastmodifytime = value;
-					this.SendPropertyChanged("lastmodifytime");
-					this.OnlastmodifytimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tags", DbType="NVarChar(MAX)")]
-		public string tags
-		{
-			get
-			{
-				return this._tags;
-			}
-			set
-			{
-				if ((this._tags != value))
-				{
-					this.OntagsChanging(value);
-					this.SendPropertyChanging();
-					this._tags = value;
-					this.SendPropertyChanged("tags");
-					this.OntagsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passed", DbType="Int")]
-		public System.Nullable<int> passed
-		{
-			get
-			{
-				return this._passed;
-			}
-			set
-			{
-				if ((this._passed != value))
-				{
-					this.OnpassedChanging(value);
-					this.SendPropertyChanging();
-					this._passed = value;
-					this.SendPropertyChanged("passed");
-					this.OnpassedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShowType", DbType="Int")]
-		public System.Nullable<int> ShowType
-		{
-			get
-			{
-				return this._ShowType;
-			}
-			set
-			{
-				if ((this._ShowType != value))
-				{
-					this.OnShowTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ShowType = value;
-					this.SendPropertyChanged("ShowType");
-					this.OnShowTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IfLoginShow", DbType="Bit")]
-		public System.Nullable<bool> IfLoginShow
-		{
-			get
-			{
-				return this._IfLoginShow;
-			}
-			set
-			{
-				if ((this._IfLoginShow != value))
-				{
-					this.OnIfLoginShowChanging(value);
-					this.SendPropertyChanging();
-					this._IfLoginShow = value;
-					this.SendPropertyChanged("IfLoginShow");
-					this.OnIfLoginShowChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ApplicationUnits")]
 	public partial class ApplicationUnits : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1600,11 +1846,15 @@ namespace WidgetDateLibrary.Models
 		
 		private int _id;
 		
+		private int _applicationid;
+		
 		private string _unitname;
 		
 		private System.Nullable<int> _datasourceid;
 		
 		private System.Nullable<int> _utype;
+		
+		private string _containUnits;
 		
 		private string _ucontent;
 		
@@ -1614,11 +1864,13 @@ namespace WidgetDateLibrary.Models
 		
 		private System.Nullable<System.DateTime> _lastmodifytime;
 		
-		private System.Nullable<int> _NextPage;
+		private System.Nullable<int> _NextUnit;
 		
-		private string _NextPageShowType;
+		private string _NextUnitShowType;
 		
-		private string _params;
+		private string _unitparams;
+		
+		private System.Nullable<int> _AuthErrorAlertUnit;
 		
 		private string _res2;
 		
@@ -1628,12 +1880,16 @@ namespace WidgetDateLibrary.Models
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
+    partial void OnapplicationidChanging(int value);
+    partial void OnapplicationidChanged();
     partial void OnunitnameChanging(string value);
     partial void OnunitnameChanged();
     partial void OndatasourceidChanging(System.Nullable<int> value);
     partial void OndatasourceidChanged();
     partial void OnutypeChanging(System.Nullable<int> value);
     partial void OnutypeChanged();
+    partial void OncontainUnitsChanging(string value);
+    partial void OncontainUnitsChanged();
     partial void OnucontentChanging(string value);
     partial void OnucontentChanged();
     partial void OnshowstyleidChanging(System.Nullable<int> value);
@@ -1642,12 +1898,14 @@ namespace WidgetDateLibrary.Models
     partial void OniseffictiveChanged();
     partial void OnlastmodifytimeChanging(System.Nullable<System.DateTime> value);
     partial void OnlastmodifytimeChanged();
-    partial void OnNextPageChanging(System.Nullable<int> value);
-    partial void OnNextPageChanged();
-    partial void OnNextPageShowTypeChanging(string value);
-    partial void OnNextPageShowTypeChanged();
-    partial void OntheparamsChanging(string value);
-    partial void OntheparamsChanged();
+    partial void OnNextUnitChanging(System.Nullable<int> value);
+    partial void OnNextUnitChanged();
+    partial void OnNextUnitShowTypeChanging(string value);
+    partial void OnNextUnitShowTypeChanged();
+    partial void OnunitparamsChanging(string value);
+    partial void OnunitparamsChanged();
+    partial void OnAuthErrorAlertUnitChanging(System.Nullable<int> value);
+    partial void OnAuthErrorAlertUnitChanged();
     partial void Onres2Changing(string value);
     partial void Onres2Changed();
     #endregion
@@ -1673,6 +1931,26 @@ namespace WidgetDateLibrary.Models
 					this._id = value;
 					this.SendPropertyChanged("id");
 					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_applicationid", DbType="Int NOT NULL")]
+		public int applicationid
+		{
+			get
+			{
+				return this._applicationid;
+			}
+			set
+			{
+				if ((this._applicationid != value))
+				{
+					this.OnapplicationidChanging(value);
+					this.SendPropertyChanging();
+					this._applicationid = value;
+					this.SendPropertyChanged("applicationid");
+					this.OnapplicationidChanged();
 				}
 			}
 		}
@@ -1733,6 +2011,26 @@ namespace WidgetDateLibrary.Models
 					this._utype = value;
 					this.SendPropertyChanged("utype");
 					this.OnutypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_containUnits", DbType="NVarChar(50)")]
+		public string containUnits
+		{
+			get
+			{
+				return this._containUnits;
+			}
+			set
+			{
+				if ((this._containUnits != value))
+				{
+					this.OncontainUnitsChanging(value);
+					this.SendPropertyChanging();
+					this._containUnits = value;
+					this.SendPropertyChanged("containUnits");
+					this.OncontainUnitsChanged();
 				}
 			}
 		}
@@ -1817,62 +2115,82 @@ namespace WidgetDateLibrary.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextPage", DbType="Int")]
-		public System.Nullable<int> NextPage
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextUnit", DbType="Int")]
+		public System.Nullable<int> NextUnit
 		{
 			get
 			{
-				return this._NextPage;
+				return this._NextUnit;
 			}
 			set
 			{
-				if ((this._NextPage != value))
+				if ((this._NextUnit != value))
 				{
-					this.OnNextPageChanging(value);
+					this.OnNextUnitChanging(value);
 					this.SendPropertyChanging();
-					this._NextPage = value;
-					this.SendPropertyChanged("NextPage");
-					this.OnNextPageChanged();
+					this._NextUnit = value;
+					this.SendPropertyChanged("NextUnit");
+					this.OnNextUnitChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextPageShowType", DbType="NVarChar(20)")]
-		public string NextPageShowType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NextUnitShowType", DbType="NVarChar(20)")]
+		public string NextUnitShowType
 		{
 			get
 			{
-				return this._NextPageShowType;
+				return this._NextUnitShowType;
 			}
 			set
 			{
-				if ((this._NextPageShowType != value))
+				if ((this._NextUnitShowType != value))
 				{
-					this.OnNextPageShowTypeChanging(value);
+					this.OnNextUnitShowTypeChanging(value);
 					this.SendPropertyChanging();
-					this._NextPageShowType = value;
-					this.SendPropertyChanged("NextPageShowType");
-					this.OnNextPageShowTypeChanged();
+					this._NextUnitShowType = value;
+					this.SendPropertyChanged("NextUnitShowType");
+					this.OnNextUnitShowTypeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="params", Storage="_params", DbType="NVarChar(100)")]
-		public string theparams
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitparams", DbType="NVarChar(100)")]
+		public string unitparams
 		{
 			get
 			{
-				return this._params;
+				return this._unitparams;
 			}
 			set
 			{
-				if ((this._params != value))
+				if ((this._unitparams != value))
 				{
-					this.OntheparamsChanging(value);
+					this.OnunitparamsChanging(value);
 					this.SendPropertyChanging();
-					this._params = value;
-					this.SendPropertyChanged("theparams");
-					this.OntheparamsChanged();
+					this._unitparams = value;
+					this.SendPropertyChanged("unitparams");
+					this.OnunitparamsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthErrorAlertUnit", DbType="Int")]
+		public System.Nullable<int> AuthErrorAlertUnit
+		{
+			get
+			{
+				return this._AuthErrorAlertUnit;
+			}
+			set
+			{
+				if ((this._AuthErrorAlertUnit != value))
+				{
+					this.OnAuthErrorAlertUnitChanging(value);
+					this.SendPropertyChanging();
+					this._AuthErrorAlertUnit = value;
+					this.SendPropertyChanged("AuthErrorAlertUnit");
+					this.OnAuthErrorAlertUnitChanged();
 				}
 			}
 		}
@@ -1893,6 +2211,260 @@ namespace WidgetDateLibrary.Models
 					this._res2 = value;
 					this.SendPropertyChanged("res2");
 					this.Onres2Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WebPageUnits")]
+	public partial class WebPageUnits : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _pageid;
+		
+		private int _pageunitid;
+		
+		private System.Nullable<bool> _ifloginshow;
+		
+		private string _showcontainer;
+		
+		private string _widgettype;
+		
+		private string _showtitle;
+		
+		private System.Nullable<int> _showorder;
+		
+		private string _specialCssFile;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnpageidChanging(int value);
+    partial void OnpageidChanged();
+    partial void OnpageunitidChanging(int value);
+    partial void OnpageunitidChanged();
+    partial void OnifloginshowChanging(System.Nullable<bool> value);
+    partial void OnifloginshowChanged();
+    partial void OnshowcontainerChanging(string value);
+    partial void OnshowcontainerChanged();
+    partial void OnwidgettypeChanging(string value);
+    partial void OnwidgettypeChanged();
+    partial void OnshowtitleChanging(string value);
+    partial void OnshowtitleChanged();
+    partial void OnshoworderChanging(System.Nullable<int> value);
+    partial void OnshoworderChanged();
+    partial void OnspecialCssFileChanging(string value);
+    partial void OnspecialCssFileChanged();
+    #endregion
+		
+		public WebPageUnits()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pageid", DbType="Int NOT NULL")]
+		public int pageid
+		{
+			get
+			{
+				return this._pageid;
+			}
+			set
+			{
+				if ((this._pageid != value))
+				{
+					this.OnpageidChanging(value);
+					this.SendPropertyChanging();
+					this._pageid = value;
+					this.SendPropertyChanged("pageid");
+					this.OnpageidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pageunitid", DbType="Int NOT NULL")]
+		public int pageunitid
+		{
+			get
+			{
+				return this._pageunitid;
+			}
+			set
+			{
+				if ((this._pageunitid != value))
+				{
+					this.OnpageunitidChanging(value);
+					this.SendPropertyChanging();
+					this._pageunitid = value;
+					this.SendPropertyChanged("pageunitid");
+					this.OnpageunitidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ifloginshow", DbType="Bit")]
+		public System.Nullable<bool> ifloginshow
+		{
+			get
+			{
+				return this._ifloginshow;
+			}
+			set
+			{
+				if ((this._ifloginshow != value))
+				{
+					this.OnifloginshowChanging(value);
+					this.SendPropertyChanging();
+					this._ifloginshow = value;
+					this.SendPropertyChanged("ifloginshow");
+					this.OnifloginshowChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_showcontainer", DbType="NVarChar(50)")]
+		public string showcontainer
+		{
+			get
+			{
+				return this._showcontainer;
+			}
+			set
+			{
+				if ((this._showcontainer != value))
+				{
+					this.OnshowcontainerChanging(value);
+					this.SendPropertyChanging();
+					this._showcontainer = value;
+					this.SendPropertyChanged("showcontainer");
+					this.OnshowcontainerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_widgettype", DbType="NVarChar(50)")]
+		public string widgettype
+		{
+			get
+			{
+				return this._widgettype;
+			}
+			set
+			{
+				if ((this._widgettype != value))
+				{
+					this.OnwidgettypeChanging(value);
+					this.SendPropertyChanging();
+					this._widgettype = value;
+					this.SendPropertyChanged("widgettype");
+					this.OnwidgettypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_showtitle", DbType="NVarChar(50)")]
+		public string showtitle
+		{
+			get
+			{
+				return this._showtitle;
+			}
+			set
+			{
+				if ((this._showtitle != value))
+				{
+					this.OnshowtitleChanging(value);
+					this.SendPropertyChanging();
+					this._showtitle = value;
+					this.SendPropertyChanged("showtitle");
+					this.OnshowtitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_showorder", DbType="Int")]
+		public System.Nullable<int> showorder
+		{
+			get
+			{
+				return this._showorder;
+			}
+			set
+			{
+				if ((this._showorder != value))
+				{
+					this.OnshoworderChanging(value);
+					this.SendPropertyChanging();
+					this._showorder = value;
+					this.SendPropertyChanged("showorder");
+					this.OnshoworderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_specialCssFile", DbType="NVarChar(50)")]
+		public string specialCssFile
+		{
+			get
+			{
+				return this._specialCssFile;
+			}
+			set
+			{
+				if ((this._specialCssFile != value))
+				{
+					this.OnspecialCssFileChanging(value);
+					this.SendPropertyChanging();
+					this._specialCssFile = value;
+					this.SendPropertyChanged("specialCssFile");
+					this.OnspecialCssFileChanged();
 				}
 			}
 		}

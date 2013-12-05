@@ -14,8 +14,15 @@ namespace ComPublishWeb.Controllers
             ViewBag.Message = "欢迎进入三吉综合发布系统.";
             if (style != null)
                 ViewBag.NowPageStyle = style;
-            var res = new WidgetDate.Repository.InitPageRepository().GetInitPageAppInfo();
-            return View(res.Where(o => o.ShowType != 2));
+            var isauthored = HttpContext.User.Identity.IsAuthenticated;
+            if (isauthored)
+            {
+                return View(new WidgetDate.Repository.InitPageRepository().GetInitPageAppInfoIndex());
+            }
+            else
+            {
+                return View(new WidgetDate.Repository.InitPageRepository().GetAuthedInitPageAppInfo(HttpContext.User.Identity.Name.Split(',')[0]));
+            }
         }
 
 
@@ -28,7 +35,7 @@ namespace ComPublishWeb.Controllers
         {
             ViewBag.Message = "欢迎进入三吉综合发布系统.";
 
-            return View(new WidgetDate.Repository.InitPageRepository().GetAuthedInitPageAppInfo(HttpContext.User.Identity.Name.Split(',')[0]).Where(o => o.ShowType != 2));
+            return View(new WidgetDate.Repository.InitPageRepository().GetAuthedInitPageAppInfo(HttpContext.User.Identity.Name.Split(',')[0]));
         }
 
         public ActionResult BookSearch()
@@ -50,8 +57,7 @@ namespace ComPublishWeb.Controllers
 
         public ActionResult _SideBar()
         {
-
-            return View(new WidgetDate.Repository.InitPageRepository().GetInitPageAppInfo().Where(o => o.ShowType == 2));
+            return View(new WidgetDate.Repository.InitPageRepository().GetInitPageAppInfo());
         }
     }
 }

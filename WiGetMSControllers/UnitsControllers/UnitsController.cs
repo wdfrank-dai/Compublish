@@ -12,27 +12,29 @@ namespace WidgetAdmin.WiGetMS.Controllers
 {
     public class UnitsController : Controller
     {
-        //
-        // GET: /Units/
+        static int APPID = 0;
+        static int APPID2 = 0;
 
         public ActionResult Index()
         {
             var ad = new UnitsRepository();
             ViewData["datasourceid"] = new SelectList(ad.dsnamelist(), "id", "dsname");
             ViewData["showstyleid"] = new SelectList(ad.showstyle(), "id", "name");
-            ViewData["NextPageid"] = new SelectList(ad.pagelist(), "id", "pagename");
-            ViewData["NextPageShowTypeid"] = new SelectList(NextPageShowTypeList.GetNextPageShowTypeList(), "NextPageShowType", "NextPageShowType");
+            ViewData["NextUnitid"] = new SelectList(ad.unitlist(), "id", "unitname");
+            ViewData["NextUnitShowTypeid"] = new SelectList(NextUnitShowTypeList.GetNextUnitShowTypeList(), "NextUnitShowType", "NextUnitShowType");
+            ViewData["AuthErrorAlertUnit"] = new SelectList(ad.unitlist(), "id", "unitname");
             Session["nowunitid"] = null;
             return View();
         }
 
         public ActionResult AddUnits()
-        {
+        {   
             var ad = new UnitsRepository();
             ViewData["datasourceid"] = new SelectList(ad.dsnamelist(), "id", "dsname");
             ViewData["showstyleid"] = new SelectList(ad.showstyle(), "id", "name");
-            ViewData["NextPageid"] = new SelectList(ad.pagelist(), "id", "pagename");
-            ViewData["NextPageShowTypeid"] = new SelectList(NextPageShowTypeList.GetNextPageShowTypeList(), "NextPageShowType", "NextPageShowType");
+            ViewData["NextUnitid"] = new SelectList(ad.unitlist(), "id", "unitname");
+            ViewData["NextUnitShowTypeid"] = new SelectList(NextUnitShowTypeList.GetNextUnitShowTypeList(), "NextUnitShowType", "NextUnitShowType");
+            ViewData["AuthErrorAlertUnit"] = new SelectList(ad.unitlist(), "id", "unitname");
             return PartialView("AddUnits");
         }
 
@@ -41,37 +43,76 @@ namespace WidgetAdmin.WiGetMS.Controllers
             var rep = new UnitsRepository().GetViewDataForUnits(confid);
             var rep2 = new UnitsRepository().GetViewDatanextpage(confid);
             var rep3 = new UnitsRepository().GetViewDatanextpageshowtype(confid);
+            var rep4 = new UnitsRepository().GetViewDataErrorUnit(confid);
             var ad = new UnitsRepository();
             ViewData["datasourceid"] = new SelectList(ad.dsnamelist(), "id", "dsname", rep.datasourceid);
             ViewData["showstyleid"] = new SelectList(ad.showstyle(), "id", "name",rep.showstyleid);
-            ViewData["NextPageid"] = new SelectList(ad.pagelist(), "id", "pagename", rep2.NextPage);
-            ViewData["NextPageShowTypeid"] = new SelectList(NextPageShowTypeList.GetNextPageShowTypeList(), "NextPageShowType", "NextPageShowType", rep3.nextpageshowtype);
+            ViewData["NextUnitid"] = new SelectList(ad.unitlist(), "id", "unitname", rep2.NextUnit);
+            ViewData["NextUnitShowTypeid"] = new SelectList(NextUnitShowTypeList.GetNextUnitShowTypeList(), "NextUnitShowType", "NextUnitShowType", rep3.nextunitshowtype);
+            ViewData["AuthErrorAlertUnit"] = new SelectList(ad.unitlist(), "id", "unitname",rep4.AuthErrorAlertUnit);
             return PartialView("EditUnits", new UnitsRepository().MeetingDetailInfo(confid));
         }
 
         //Telerik调用的方法
         [GridAction]
-        public ActionResult UnitsShow()
+        public ActionResult UnitsShow(int appid)
+        {
+            APPID = appid;
+            APPID2 = appid;
+            if (appid != 0)
+                Session["nowappid"] = appid;
+            else if (Session["nowappid"] != null)
+                appid = int.Parse(Session["nowunitid"].ToString());
+            UnitsRepository rep = new UnitsRepository();
+            if (appid != 0)
+                return View(new GridModel(rep.GetAllUnitsByAppid(appid)));
+            return View(new GridModel(rep.GetAllUnits()));
+          
+        }
+
+        [GridAction]
+        public ActionResult UnitsShow2()
         {
             UnitsRepository rep = new UnitsRepository();
             return View(new GridModel(rep.GetAllUnits()));
         }
 
+        //[GridAction]
+        //public ActionResult SelectUnitsAjaxEditing(int appid)
+        //{
+        //    if (appid != 0)
+        //        Session["nowappid"] = appid;
+        //    else if (Session["nowappid"] != null)
+        //        appid = int.Parse(Session["nowunitid"].ToString());
+
+        //    UnitsRepository re = new UnitsRepository();
+        //    if (appid != 0)
+        //        return View(new GridModel(re.GetAllUnitsByAppid(appid)));
+        //    return View(new GridModel(re.GetAllUnits()));
+        //}
+
+
         //添加控件
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AddUnits(ApplicationUnits Dataid)
         {
-            string nownextpage = Request.Form["NextPageid"].ToString();
-            string nownextpageshowtype = Request.Form["NextPageShowTypeid"].ToString();
-            if (nownextpage != "")
+            string nownextunit = Request.Form["NextUnitid"].ToString();
+            string nownextunitshowtype = Request.Form["NextUnitShowTypeid"].ToString();
+            string nowerrorunitid = Request.Form["AuthErrorAlertUnit"].ToString();
+            if (nownextunit != "")
             {
-                Dataid.NextPage = int.Parse(nownextpage);
+                Dataid.NextUnit = int.Parse(nownextunit);
             }
-            if (nownextpageshowtype != "" && nownextpageshowtype != "未选择")
+            if (nownextunitshowtype != "" && nownextunitshowtype != "未选择")
             {
-                Dataid.NextPageShowType = nownextpageshowtype;
+                Dataid.NextUnitShowType = nownextunitshowtype;
             }
-            Dataid.NextPageShowType = nownextpageshowtype;
+            if (nowerrorunitid != "")
+            {
+                Dataid.AuthErrorAlertUnit = int.Parse(nowerrorunitid);
+            }
+            Dataid.applicationid = APPID;
+            Dataid.NextUnitShowType = nownextunitshowtype;
             //ApplicationUnits ads = new ApplicationUnits();
             string res;
             UnitsRepository rep = new UnitsRepository();
@@ -103,14 +144,19 @@ namespace WidgetAdmin.WiGetMS.Controllers
             {
                 data.showstyleid = int.Parse(Request.Form["showstyleid"]);
             }
-            if (Request.Form["NextPageid"] != "")
+            if (Request.Form["NextUnitid"] != "")
             {
-                data.NextPage = int.Parse(Request.Form["NextPageid"]);
+                data.NextUnit = int.Parse(Request.Form["NextUnitid"]);
             }
-            if (Request.Form["NextPageShowTypeid"] != "" && Request.Form["NextPageShowTypeid"] != "未选择")
+            if (Request.Form["NextUnitShowTypeid"] != "" && Request.Form["NextUnitShowTypeid"] != "未选择")
             {
-                data.nextpageshowtype = Request.Form["NextPageShowTypeid"];
+                data.nextunitshowtype = Request.Form["NextUnitShowTypeid"];
             }
+            if (Request.Form["AuthErrorAlertUnit"] != "" && Request.Form["AuthErrorAlertUnit"] != "未选择")
+            {
+                data.AuthErrorAlertUnit = int.Parse(Request.Form["AuthErrorAlertUnit"]);
+            }
+            data.appid = APPID2;
             new UnitsRepository().GetEditUnits(data);
             ViewData["ActionMessagesForEdit"] = "修改成功";
             return PartialView("../Shared/ShowActionMessage");
@@ -144,16 +190,16 @@ namespace WidgetAdmin.WiGetMS.Controllers
             return PartialView("../Shared/ShowActionMessage");
         }
 
-        public class NextPageShowTypeList
+        public class NextUnitShowTypeList
         {
-            public string nextpageshowtype { get;set;}
-            public static List<NextPageShowTypeList> GetNextPageShowTypeList()
+            public string nextunitshowtype { get; set; }
+            public static List<NextUnitShowTypeList> GetNextUnitShowTypeList()
             {
-                return new List<NextPageShowTypeList>
+                return new List<NextUnitShowTypeList>
                 {
-                    new NextPageShowTypeList { nextpageshowtype = "未选择"}, 
-                    new NextPageShowTypeList { nextpageshowtype = "OnWindow" },
-                    new NextPageShowTypeList { nextpageshowtype = "ShowDataDetail" },
+                    new NextUnitShowTypeList { nextunitshowtype = "未选择"}, 
+                    new NextUnitShowTypeList { nextunitshowtype = "OnWindow" },
+                    new NextUnitShowTypeList { nextunitshowtype = "ShowDataDetail" },
                 };
             }
 

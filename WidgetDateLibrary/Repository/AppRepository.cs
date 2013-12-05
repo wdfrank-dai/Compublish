@@ -132,7 +132,32 @@ namespace WidgetDate.Repository
                 return null;
             }
         }
+        //修改后的方法
+        public WebPageSet GetOneWebPageByAppID(int id)
+        {
+            try
+            {
+                WidgetDataContext db = new WidgetDataContext();
+                return db.WebPageSet.FirstOrDefault(o => o.pageno == id);
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
+        public List<WebPageUnits> GetOneWebPageUnitsByAppID(int id)
+        {
+            try
+            {
+                WidgetDataContext db = new WidgetDataContext();
+                return db.WebPageUnits.Where(o => o.pageid == id).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
     }
 }

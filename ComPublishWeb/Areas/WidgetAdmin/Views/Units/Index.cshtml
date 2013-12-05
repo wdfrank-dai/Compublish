@@ -4,6 +4,48 @@
 }
 @using Telerik.Web.Mvc.UI
 <div class="bigbox">
+<h2>用户第三方应用</h2>
+<div>
+@(Html.Telerik().Grid<WiGetMS.Models.showApplication>()
+          .Name("AppOfUserGrid")
+          .DataKeys(keys =>
+           {
+              keys.Add(c => c.id);
+           })
+    
+          .DataBinding(dataBinding =>
+              {
+                  dataBinding.Ajax()
+                   .Select("GetAllAppOfUser", "ApplicationManage");
+              }) 
+          .Columns(columns =>   
+          {
+              columns.Bound(c => c.id).Hidden(true);    
+              columns.Bound(c => c.Appname).Width(95);
+              columns.Bound(c => c.Note).Width(140);
+              columns.Bound(c => c.Logourl).Width(190);
+              columns.Bound(c => c.Lastmodifytime).Width(130);
+              columns.Bound(c => c.Publishto).Width(120);
+              columns.Bound(c => c.Ispublishstring).Width(90);
+			  columns.Bound(c => c.ShowTypes).Width(90);
+			  columns.Bound(c => c.IfLoginShows).Width(90);
+              columns.Bound(c => c.Tags).Width(150);
+              columns.Bound(c => c.Passed).Width(130);
+              columns.Bound(c => c.Appname)
+                .ClientTemplate("<input type='button' value='删除' class='t-button' onclick='deleteapps(<#= id#>)' />").Title("操作").Width(100);
+          })
+         .Pageable(paging => paging.PageSize(8))
+         .Scrollable(scrolling => scrolling.Height(240))
+		 .Resizable(resizing => resizing.Columns(true))
+		 .Reorderable(reorder => reorder.Columns(true)) 
+         .Sortable()
+         .Selectable()
+         .Filterable()
+         .ClientEvents(events => events.OnRowSelect("onRowSelectedUnit"))
+          )
+</div>
+
+<h2>单元管理</h2>
 <div>
 @{
     Html.Telerik().Grid<WiGetMS.Models.Units>()
@@ -23,21 +65,22 @@
           {
               columns.Bound(o => o.id).Hidden(true);
               columns.Bound(c => c.unitname).Width(140);
-              columns.Bound(c => c.NextPage).Width(80);
-              columns.Bound(c => c.nextpageshowtype).Width(120);
+              columns.Bound(c => c.NextUnit).Width(80);
+              columns.Bound(c => c.nextunitshowtype).Width(120);
               columns.Bound(c => c.dsname).Width(180);
               columns.Bound(c => c.utype).Width(100);
-              columns.Bound(c => c.theparams).Width(100);
+              columns.Bound(c => c.unitparams).Width(100);
               columns.Bound(c => c.ucontent).Width(270);
               columns.Bound(c => c.showstylename).Width(130);
               columns.Bound(c => c.iseffictive).ClientTemplate("<input type='text' readonly='readonly'    name='iseffictive' <#= iseffictive?  \"value='是'  style=' width:60px;  text-align:center; border-style:none; border-width:0px; color:Blue ;' \" : \"value='否'  style=' width:60px; text-align:center;  border-style:none; border-width:0px; color:Red ;'\" #> />").Width(90);
-              columns.Bound(c => c.lastmodifytime).Width(130);
+              columns.Bound(c => c.AuthErrorAlertUnit).Width(130);
+			  columns.Bound(c => c.lastmodifytime).Width(130);
               columns.Bound(c => c.Edit)
                   .ClientTemplate("<a type ='button' value='修 改' class='t-button' onclick = Edit(<#= id #>) >修 改</a> <a type ='button' value='删 除' class='t-button' onclick = Delete(<#= id #>) >删 除</a>")
                   .Title("操 作").Width(200);
           })
           .Editable(editing => editing.Mode(GridEditMode.PopUp))
-          .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+          .ClientEvents(events => events.OnRowSelect("onRowSelected2"))
           .Pageable(pagesizi => pagesizi.PageSize(5))
           .Selectable()
           .Scrollable(scrolling => scrolling.Height(170))
@@ -190,8 +233,18 @@
         $(document).ready(function () {
         });
 
+		var Appid = 0;
+        function onRowSelectedUnit(e) {
+            var UnitsGrid = $('#UnitsGrid').data('tGrid');
+            var AppID = e.row.cells[0].innerHTML;
+            Appid = AppID;
+            UnitsGrid.rebind({
+                appid: AppID
+            });
+        }
+
         //选定APP后刷新PAGE
-        function onRowSelected(e) {
+        function onRowSelected2(e) {
             var UnitsCssGrid = $('#UnitsCssGrid').data('tGrid');
             var UnitsID = e.row.cells[0].innerHTML;
             unitsid = UnitsID

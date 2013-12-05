@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>中南民族大学国有资产管理处</title>
+    <title>南方少数民族非物质文化遗产数据库</title>
     @{ 
         var nowstyle = "red";
         if (ViewBag.NowPageStyle != null)
@@ -21,13 +21,15 @@
     @Assets.Theme(@nowstyle)    
     @Assets.Script("modernizr-1.7.min.js")
     @RenderSection("Header",false)
+    <link href="../../Content/INettutes/inettuts.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/widget.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
     <div id="container">
         <div id="header">
-            <div id="pic_name"></div>
-            <div id="S_name"></div>
+      @*      <div id="pic_name"></div>
+            <div id="S_name"></div>*@
             @Html.Partial("_UserNavigation")
             @Html.Partial("_MainNavigation")
         </div>

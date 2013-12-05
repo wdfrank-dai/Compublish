@@ -13,6 +13,8 @@ namespace WiGetMS.Models
         [DisplayName("ID")]
         public int id { get; set; }
 
+        [DisplayName("第三方应用id")]
+        public int appid { get; set; }
          
         [DisplayName("数据源名")]
         public string dsname { get; set; }

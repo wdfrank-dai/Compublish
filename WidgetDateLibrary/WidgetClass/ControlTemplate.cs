@@ -56,7 +56,7 @@ namespace WidgetDate.Class
                 {
                     //m.title = m.title.Substring(0,22);
                     str.Append("<p>");
-                    if (m.NewsId == null || m.NewsId == "")
+                    if (m.NewsTheparams == null || m.NewsTheparams == "")
                     {
                         str.Append("</p>");
                         continue;
@@ -77,9 +77,9 @@ namespace WidgetDate.Class
                         if (m.NewsUrl == null || m.NewsUrl == "")
                         {
                             if (showtype == "ShowDataDetail")
-                                str.Append("<a href=/WidgetDateView/Show/ShowDataDetail?pageid=" + nextpageid + "&theparams=id=" + m.NewsId + " target='_blank' title='" + m.NewsTitle + "'>" + m.NewsTitle + "</a>");
+                                str.Append("<a href=/WidgetDateView/Show/ShowDataDetail?pageid=" + nextpageid + "&theparams=" + m.NewsTheparams + " target='_blank' title='" + m.NewsTitle + "'>" + m.NewsTitle + "</a>");
                             if (showtype == "OnWindow")
-                                str.Append("<a href='javascript:void(0);' title='" + m.NewsTitle + "' onclick=OnWindows(" + nextpageid + ",'id=" + m.NewsId + "')> " + m.NewsTitle + "</a>");
+                                str.Append("<a href='javascript:void(0);' title='" + m.NewsTitle + "' onclick=OnWindows(" + nextpageid + ",'" + m.NewsTheparams + "')> " + m.NewsTitle + "</a>");
                         }
                         else
                             str.Append("<a href=" + m.NewsUrl + " target='_blank' title='" + m.NewsTitle + "'>" + m.NewsTitle + "</a>");
@@ -117,9 +117,9 @@ namespace WidgetDate.Class
                     else
                     {
                         if (showtype == "ShowDataDetail")
-                            str.Append("<a class='Newslist_a' href=/WidgetDateView/Show/ShowDataDetail?pageid=" + nextpageid + "&theparams=id=" + m.NewsId + " target='_blank' title='" + m.NewsTitle + "'>" + m.NewsTitle + "</a>");
+                            str.Append("<a class='Newslist_a' href=/WidgetDateView/Show/ShowDataDetail?pageid=" + nextpageid + "&theparams=" + m.NewsTheparams + " target='_blank' title='" + m.NewsTitle + "'>" + m.NewsTitle + "</a>");
                         if (showtype == "OnWindow")
-                            str.Append("<a href='javascript:void(0);' title='" + m.NewsTitle + "' onclick=OnWindows(" + nextpageid + ",'id=" + m.NewsId + "')> " + m.NewsTitle + "</a>");
+                            str.Append("<a href='javascript:void(0);' title='" + m.NewsTitle + "' onclick=OnWindows(" + nextpageid + ",'" + m.NewsTheparams + "')> " + m.NewsTitle + "</a>");
                     }
                     str.Append("<span class='Newslist_time'>" + m.NewsDataTime + "</span>");
                     str.Append("</p>");
@@ -194,6 +194,16 @@ namespace WidgetDate.Class
                 return "生成视图出错";
             }
         }
+
+//记录以前方法。。。保留
+        //if (showtype == "ShowDataDetail")
+        //                    str.Append("<a class='Newslist_a' href=/WidgetDateView/Show/ShowDataDetail?pageid=" + nextpageid + "&theparams=id=" + m.NewsId + " target='_blank' title='" + m.NewsTitle + "'>" + m.NewsTitle + "</a>");
+        //                if (showtype == "OnWindow")
+        //                    str.Append("<a href='javascript:void(0);' title='" + m.NewsTitle + "' onclick=OnWindows(" + nextpageid + ",'id=" + m.NewsId + "')> " + m.NewsTitle + "</a>");
+//------------------------------------------
+
+
+
 
         //创造一个form,验证需要页面中添加验证控件和JQ。
         //<script src="../../Scripts/jquery-1.5.1.min.js" type="text/javascript"></script>

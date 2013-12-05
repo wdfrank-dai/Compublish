@@ -27,27 +27,36 @@
 		</tr>
         <tr>
 		<td class="PersMS-table-4cols-1">
-			@Html.LabelFor(model => model.theparams):  
+			@Html.LabelFor(model => model.unitparams):  
 		</td>
 		<td class="PersMS-table-4cols-3">
-			@Html.EditorFor(model => model.theparams)
+			@Html.EditorFor(model => model.unitparams)
         </td>
 	   </tr>
 		<tr>
 		<td class="PersMS-table-4cols-1">
-           @Html.LabelFor(model => model.NextPage): 
+           @Html.LabelFor(model => model.NextUnit): 
 		 </td>  
 		 <td class="PersMS-table-4cols-2">
-		   @Html.DropDownList("NextPageid",null,new { @style = "width:183px " })
+		   @Html.DropDownList("NextUnitid",null,new { @style = "width:183px " })
 		</td>
 		</tr>
 
 		<tr>
 		<td class="PersMS-table-4cols-1">
-           @Html.LabelFor(model => model.nextpageshowtype): 
+           @Html.LabelFor(model => model.nextunitshowtype): 
 		 </td>  
 		 <td class="PersMS-table-4cols-2">
-		   @Html.DropDownList("NextPageShowTypeid",null,new { @style = "width:183px " })
+		   @Html.DropDownList("NextUnitShowTypeid",null,new { @style = "width:183px " })
+		</td>
+		</tr>
+
+		<tr>
+		<td class="PersMS-table-4cols-1">
+           @Html.LabelFor(model => model.AuthErrorAlertUnit): 
+		 </td>  
+		 <td class="PersMS-table-4cols-2">
+		   @Html.DropDownList("AuthErrorAlertUnit",null,"--请选择--",new { @style = "width:183px " })
 		</td>
 		</tr>
 

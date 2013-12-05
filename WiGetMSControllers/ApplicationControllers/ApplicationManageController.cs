@@ -54,6 +54,7 @@ namespace WidgetAdmin.WiGetMS.Controllers
         [GridAction]
         public ActionResult GetAllApp()
         {
+
             //ViewData["Publishto"] = new SelectList(Publishto.GetPublishtoList(), "Code", "Name");
             ApplicationManageRepository rep = new ApplicationManageRepository();
             return View(new GridModel(rep.GetAllAppInfo()));

@@ -54,6 +54,7 @@
     <Compile Include="ApplicationPage\ApplicationPageController.cs" />
     <Compile Include="ContentsEditor\ContentsController.cs" />
     <Compile Include="ContentsEditor\ContentsForUsersController.cs" />
+    <Compile Include="WebPage\WebPageController.cs" />
     <Compile Include="WiGetHomeControllers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitsControllers\DataSourceController.cs" />

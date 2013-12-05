@@ -58,5 +58,40 @@ namespace WidgetDateLibrary.Properties {
                 return ((string)(this["COMPUBConnectionString2"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=210.42.159.78;Initial Catalog=COMPUB.MDF;Persist Security Info=True;U" +
+            "ser ID=developer")]
+        public string COMPUB_MDFConnectionString {
+            get {
+                return ((string)(this["COMPUB_MDFConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=D:\\综合发布平台\\Compublish\\Compublish\\ComPubl" +
+            "ishWeb\\App_Data\\COMPUB.mdf;Integrated Security=True;Connect Timeout=30;User Inst" +
+            "ance=True")]
+        public string COMPUBConnectionString3 {
+            get {
+                return ((string)(this["COMPUBConnectionString3"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=E:\\综合发布平台\\Compublish\\Compublish\\ComPubl" +
+            "ishWeb\\App_Data\\COMPUB.mdf;Integrated Security=True;Connect Timeout=30;User Inst" +
+            "ance=True")]
+        public string COMPUBConnectionString4 {
+            get {
+                return ((string)(this["COMPUBConnectionString4"]));
+            }
+        }
     }
 }

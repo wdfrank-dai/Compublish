@@ -36,7 +36,7 @@ namespace WidgetDate.Models
     [Serializable]
     public class NewsListModel
     {
-        public string NewsId { get; set; }
+        public string NewsTheparams { get; set; }
         public string NewsUrl { get; set; }
         public string NewsTitle { get; set; }
         public string NewsIntro { get; set; }
@@ -61,7 +61,7 @@ namespace WidgetDate.Models
     [Serializable]
     public class ImgNewsListModel
     {
-        public string NewsId { get; set; }
+        public string NewsTheparams { get; set; }
         public string NewsImgUrl { get; set; }
         public string NewsUrl { get; set; }
         public string NewsTitle { get; set; }

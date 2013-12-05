@@ -29,6 +29,25 @@ namespace WiGetMS.Models.Repository
             return re;
         }
 
+        public IEnumerable<Datasource> GetAllDataByAppId(int appid)
+        {
+            WiGetMSLinqDataContext db = new WiGetMSLinqDataContext();
+            var rep = new WiGetMSLinqDataContext().ApplicationDatasource.Where(d=>d.applicationid==appid).ToList();
+            var re = from ad in rep
+                     select new Datasource
+                     {
+                         id = ad.id,
+                         dsname = ad.dsname,
+                         dataitems = ad.dataitems == null ? "" : ad.dataitems,
+                         dsparams = ad.dsparams == null ? "" : ad.dsparams,
+                         dsurl = ad.dsurl == null ? "" : ad.dsurl,
+                         //modifydate = ad.modifydate.HasValue ? ad.modifydate.Value.ToString("yyyy-MM-dd HH:mm") : "",
+                         isefficetiveS = GetisefficetiveConvert(ad.id),
+                         unitsid = ad.unitsid == null ? 0 : ad.unitsid.Value,
+                     };
+            return re;
+        }
+
         //添加数据元
         public IEnumerable<ApplicationDatasource> Insert(ApplicationDatasource ad)
         {

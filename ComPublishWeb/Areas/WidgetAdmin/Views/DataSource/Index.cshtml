@@ -4,6 +4,48 @@
     Layout = "~/Views/Shared/_LayoutRole.cshtml";
 }
 <div class="bigbox">
+<h2>用户第三方应用</h2>
+<div>
+@(Html.Telerik().Grid<WiGetMS.Models.showApplication>()
+          .Name("AppOfUserGrid")
+          .DataKeys(keys =>
+           {
+              keys.Add(c => c.id);
+           })
+    
+          .DataBinding(dataBinding =>
+              {
+                  dataBinding.Ajax()
+                   .Select("GetAllAppOfUser", "ApplicationManage");
+              }) 
+          .Columns(columns =>   
+          {
+              columns.Bound(c => c.id).Hidden(true);    
+              columns.Bound(c => c.Appname).Width(95);
+              columns.Bound(c => c.Note).Width(140);
+              columns.Bound(c => c.Logourl).Width(190);
+              columns.Bound(c => c.Lastmodifytime).Width(130);
+              columns.Bound(c => c.Publishto).Width(120);
+              columns.Bound(c => c.Ispublishstring).Width(90);
+			  columns.Bound(c => c.ShowTypes).Width(90);
+			  columns.Bound(c => c.IfLoginShows).Width(90);
+              columns.Bound(c => c.Tags).Width(150);
+              columns.Bound(c => c.Passed).Width(130);
+              columns.Bound(c => c.Appname)
+                .ClientTemplate("<input type='button' value='删除' class='t-button' onclick='deleteapps(<#= id#>)' />").Title("操作").Width(100);
+          })
+         .Pageable(paging => paging.PageSize(8))
+         .Scrollable(scrolling => scrolling.Height(240))
+		 .Resizable(resizing => resizing.Columns(true))
+		 .Reorderable(reorder => reorder.Columns(true)) 
+         .Sortable()
+         .Selectable()
+         .Filterable()
+         .ClientEvents(events => events.OnRowSelect("onRowSelected"))
+          )
+</div>
+
+<h2>数据源管理</h2>
 <div>
 @{
     Html.Telerik().Grid<WiGetMS.Models.Datasource>()
@@ -99,7 +141,18 @@
 
         });
 
+		var Appid = 0;
+        function onRowSelected(e) {
+            var DSGrid = $('#DSGrid').data('tGrid');
+            var AppID = e.row.cells[0].innerHTML;
+            Appid = AppID;
+            DSGrid.rebind({
+                appid: AppID
+            });
+        }
+
         function Add() {
+			
             var window = $('#AddDataWindow').data('tWindow');
             window.ajaxRequest("/WidgetAdmin/DataSource/AddData");
             window.center().open();

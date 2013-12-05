@@ -79,5 +79,16 @@ namespace AuthMSModelsLibrary.Properties {
                 return ((string)(this["WHSMPERSAUTHConnectionString4"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=E:\\综合发布平台\\Compublish\\ComPublishWeb\\App_" +
+            "Data\\COMPUB.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True")]
+        public string COMPUBConnectionString {
+            get {
+                return ((string)(this["COMPUBConnectionString"]));
+            }
+        }
     }
 }

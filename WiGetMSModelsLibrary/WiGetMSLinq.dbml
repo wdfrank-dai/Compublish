@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="COMPUB.MDF" Class="WiGetMSLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=210.42.159.78;Initial Catalog=COMPUB.MDF;Persist Security Info=True;User ID=developer" SettingsObjectName="WiGetMSModelsLibrary.Properties.Settings" SettingsPropertyName="COMPUB_MDFConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="COMPUB" Class="WiGetMSLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\DELL\Desktop\Compublish-master1\Compublish-master\ComPublishWeb\App_Data\COMPUB.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="WiGetMSModelsLibrary.Properties.Settings" SettingsPropertyName="COMPUBConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ApplicationUnitsShowStyle" Member="ApplicationUnitsShowStyle">
     <Type Name="ApplicationUnitsShowStyle">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -27,20 +27,6 @@
       <Column Name="passed" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="summary" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="suggestion" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ApplicationDatasource" Member="ApplicationDatasource">
-    <Type Name="ApplicationDatasource">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="dsname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="unitsid" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="dsurl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="dsparams" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="dataitems" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="isefficetive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="modifydate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="operator" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Association Name="ApplicationDatasource_ApplicationUnits" Member="ApplicationUnits" ThisKey="id" OtherKey="datasourceid" Type="ApplicationUnits" />
     </Type>
   </Table>
   <Table Name="dbo.ApplicationUnitsCss" Member="ApplicationUnitsCss">
@@ -106,20 +92,38 @@
   <Table Name="dbo.ApplicationUnits" Member="ApplicationUnits">
     <Type Name="ApplicationUnits">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="applicationid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="unitname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="datasourceid" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="utype" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="containUnits" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ucontent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="showstyleid" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="iseffictive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="lastmodifytime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="NextPage" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NextPageShowType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="params" Member="theparams" Storage="_params" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="res2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="NextUnit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NextUnitShowType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="unitparams" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuthErrorAlertUnit" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="ApplicationUnits_ApplicationUnitsCss" Member="ApplicationUnitsCss" ThisKey="id" OtherKey="unitsid" Type="ApplicationUnitsCss" />
-      <Association Name="ApplicationDatasource_ApplicationUnits" Member="ApplicationDatasource" ThisKey="datasourceid" OtherKey="id" Type="ApplicationDatasource" IsForeignKey="true" />
       <Association Name="ApplicationUnitsShowStyle_ApplicationUnits" Member="ApplicationUnitsShowStyle" ThisKey="showstyleid" OtherKey="id" Type="ApplicationUnitsShowStyle" IsForeignKey="true" />
+      <Association Name="ApplicationDatasource_ApplicationUnits" Member="ApplicationDatasource" ThisKey="datasourceid" OtherKey="id" Type="ApplicationDatasource" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ApplicationDatasource" Member="ApplicationDatasource">
+    <Type Name="ApplicationDatasource">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="applicationid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dsname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="unitsid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dsurl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dsparams" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="dataitems" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="isefficetive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="modifydate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="operator" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ifneedauthrity" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="ApplicationDatasource_ApplicationUnits" Member="ApplicationUnits" ThisKey="id" OtherKey="datasourceid" Type="ApplicationUnits" />
     </Type>
   </Table>
 </Database>

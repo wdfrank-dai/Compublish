@@ -1,19 +1,25 @@
-﻿@model IEnumerable<WidgetDate.Models.InitPageAppInfoModel>
+﻿@model IEnumerable<WidgetDateLibrary.Models.WebPageUnits>
 @{
     Layout = null;
 }
 <div id="sidebar">
-  <div class="block">
-    @foreach (var m in Model.Where(o => o.FirstPageId != 0))
+@{if (Model.Count() != 0) {
+    <div class="block">
+
+  
+
+    @foreach (var m in Model)
     {
-        <h3 class="h3title">@m.AppName</h3>
+        <h3 class="h3title">@m.showtitle</h3>
         <div class="content">
         <ul>
             <li>  
-            @Html.GetPageContent(m.FirstPageId, null)
+            @Html.GetPageContent(m.pageunitid, null)
             </li>
         </ul>
        </div>
     }
     </div>  
+    }
+    }
 </div>

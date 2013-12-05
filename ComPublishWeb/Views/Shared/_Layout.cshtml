@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>中南民族大学国有资产管理处</title>
+    <title>南方少数民族非物质文化遗产数据库</title>
     @{ 
         var nowstyle = "red";
         if (ViewBag.NowPageStyle != null)
@@ -28,22 +28,22 @@
 <body>
     <div id="container">
         <div id="header">
-            <div id="pic_name"></div>
-            <div id="S_name"></div>
+      @*      <div id="pic_name">
+            <div id="school"></div>
+            </div>
+            <div id="S_name"></div>*@
             @Html.Partial("_UserNavigation")
             @Html.Partial("_MainNavigation")
         </div>
-        <div id="wrapper" class="wat-cf">
-            <div id="main">
+        <div id="homewrapper" class="wat-cf">
+            <div id="homemain">
                 @RenderBody()                
             </div>
-            @Html.Action("_SideBar", "Home", new { area = "" })
-        </div>
-        <div style="min-height:35px"></div>
+            @RenderSection("sidebar", false)
+         </div>
+        <div style="min-height:35px"></div>        
         @Html.Partial("_Footer")
     </div>
-
-
      
     @Html.Telerik().ScriptRegistrar()
     @Assets.Script("modernizr-1.7.min.js")

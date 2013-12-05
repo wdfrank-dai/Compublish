@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WidgetDate.Models.InitPageAppInfoModel>
+﻿@model IEnumerable<WidgetDateLibrary.Models.WebPageUnits>
 @{
     Layout = null;
 }
@@ -24,31 +24,31 @@
 
     <div id="columns">
     <ul id="column" class="column0">
-    @foreach (var m in Model.Where(o => o.ShowType == 1 && o.FirstPageId != 0))
+    @foreach (var m in Model.Where(o => o.widgettype == "1" ))
     {
         <li class="widget my-widget"id="intro">  
                 <div class="widget-head">
-                    <h3 class="h3title">@m.AppName</h3>
+                    <h3 class="h3title">@m.showtitle</h3>
                 </div>
                 <div class="widget-content">
-                  @Html.GetPageContent(m.FirstPageId, null)
+                  @Html.GetPageContent(m.pageunitid, null)
                 </div>
             </li>
     
     }
     </ul>
 
-@{ var mList = Model.Where(o => o.ShowType == 0 && o.FirstPageId != 0).ToList(); }
+@{ var mList = Model.Where(o => o.widgettype == "0").ToList(); }
 
     <ul id="column1" class="column">    
     @for (int i = 0; i < mList.Count(); i += 2)
     {
             <li class="widget my-widget1"id="intro">  
                 <div class="widget-head">
-                    <h3 class="h3title">@mList[i].AppName</h3>
+                    <h3 class="h3title">@mList[i].showtitle</h3>
                 </div>
                 <div class="widget-content" style="">
-                   @Html.GetPageContent(mList[i].FirstPageId, null)
+                   @Html.GetPageContent(mList[i].pageunitid, null)
                 </div>
             </li>
     }
@@ -59,15 +59,17 @@
     {
             <li class="widget my-widget1"id="intro">  
                 <div class="widget-head">
-                    <h3 class="h3title">@mList[i].AppName</h3>
+                    <h3 class="h3title">@mList[i].showtitle</h3>
                 </div>
                 <div class="widget-content" style="">
-                   @Html.GetPageContent(mList[i].FirstPageId, null)
+                   @Html.GetPageContent(mList[i].pageunitid, null)
                 </div>
             </li>
     }
     </ul>  
    
+
+
      </div>
    
       @{Html.Telerik().Window()

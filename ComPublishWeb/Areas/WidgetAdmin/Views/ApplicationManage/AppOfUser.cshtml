@@ -45,6 +45,7 @@
           )
 </div>
 
+
 <div id="Window">
 @{Html.Telerik().Window()
             .Name("AppOfUser-Window")
@@ -58,6 +59,8 @@
             .Render();
             }
 </div>
+
+
 </div>
  @section Footer{
  <script type="text/javascript">
@@ -85,6 +88,16 @@
          }
          window.center().open();
      }
+
+	 var Appid = 0;
+        function onRowSelectedUnit(e) {
+            var UnitsGrid = $('#UnitsGrid').data('tGrid');
+            var AppID = e.row.cells[0].innerHTML;
+            Appid = AppID;
+            UnitsGrid.rebind({
+                appid: AppID
+            });
+        }
 
 
 //     $("#Publishto").multiselect({

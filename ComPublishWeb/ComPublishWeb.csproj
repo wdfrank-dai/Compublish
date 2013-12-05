@@ -128,6 +128,12 @@
     <Content Include="Areas\WidgetAdmin\Views\ApplicationManage\GetAllApp.aspx" />
     <Content Include="Areas\WidgetAdmin\Views\ApplicationPage\AddPage.ascx" />
     <Content Include="Areas\WidgetAdmin\Views\ApplicationPage\EditPage.ascx" />
+    <Content Include="Areas\WidgetAdmin\Views\Webpage\EditorTemplates\Currency.ascx" />
+    <Content Include="Areas\WidgetAdmin\Views\Webpage\EditorTemplates\Date.ascx" />
+    <Content Include="Areas\WidgetAdmin\Views\Webpage\EditorTemplates\DateTime.ascx" />
+    <Content Include="Areas\WidgetAdmin\Views\Webpage\EditorTemplates\Integer.ascx" />
+    <Content Include="Areas\WidgetAdmin\Views\Webpage\EditorTemplates\Number.ascx" />
+    <Content Include="Areas\WidgetAdmin\Views\Webpage\EditorTemplates\Time.ascx" />
     <Content Include="Content\1-12121G43453108.jpg" />
     <Content Include="Content\2011.2.712\Black\editor.png" />
     <Content Include="Content\2011.2.712\Black\imagebrowser.png" />
@@ -2458,6 +2464,8 @@
     <Content Include="Areas\AffairsAdmin\Views\SearchAffaris\Index.cshtml" />
     <Content Include="Areas\AffairsAdmin\Views\SearchAffaris\SearchAffairsForName.cshtml" />
     <Content Include="Areas\AffairsAdmin\Views\SearchAffaris\SearchResult.cshtml" />
+    <Content Include="Areas\WidgetAdmin\Views\Webpage\Index.cshtml" />
+    <Content Include="Areas\WidgetAdmin\Views\Webpage\EditorTemplates\DropList.cshtml" />
     <None Include="Content\ckeditor\CHANGES.md" />
     <None Include="Content\ckeditor\LICENSE.md" />
     <None Include="Content\ckeditor\plugins\scayt\LICENSE.md" />
@@ -2584,7 +2592,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2700</DevelopmentServerPort>
+          <DevelopmentServerPort>36457</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
